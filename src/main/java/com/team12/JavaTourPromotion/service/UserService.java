@@ -1,10 +1,19 @@
 package com.team12.JavaTourPromotion.service;
 
+import com.team12.JavaTourPromotion.Role;
 import com.team12.JavaTourPromotion.model.Cities;
 import com.team12.JavaTourPromotion.model.Users;
+import com.team12.JavaTourPromotion.repository.IRoleRepository;
+import com.team12.JavaTourPromotion.repository.IUserRepository;
 import com.team12.JavaTourPromotion.repository.UserRepository;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -14,35 +23,64 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 @Transactional
+@Slf4j
+public class UserService implements UserDetailsService {
 
-public class UserService {
-
-    private final UserRepository userRepository;
+    @Autowired
+    private IUserRepository userRepository;
+    @Autowired
+    private IRoleRepository roleRepository;
 
     public List<Users> getAllUsers() {
         return userRepository.findAll();
     }
     // Retrieve all products from the database
     // Retrieve a product by its id
-    public Optional<Users> getUserById(Long id) {
-        return userRepository.findById(id);
+    public void addUser(@NotNull Users user) {
+        user.setPassword(user.getPassword());
+        userRepository.save(user);
     }
-    // Add a new product to the database
-    public Users addUser(Users user) {
-        return userRepository.save(user);
-    }
-    // Update an existing product
-    public Users updateUser(@NotNull Users user) {
-        Users existingUser = userRepository.findById(user.getId())
-                .orElseThrow(() -> new IllegalStateException("User with ID " + user.getId() + " does not exist."));
-        existingUser.setName(user.getName());
-        existingUser.setUsername(user.getUsername());
-        existingUser.setPassword(user.getPassword());
-        existingUser.setProfileImgPath(user.getProfileImgPath());
-        existingUser.setRole(user.getRole());
-        return userRepository.save(existingUser);
-    }
-    // Delete a product by its id
+    public void setDefaultRole(String username) {
+        userRepository.findByUsername(username).ifPresentOrElse(
+                user -> {
 
+                    user.getRoles().add(roleRepository.findRoleById(Role.USER.value));
+                    userRepository.save(user);
+                },
+                () -> {
+                    throw new UsernameNotFoundException("User not found");
+                }
+        );
+    }
+    // Tải thông tin chi tiết người dùng để xác thực.
+    @Override
+    public UserDetails loadUserByUsername(String username) throws
+            UsernameNotFoundException {
+        var user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+        return org.springframework.security.core.userdetails.User
+                .withUsername(user.getUsername())
+                .password(user.getPassword())
+                .authorities(user.getAuthorities())
+                .accountExpired(!user.isAccountNonExpired())
+                .accountLocked(!user.isAccountNonLocked())
+                .credentialsExpired(!user.isCredentialsNonExpired())
+                .disabled(!user.isEnabled())
+                .build();
+    }
+    // Tìm kiếm người dùng dựa trên tên đăng nhập.
+    public Optional<Users> findByUsername(String username) throws
+            UsernameNotFoundException {
+        return userRepository.findByUsername(username);
+    }
+    public boolean existsByUsername(String username)
+    {
+        return userRepository.existsByUsername(username);
+    }
+
+    public boolean existsByEmail(String username)
+    {
+        return userRepository.existsByEmail(username);
+    }
 
 }
