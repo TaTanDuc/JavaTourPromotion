@@ -23,6 +23,11 @@ public class Destinations {
     @Size(min = 10, max = 50, message = "Name must be 10 to 50 characters!")
     private String Name;
 
+    @Column(name = "Content")
+    @NotBlank(message = "Content must not be blank!")
+    @Size(min = 50, message = "Content must be 50 characters or more!")
+    private String Content;
+
     @OneToMany(mappedBy = "destination")
     private List<Comments> comments;
 
@@ -33,8 +38,16 @@ public class Destinations {
     private Set<Bookmarks> bookmarks;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ProvinceID")
+    private Provinces province;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CityID")
+    private Cities city;
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "DoW_ID")
-    private DistrictsOrWards DoWs;
+    private DistrictsOrWards DoW;
 
     @ManyToMany(mappedBy = "destinations")
     private Set<Categories> categories;
