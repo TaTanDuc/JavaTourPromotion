@@ -12,17 +12,22 @@ import java.util.Set;
 @RequiredArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "Provinces")
-public class Provinces {
+@Table(name = "DoW")
+public class DistrictsOrWards {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "Name", length = 50, nullable = false)
-    @NotBlank(message = "Province's name must not be blank!")
+    @NotBlank(message = "District or ward's name must not be blank!")
     @Size(min = 10, max = 50, message = "Name must be 10 to 50 characters!")
     private String Name;
 
-    @OneToMany(mappedBy = "province")
-    private Set<Cities> cities;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CityID")
+    private Cities city;
+
+    @OneToMany(mappedBy = "DoWs")
+    private Set<Destinations> destinations;
+
 }
