@@ -23,7 +23,7 @@ public class Destinations {
     @Size(min = 10, max = 50, message = "Name must be 10 to 50 characters!")
     private String Name;
 
-    @Column(name = "Score")
+    @Column(name = "Score" , columnDefinition = "float default 0")
     @Min(value = 0, message = "Score must be at least 0!")
     @Max(value = 5, message = "Score must be at most 10!")
     private float Score;
@@ -60,4 +60,17 @@ public class Destinations {
 
     @ManyToMany(mappedBy = "destinations")
     private Set<Categories> categories;
+
+    public void calculateAverageScore() {
+        if (comments == null || comments.isEmpty()) {
+            this.Score = 0;
+        } else {
+            double average = comments.stream()
+                    .filter(comment -> comment.getDestination().equals(this))
+                    .mapToInt(Comments::getRating)
+                    .average()
+                    .orElse(0.0);
+            this.Score = (float) average;
+        }
+    }
 }

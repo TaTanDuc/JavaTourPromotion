@@ -1,10 +1,7 @@
 package com.team12.JavaTourPromotion.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
 import lombok.*;
-
-import java.util.List;
 
 @Setter
 @Getter
