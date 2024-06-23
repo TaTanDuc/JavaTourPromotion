@@ -17,6 +17,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -30,6 +31,7 @@ import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
+@RequestMapping("/destinations")
 public class DestinationController {
 
     @Autowired
@@ -42,13 +44,13 @@ public class DestinationController {
     private CityService cityService; // Đảm bảo bạn đã inject CategoryService
     @Autowired
     private ProviceService proviceService;
-    @GetMapping("/destinations")
+    @GetMapping()
     public String showDestinationList(Model model) {
         model.addAttribute("destination", destinationService.getAllDestination());
-        return "/destinations/destination-list";
+        return "Homepage/Home";
     }
     // For adding a new product
-    @GetMapping("/destinations/add")
+    @GetMapping("/add")
     public String showAddForm(Model model) {
         model.addAttribute("destinations", new Destinations());
         model.addAttribute("categories", categoryService.getAlCatologies());

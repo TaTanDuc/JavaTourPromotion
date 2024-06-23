@@ -10,22 +10,21 @@
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
       rel="stylesheet"
     />
-    <th:block th:replace="~{layout::min-css}"></th:block>
-    <th:block th:replace="~{layout::fontawesome-css}"></th:block>
-    <th:block th:replace="~{layout::wooxtravel-css}"></th:block>
-    <th:block th:replace="~{layout::owl-css}"></th:block>
-    <th:block th:replace="~{layout::animate-css}"></th:block>
-    <th:block th:replace="~{layout::bundle-css}"></th:block>
+    <th:block th:replace="~{Layout/layoutUser::min-css}"></th:block>
+    <th:block th:replace="~{Layout/layoutUser::fontawesome-css}"></th:block>
+    <th:block th:replace="~{Layout/layoutUser::wooxtravel-css}"></th:block>
+    <th:block th:replace="~{Layout/layoutUser::owl-css}"></th:block>
+    <th:block th:replace="~{Layout/layoutUser::animate-css}"></th:block>
+    <th:block th:replace="~{Layout/layoutUser::bundle-css}"></th:block>
 
     <title>TDL Travel Bootstrap 5 Theme</title>
   </head>
 
   <body>
-    <th:block th:replace="~{layout::loading}"></th:block>
-    <!-- Header Page -->
-    <th:block th:replace="~{layout::header}"></th:block>
-    <!-- Content Page -->
-    <div class="container">
+    <th:block th:replace="~{Layout/layoutUser::loading}"></th:block>
+
+    <th:block th:replace="~{Layout/layoutUser::header}"></th:block>
+    <div class="container-user">
       <section id="section-1">
         <div class="content-slider">
           <input
@@ -160,7 +159,6 @@
           </nav>
         </div>
       </section>
-
       <div class="visit-country">
         <div class="container">
           <div class="row">
@@ -251,6 +249,6 @@
       </div>
     </div>
     <!-- Footer Page -->
-    <th:block th:replace="~{layout::footer}"></th:block>
+    <th:block th:replace="~{Layout/layoutUser::footer}"></th:block>
   </body>
 </html>

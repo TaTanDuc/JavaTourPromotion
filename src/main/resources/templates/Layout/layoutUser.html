@@ -15,7 +15,7 @@
     <!-- Bootstrap core CSS -->
     <link
       th:fragment="min-css"
-      th:href="@{../../static/assets/User/vendor/bootstrap/css/bootstrap.min.css}"
+      th:href="@{/assets/User/vendor/bootstrap/css/bootstrap.min.css}"
       rel="stylesheet"
     />
 
@@ -23,22 +23,22 @@
     <link
       th:fragment="fontawesome-css"
       rel="stylesheet"
-      th:href="@{../../static/assets/User/css/fontawesome.css}"
+      th:href="@{/assets/User/css/fontawesome.css}"
     />
     <link
       th:fragment="wooxtravel-css"
       rel="stylesheet"
-      th:href="@{../../static/assets/User/css/templatemo-woox-travel.css}"
+      th:href="@{/assets/User/css/templatemo-woox-travel.css}"
     />
     <link
       th:fragment="owl-css"
       rel="stylesheet"
-      th:href="@{../../static/assets/User/css/owl.css}"
+      th:href="@{/assets/User/css/owl.css}"
     />
     <link
       th:fragment="animate-css"
       rel="stylesheet"
-      th:href="@{../../static/assets/User/css/animate.css}"
+      th:href="@{/assets/User/css/animate.css}"
     />
     <link
       th:fragment="bundle-css"
@@ -81,7 +81,7 @@ https://templatemo.com/tm-580-woox-travel
             <!-- ***** Menu Start ***** -->
             <ul class="nav">
               <li><a href="/home" class="active">Home</a></li>
-              <li><a href="/about">AboutUs</a></li>
+              <li><a href="/about">About</a></li>
               <li><a href="/contact">Contact</a></li>
               <li><a href="/login">Login</a></li>
               <li><a href="reservation.html">Detail Destination</a></li>
@@ -96,7 +96,7 @@ https://templatemo.com/tm-580-woox-travel
     </div>
   </header>
   <!-- ***** Header Area End ***** -->
-  <div class="container">
+  <div class="container-user">
     <div th:fragment="content"></div>
   </div>
 
@@ -135,19 +135,17 @@ https://templatemo.com/tm-580-woox-travel
         </div>
       </div>
     </footer>
+    <script th:src="@{/assets/User/vendor/jquery/jquery.min.js}"></script>
     <script
-      th:src="@{../../static/assets/User/vendor/jquery/jquery.min.js}"
-    ></script>
-    <script
-      th:src="@{../../static/assets/User/vendor/bootstrap/js/bootstrap.min.js}"
+      th:src="@{/assets/User/vendor/bootstrap/js/bootstrap.min.js}"
     ></script>
 
-    <script th:src="@{../../static/assets/User/js/isotope.min.js}"></script>
-    <script th:src="@{../../static/assets/User/owl-carousel.js}"></script>
-    <script th:src="@{../../static/assets/User/js/wow.js}"></script>
-    <script th:src="@{../../static/assets/User/js/tabs.js}"></script>
-    <script th:src="@{../../static/assets/User/js/popup.js}"></script>
-    <script th:src="@{../../static/assets/User/js/custom.js}"></script>
+    <script th:src="@{/assets/User/js/isotope.min.js}"></script>
+    <script th:src="@{/assets/User/owl-carousel.js}"></script>
+    <script th:src="@{/assets/User/js/wow.js}"></script>
+    <script th:src="@{/assets/User/js/tabs.js}"></script>
+    <script th:src="@{/assets/User/js/popup.js}"></script>
+    <script th:src="@{/assets/User/js/custom.js}"></script>
 
     <script>
       function bannerSwitcher() {
