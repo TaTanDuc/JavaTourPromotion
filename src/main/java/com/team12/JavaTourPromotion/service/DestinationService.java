@@ -44,7 +44,7 @@ public class DestinationService {
         return destinationRepository.save(existingDestination);
     }
     // Delete a product by its id
-    public void deleteProductById(Long id) {
+    public void deleteDestinationById(Long id) {
         if (!destinationRepository.existsById(id)) {
             throw new IllegalStateException("Destination with ID " + id + " does not exist.");
         }
