@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 @RequiredArgsConstructor
 
 
-public class CommentController {
+public class  CommentController {
     @Autowired
     private CommentService commentService; // Đảm bảo bạn đã inject CategoryService
     // Display a list of all products

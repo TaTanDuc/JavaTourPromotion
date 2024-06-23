@@ -22,13 +22,20 @@ public class Destinations {
     @NotBlank(message = "Destination's name must not be blank!")
     @Size(min = 10, max = 50, message = "Name must be 10 to 50 characters!")
     private String Name;
-    private String Content;
-    private float score;
+
+    @Column(name = "Score")
+    @Min(value = 0, message = "Score must be at least 0!")
+    @Max(value = 5, message = "Score must be at most 10!")
+    private float Score;
 
     @Column(name = "Content")
     @NotBlank(message = "Content must not be blank!")
     @Size(min = 50, message = "Content must be 50 characters or more!")
     private String Content;
+
+    @Column(name = "ImageUrl")
+    @NotBlank(message = "Image must not be blank!")
+    private String ImageUrl;
 
     @OneToMany(mappedBy = "destination")
     private List<Comments> comments;
