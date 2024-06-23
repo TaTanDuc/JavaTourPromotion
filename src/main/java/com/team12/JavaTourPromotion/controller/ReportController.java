@@ -51,25 +51,7 @@ public class ReportController {
 
     // Handle request to delete a product
     @GetMapping("/reports/delete/{id}")
-    public String deleteReport
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    (@PathVariable Long id) {
+    public String deleteReport(@PathVariable Long id) {
         reportService.deleteReportById(id);
         return "redirect:/reports";
     }

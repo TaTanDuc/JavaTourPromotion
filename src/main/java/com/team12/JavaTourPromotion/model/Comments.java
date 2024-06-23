@@ -36,4 +36,14 @@ public class Comments {
 
     @Column(name = "ReviewedStatus", columnDefinition = "boolean default false")
     private boolean Status;
+
+
+    @PrePersist
+    @PreUpdate
+    @PostRemove
+    private void updateDestinationScore() {
+        if (destination != null) {
+            destination.calculateAverageScore();
+        }
+    }
 }

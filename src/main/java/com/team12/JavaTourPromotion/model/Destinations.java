@@ -37,7 +37,7 @@ public class Destinations {
     @NotBlank(message = "Image must not be blank!")
     private String ImageUrl;
 
-    @OneToMany(mappedBy = "destination")
+    @OneToMany(mappedBy = "destination", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Comments> comments;
 
     @OneToMany(mappedBy = "destination")
@@ -66,7 +66,6 @@ public class Destinations {
             this.Score = 0;
         } else {
             double average = comments.stream()
-                    .filter(comment -> comment.getDestination().equals(this))
                     .mapToInt(Comments::getRating)
                     .average()
                     .orElse(0.0);
