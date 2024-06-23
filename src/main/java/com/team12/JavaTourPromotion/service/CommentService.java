@@ -1,10 +1,7 @@
 package com.team12.JavaTourPromotion.service;
 
 import com.team12.JavaTourPromotion.model.Comments;
-import com.team12.JavaTourPromotion.model.Provinces;
 import com.team12.JavaTourPromotion.repository.CommentRepository;
-import com.team12.JavaTourPromotion.repository.ProvinceRepository;
-import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;

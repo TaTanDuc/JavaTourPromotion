@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.*;
 
-import java.util.List;
 import java.util.Set;
 
 @Setter
@@ -23,8 +22,11 @@ public class DistrictsOrWards {
     @Size(min = 10, max = 50, message = "Name must be 10 to 50 characters!")
     private String Name;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CityID")
+    private Cities city;
 
-    @OneToMany(mappedBy = "DoWs")
+    @OneToMany(mappedBy = "DoW")
     private Set<Destinations> destinations;
 
 }

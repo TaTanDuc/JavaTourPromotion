@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.*;
 
-import java.util.List;
 import java.util.Set;
 
 @Setter
@@ -25,4 +24,7 @@ public class Provinces {
 
     @OneToMany(mappedBy = "province")
     private Set<Cities> cities;
+
+    @OneToMany(mappedBy = "province")
+    private Set<Destinations> destinations;
 }
