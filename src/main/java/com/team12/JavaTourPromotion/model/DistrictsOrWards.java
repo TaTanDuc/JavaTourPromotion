@@ -27,7 +27,7 @@ public class DistrictsOrWards {
     @JoinColumn(name = "CityID")
     private Cities city;
 
-    @OneToMany(mappedBy = "DoWs")
+    @OneToMany(mappedBy = "DoW")
     private Set<Destinations> destinations;
 
 }

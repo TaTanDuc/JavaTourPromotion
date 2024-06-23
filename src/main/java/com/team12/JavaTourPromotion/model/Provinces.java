@@ -25,4 +25,7 @@ public class Provinces {
 
     @OneToMany(mappedBy = "province")
     private Set<Cities> cities;
+
+    @OneToMany(mappedBy = "province")
+    private Set<Destinations> destinations;
 }
