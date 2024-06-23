@@ -29,4 +29,7 @@ public class Cities {
 
     @OneToMany(mappedBy = "city")
     private Set<DistrictsOrWards> DoWs;
+
+    @OneToMany(mappedBy = "city")
+    private Set<Destinations> destinations;
 }

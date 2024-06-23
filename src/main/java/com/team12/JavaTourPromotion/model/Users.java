@@ -48,7 +48,7 @@ public class Users implements UserDetails {
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "User_Role",
         joinColumns = @JoinColumn(name = "user_id"),
-        inverseJoinColumns = @JoinColumn(name = "role_id", columnDefinition = "int default 3"))
+        inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Roles> roles = new HashSet<>();
 
     @OneToMany(mappedBy = "user")
@@ -56,6 +56,9 @@ public class Users implements UserDetails {
 
     @OneToMany(mappedBy = "user")
     private List<Bookmarks> bookmarks;
+
+    @Column(name = "Banned", columnDefinition = "boolean default false")
+    private boolean Banned;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities(){

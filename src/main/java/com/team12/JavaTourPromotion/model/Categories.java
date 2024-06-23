@@ -32,5 +32,4 @@ public class Categories {
                 joinColumns = @JoinColumn(name = "CategoryID"),
                 inverseJoinColumns = @JoinColumn(name = "DestinationID"))
     private Set<Destinations> destinations;
-
 }
