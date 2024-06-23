@@ -1,22 +1,15 @@
 package com.team12.JavaTourPromotion.service;
 
-import com.team12.JavaTourPromotion.model.Provinces;
 import com.team12.JavaTourPromotion.repository.CityRepository;
-import com.team12.JavaTourPromotion.repository.ProvinceRepository;
 import jakarta.validation.constraints.NotNull;
 
 import java.util.List;
 import java.util.Optional;
 
 import com.team12.JavaTourPromotion.model.Cities;
-import com.team12.JavaTourPromotion.repository.CityRepository;
-import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -38,9 +31,7 @@ public class CityService {
     public Cities updateCity(@NotNull Cities city) {
         Cities existingCities = cityRepository.findById(city.getId())
                 .orElseThrow(() -> new IllegalStateException("Product with ID " + city.getId() + " does not exist."));
-        existingCities.setProvinceID(city.getProvinceID());
-
-
+        existingCities.setProvince(city.getProvince());
         return cityRepository.save(existingCities);
     }
     // Delete a product by its id

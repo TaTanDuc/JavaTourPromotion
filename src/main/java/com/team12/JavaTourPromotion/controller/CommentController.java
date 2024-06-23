@@ -1,11 +1,7 @@
 package com.team12.JavaTourPromotion.controller;
 
-import com.team12.JavaTourPromotion.model.Cities;
 import com.team12.JavaTourPromotion.model.Comments;
-import com.team12.JavaTourPromotion.service.CityService;
 import com.team12.JavaTourPromotion.service.CommentService;
-import com.team12.JavaTourPromotion.service.ProviceService;
-import com.team12.JavaTourPromotion.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;

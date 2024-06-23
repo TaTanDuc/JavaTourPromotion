@@ -1,19 +1,15 @@
 package com.team12.JavaTourPromotion.service;
 
 import com.team12.JavaTourPromotion.Role;
-import com.team12.JavaTourPromotion.model.Cities;
 import com.team12.JavaTourPromotion.model.Users;
 import com.team12.JavaTourPromotion.repository.IRoleRepository;
 import com.team12.JavaTourPromotion.repository.IUserRepository;
-import com.team12.JavaTourPromotion.repository.UserRepository;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +19,6 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 @Transactional
-@Slf4j
 public class UserService implements UserDetailsService {
 
     @Autowired
