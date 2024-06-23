@@ -28,41 +28,7 @@ public class CityController {
         return "/cities/city-list";
     }
     // For adding a new product
-    @GetMapping("/cities/add")
-    public String showAddForm(Model model) {
-        model.addAttribute("cities", new Cities());
-        model.addAttribute("provinces", provinceService.getAllProvinces()); //Load categories
-        return "/cities/add-city";
-    }
-    // Process the form for adding a new product
-    @PostMapping("/cities/add")
-    public String addCity(@Valid Cities city, BindingResult result) {
-        if (result.hasErrors()) {
-            return "/cities/add-city";
-        }
 
-        cityService.addCity(city);
-        return "redirect:/cities";
-    }
     // For editing a product
-    @GetMapping("/cities/edit/{id}")
-    public String showEditForm(@PathVariable Long id, Model model) {
-        Cities city = cityService.getCityById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid cityId:" + id));
-        model.addAttribute("cities", city);
-        model.addAttribute("provinces", provinceService.getAllProvinces()); //Load provinces
-        return "/cities/update-city";
-    }
-    // Process the form for updating a product
-    @PostMapping("/cities/update/{id}")
-    public String updateCity(@PathVariable Long id, @Valid Cities city,
-                                BindingResult result) {
-        if (result.hasErrors()) {
-            city.setId(id); // set id to keep it in the form in case of errors
 
-            return "/cities/update-city";
-        }
-        cityService.updateCity(city);
-        return "redirect:/cities";
-    }
 }

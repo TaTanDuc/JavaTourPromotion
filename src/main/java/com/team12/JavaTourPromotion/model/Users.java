@@ -97,6 +97,13 @@ public class Users implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+    public boolean isBanned() {
+        return Banned;
+    }
+
+    public void setBanned(boolean Banned) {
+        this.Banned = Banned;
+    }
 
     @Override
     public boolean equals(Object o){

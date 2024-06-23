@@ -35,19 +35,7 @@ public class CityService {
         return cityRepository.save(city);
     }
     // Update an existing product
-    public Cities updateCity(@NotNull Cities city) {
-        Cities existingCities = cityRepository.findById(city.getId())
-                .orElseThrow(() -> new IllegalStateException("Product with ID " + city.getId() + " does not exist."));
-        existingCities.setProvinceID(city.getProvinceID());
 
-
-        return cityRepository.save(existingCities);
-    }
     // Delete a product by its id
-    public void deleteCityById(Long id) {
-        if (!cityRepository.existsById(id)) {
-            throw new IllegalStateException("City with ID " + id + " does not exist.");
-        }
-        cityRepository.deleteById(id);
-    }
+
 }

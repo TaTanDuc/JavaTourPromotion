@@ -82,5 +82,19 @@ public class UserService implements UserDetailsService {
     {
         return userRepository.existsByEmail(username);
     }
+    @Transactional
+    public void banUser(String username) {
+        Users user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+        user.setBanned(true);
+        userRepository.save(user);
+    }
 
+    @Transactional
+    public void unbanUser(String username) {
+        Users user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+        user.setBanned(false);
+        userRepository.save(user);
+    }
 }

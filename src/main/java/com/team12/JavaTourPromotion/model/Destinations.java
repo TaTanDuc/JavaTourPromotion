@@ -22,6 +22,8 @@ public class Destinations {
     @NotBlank(message = "Destination's name must not be blank!")
     @Size(min = 10, max = 50, message = "Name must be 10 to 50 characters!")
     private String Name;
+    private String Content;
+    private float score;
 
     @Column(name = "Content")
     @NotBlank(message = "Content must not be blank!")
