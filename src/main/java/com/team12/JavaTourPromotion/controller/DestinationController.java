@@ -50,11 +50,11 @@ public class DestinationController {
     // For adding a new product
     @GetMapping("/destinations/add")
     public String showAddForm(Model model) {
-        model.addAttribute("destination", new Destinations());
+        model.addAttribute("destinations", new Destinations());
         model.addAttribute("categories", categoryService.getAlCatologies());
-        model.addAttribute("categories", proviceService.getAllProvinces());
-        model.addAttribute("categories", cityService.getAllCities());
-        model.addAttribute("categories", districtsOrWardsService.getAllDistrictsOrWards());//Load categories
+        model.addAttribute("provinces", proviceService.getAllProvinces());
+        model.addAttribute("cities", cityService.getAllCities());
+        model.addAttribute("dows", districtsOrWardsService.getAllDistrictsOrWards());//Load categories
         return "/destinations/add-destination";
     }
     @PostMapping("/destinations/add")
@@ -105,11 +105,11 @@ public class DestinationController {
     public String showEditForm(@PathVariable Long id, Model model) {
         Destinations destination = destinationService.getDestinationById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid destination Id:" + id));
-        model.addAttribute("destination", destination);
+        model.addAttribute("destinations", destination);
         model.addAttribute("categories", categoryService.getAlCatologies());
-        model.addAttribute("categories", proviceService.getAllProvinces());
-        model.addAttribute("categories", cityService.getAllCities());
-        model.addAttribute("categories", districtsOrWardsService.getAllDistrictsOrWards());
+        model.addAttribute("provinces", proviceService.getAllProvinces());
+        model.addAttribute("cities", cityService.getAllCities());
+        model.addAttribute("dows", districtsOrWardsService.getAllDistrictsOrWards());
         return "/destinations/update-destination";
     }
     @PostMapping("/destinations/update/{id}")
