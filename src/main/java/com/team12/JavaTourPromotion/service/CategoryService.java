@@ -21,7 +21,7 @@ public class CategoryService {
      * Retrieve all categories from the database.
      * @return a list of categories
      */
-    public List<Categories> getAlCatologies(){
+    public List<Categories> getAllCategories(int x, int y, String s){
         return categoryRepository.findAll();
     }
     public Optional<Categories> getCategoryById(Long id) {

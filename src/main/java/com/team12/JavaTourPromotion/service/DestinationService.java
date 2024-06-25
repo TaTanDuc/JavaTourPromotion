@@ -17,7 +17,7 @@ public class DestinationService {
 
     private final DestinationRepository destinationRepository;
     // Retrieve all products from the database
-    public List<Destinations> getAllDestination() {
+    public List<Destinations> getAllDestination(int x, int y, String s) {
         return destinationRepository.findAll();
     }
     // Retrieve a product by its id
@@ -50,5 +50,4 @@ public class DestinationService {
         }
         destinationRepository.deleteById(id);
     }
-
 }

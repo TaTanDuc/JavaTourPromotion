@@ -1,76 +1,52 @@
 package com.team12.JavaTourPromotion.controller;
 
-import org.springframework.ui.Model;
+import com.team12.JavaTourPromotion.viewmodel.CategoryGETVM;
+import org.springframework.http.ResponseEntity;
 import com.team12.JavaTourPromotion.service.CategoryService;
-import com.team12.JavaTourPromotion.model.Categories;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-
-@Controller
 @RequiredArgsConstructor
-@RequestMapping("/categories")
+@RestController
+@RequestMapping("/api/v1/admin")
 public class CategoryController {
     @Autowired
     private final CategoryService categoryService;
 
-    @GetMapping("/add")
-    public String showAddForm(Model model) {
-        model.addAttribute("category", new Categories());
-        return "/categories/add-category";
+    @GetMapping("/categories")
+    public ResponseEntity<List<CategoryGETVM>> getAllCategories(Integer pageNo, Integer pageSize, String sortBy){
+        return  ResponseEntity.ok(categoryService.getAllCategories(
+                        pageNo == null ? 0 : pageNo,
+                        pageSize == null ? 20 : pageSize,
+                        sortBy == null ? "id" : sortBy)
+                .stream()
+                .map(CategoryGETVM::from)
+                .toList()
+        );
     }
 
-    @PostMapping("/add")
-    public String addCategory(@Valid Categories category, BindingResult result) {
-        if (result.hasErrors()) {
-            return "/categories/add-category";
-        }
-        categoryService.addCategory(category);
-        return "redirect:/categories";
-    }
-
-    @GetMapping("")
-    public String listCategories(Model model) {
-        List<Categories> categories = categoryService.getAlCatologies();
-        model.addAttribute("categories", categories);
-        return "/categories/categories-list";
-    }
-
-    @GetMapping("/edit/{id}")
-    public String showUpdateForm(@PathVariable("id") Long id, Model model) {
-        Categories category = categoryService.getCategoryById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid category Id:" + id));
-        model.addAttribute("category", category);
-        return "/categories/update-category";
-    }
-    // POST request to update category
-    @PostMapping("/update/{id}")
-    public String updateCategory(@PathVariable("id") Long id, @Valid Categories
-            category, BindingResult result, Model model) {
-        if (result.hasErrors()) {
-            category.setId(id);
-            return "/categories/update-category";
-        }
-        categoryService.updateCategory(category);
-        model.addAttribute("categories", categoryService.getAlCatologies());
-        return "redirect:/categories";
-    }
-    // GET request for deleting category
-    @GetMapping("/delete/{id}")
-    public String deleteCategory(@PathVariable("id") Long id, Model model) {
-        Categories category = categoryService.getCategoryById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid category Id:" + id));
+    @DeleteMapping("/category/{id}")
+    public ResponseEntity<Void> deleteCategoryByID(@RequestParam Long id){
         categoryService.deleteCategoryById(id);
-        model.addAttribute("categories", categoryService.getAlCatologies());
-        return "redirect:/categories";
+        return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("category/get/{id}")
+    public ResponseEntity<CategoryGETVM> getCategoryByID(@RequestParam Long id){
+        return ResponseEntity.ok(categoryService.getCategoryById(id)
+                .map(CategoryGETVM::from)
+                .orElse(null));
+    }
+
+    @GetMapping("category/search")
+    public ResponseEntity<List<CategoryGETVM>> searchCategory(String keyword){
+        return ResponseEntity.ok(categoryService.searchCategory(keyword)
+                .stream()
+                .map(CategoryGETVM::from)
+                .toList()
+        );
     }
 }
