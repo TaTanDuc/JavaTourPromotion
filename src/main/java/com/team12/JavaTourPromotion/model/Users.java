@@ -23,24 +23,24 @@ public class Users implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "Name", length = 50)
+    @Column(name = "Name", length = 50) 
     @Size(min = 10, max = 50, message = "Name must be 10 to 50 characters")
-    private String Name;
+    private String name;
 
     @Column(name = "Username", length = 20, nullable = false, unique = true)
     @NotBlank(message = "Username is required")
     @Size(min = 8, max = 20, message = "Username must be 8 to 20 characters!")
-    private String Username;
+    private String username;
 
     @Column(name = "Password", length = 20, nullable = false)
     @Size(min = 8, max = 20, message = "Password must be 8 to 20 characters!")
     @NotBlank(message = "Password is required")
-    private String Password;
+    private String password;
 
     @Column(name = "Email", length = 50)
     @Email
     @Size(min = 10, max = 50, message = "Email must be between 10 and 50 characters!")
-    private String Email;
+    private String email;
 
     @Column(name = "ProfileImagePath")
     private String ProfileImgPath;
@@ -70,12 +70,12 @@ public class Users implements UserDetails {
 
     @Override
     public String getPassword(){
-        return Password;
+        return password;
     }
 
     @Override
     public String getUsername(){
-        return Username;
+        return username;
     }
 
     @Override
