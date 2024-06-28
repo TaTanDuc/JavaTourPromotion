@@ -22,9 +22,9 @@ public class Provinces {
     @Size(min = 10, max = 50, message = "Name must be 10 to 50 characters!")
     private String Name;
 
-    @OneToMany(mappedBy = "province")
+    @OneToMany(mappedBy = "province", cascade = CascadeType.ALL)
     private Set<Cities> cities;
 
-    @OneToMany(mappedBy = "province")
+    @OneToMany(mappedBy = "province", cascade = CascadeType.ALL)
     private Set<Destinations> destinations;
 }

@@ -14,8 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequiredArgsConstructor
-
-
+@RestController
 public class  CommentController {
     @Autowired
     private CommentService commentService;

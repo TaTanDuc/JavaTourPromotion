@@ -1,5 +1,6 @@
 package com.team12.JavaTourPromotion.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.*;
@@ -22,13 +23,14 @@ public class Cities {
     @Size(min = 10, max = 50, message = "City's name must be 10 to 50 characters!")
     private String Name;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "ProvinceID")
+    @ManyToOne
+    @JoinColumn(name = "ProvinceID", referencedColumnName = "id")
+    @JsonIgnore
     private Provinces province;
 
-    @OneToMany(mappedBy = "city")
-    private Set<DistrictsOrWards> DoWs;
+    @OneToMany(mappedBy = "city", cascade = CascadeType.ALL)
+    private Set<DistrictsOrWards> DoW;
 
-    @OneToMany(mappedBy = "city")
+    @OneToMany(mappedBy = "city", cascade = CascadeType.ALL)
     private Set<Destinations> destinations;
 }
