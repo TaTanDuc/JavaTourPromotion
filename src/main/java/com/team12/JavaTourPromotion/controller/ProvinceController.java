@@ -43,13 +43,13 @@ public class ProvinceController {
 //    }
 
     // GET request to show category edit form
-    @GetMapping("/provinces/edit/{id}")
-    public String showUpdateForm(@PathVariable("id") Long id, Model model) {
-        Provinces province = provinceService.getProvinceById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid province Id:" + id));
-        model.addAttribute("province", province);
-        return "/provinces/update-province";
-    }
+//    @GetMapping("/provinces/edit/{id}")
+//    public String showUpdateForm(@PathVariable("id") Long id, Model model) {
+//        Provinces province = provinceService.getProvinceById(id)
+//                .orElseThrow(() -> new IllegalArgumentException("Invalid province Id:" + id));
+//        model.addAttribute("province", province);
+//        return "/provinces/update-province";
+//    }
     // POST request to update category
     @PostMapping("/provinces/update/{id}")
     public String updateProvince(@PathVariable("id") Long id, @Valid Provinces province,
