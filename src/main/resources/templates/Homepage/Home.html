@@ -83,54 +83,83 @@
               </div>
             </div>
             <div class="container">
-              <div class="row">
-                <div class="col-lg-12">
-                  <div class="more-info">
-                    <div class="row">
-                      <input
-                        type="text"
-                        placeholder="Tìm kiếm một địa điểm mà bạn quan tâm"
-                      />
-                    </div>
-                    <form action="">
+              <form action="">
+                <div class="row">
+                  <div class="col-lg-12">
+                    <div class="info" style="margin-bottom: 35px">
                       <div class="row">
-                        <div class="col-lg-3 col-sm-6 col-6">
-                          <label for="cars">Choose a car:</label>
-                          <select name="cars" id="cars">
-                            <option value="volvo">Volvo</option>
-                            <option value="saab">Saab</option>
-                            <option value="opel">Opel</option>
-                            <option value="audi">Audi</option>
-                          </select>
-                        </div>
-                        <div class="col-6">
-                          <label for="cars">Choose a car:</label>
-                          <select name="cars" id="cars">
-                            <option value="volvo">Volvo</option>
-                            <option value="saab">Saab</option>
-                            <option value="opel">Opel</option>
-                            <option value="audi">Audi</option>
-                          </select>
-                        </div>
-                        <div class="col-6">
-                          <label for="cars">Choose a car:</label>
-                          <select name="cars" id="cars">
-                            <option value="volvo">Volvo</option>
-                            <option value="saab">Saab</option>
-                            <option value="opel">Opel</option>
-                            <option value="audi">Audi</option>
-                          </select>
-                        </div>
-                        <div class="col-6">
-                          <div class="main-button">
-                            <a>Tìm kiếm</a>
-                          </div>
-                        </div>
+                        <input
+                          type="text"
+                          placeholder="Tìm kiếm một địa điểm mà bạn quan tâm"
+                        />
+                        <i class="fa-solid fa-chevron-down" id="icon_arrow"></i>
+                        <a class="btn_search"
+                          >Tìm kiếm
+                          <i
+                            class="fa-solid fa-magnifying-glass"
+                            id="icon_search"
+                          ></i
+                        ></a>
                       </div>
-                    </form>
+                    </div>
                   </div>
                 </div>
-              </div>
+                <div class="box">
+                  <!-- <form action="" method="post"> -->
+                  <!-- Select box 1 -->
+                  <div class="list_box">
+                    <div class="item-box">
+                      <label for="cars">Choose a car:</label>
+                      <select name="cars" id="cars">
+                        <option value="volvo">Volvo</option>
+                        <option value="saab">Saab</option>
+                        <option value="mercedes">Mercedes</option>
+                        <option value="audi">Audi</option>
+                      </select>
+                    </div>
+                    <!-- Select box 2 -->
+                    <div class="item-box">
+                      <label for="cars">Choose a car:</label>
+                      <select name="cars" id="cars">
+                        <option value="volvo">Volvo</option>
+                        <option value="saab">Saab</option>
+                        <option value="mercedes">Mercedes</option>
+                        <option value="audi">Audi</option>
+                      </select>
+                    </div>
+                    <!-- Select box 3 -->
+                    <div class="item-box">
+                      <label for="cars">Choose a car:</label>
+                      <select name="cars" id="cars">
+                        <option value="volvo">Volvo</option>
+                        <option value="saab">Saab</option>
+                        <option value="mercedes">Mercedes</option>
+                        <option value="audi">Audi</option>
+                      </select>
+                    </div>
+
+                    <ul class="checkbox-list">
+                      <li class="checkbox-item">
+                        <label class="form-control">
+                          <input type="checkbox" name="checkbox" />
+                          Vui chơi
+                        </label>
+                      </li>
+                      <li class="checkbox-item">
+                        <label class="form-control">
+                          <input
+                            type="checkbox"
+                            name="checkbox-checked"
+                            checked
+                          />
+                          Du lịch
+                        </label>
+                      </li>
+                    </ul>
+                  </div>
+                  <!-- </form> -->
+                </div>
+              </form>
             </div>
           </div>
           <nav>
@@ -173,6 +202,151 @@
               <div class="items">
                 <div class="row">
                   <div class="col-lg-12">
+                    <!-- Item  -->
+                    <div class="item">
+                      <div class="row">
+                        <div class="col-lg-4 col-sm-5">
+                          <div class="image">
+                            <img src="assets/images/country-01.jpg" alt="" />
+                          </div>
+                        </div>
+                        <div class="col-lg-8 col-sm-7">
+                          <div class="right-content">
+                            <h4>SWITZERLAND</h4>
+                            <span>Europe</span>
+                            <div class="main-button">
+                              <a href="about.html">Explore More</a>
+                            </div>
+                            <p>
+                              Woox Travel is a professional Bootstrap 5 theme
+                              HTML CSS layout for your website. You can use this
+                              layout for your commercial work.
+                            </p>
+                            <ul class="info">
+                              <li>
+                                <i class="fa fa-user"></i> 8.66 Mil People
+                              </li>
+                              <li><i class="fa fa-globe"></i> 41.290 km2</li>
+                              <li><i class="fa fa-home"></i> $1.100.200</li>
+                            </ul>
+                            <div class="text-button">
+                              <a href="about.html"
+                                >Need Directions ?
+                                <i class="fa fa-arrow-right"></i
+                              ></a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="item">
+                      <div class="row">
+                        <div class="col-lg-4 col-sm-5">
+                          <div class="image">
+                            <img src="assets/images/country-01.jpg" alt="" />
+                          </div>
+                        </div>
+                        <div class="col-lg-8 col-sm-7">
+                          <div class="right-content">
+                            <h4>SWITZERLAND</h4>
+                            <span>Europe</span>
+                            <div class="main-button">
+                              <a href="about.html">Explore More</a>
+                            </div>
+                            <p>
+                              Woox Travel is a professional Bootstrap 5 theme
+                              HTML CSS layout for your website. You can use this
+                              layout for your commercial work.
+                            </p>
+                            <ul class="info">
+                              <li>
+                                <i class="fa fa-user"></i> 8.66 Mil People
+                              </li>
+                              <li><i class="fa fa-globe"></i> 41.290 km2</li>
+                              <li><i class="fa fa-home"></i> $1.100.200</li>
+                            </ul>
+                            <div class="text-button">
+                              <a href="about.html"
+                                >Need Directions ?
+                                <i class="fa fa-arrow-right"></i
+                              ></a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="item">
+                      <div class="row">
+                        <div class="col-lg-4 col-sm-5">
+                          <div class="image">
+                            <img src="assets/images/country-01.jpg" alt="" />
+                          </div>
+                        </div>
+                        <div class="col-lg-8 col-sm-7">
+                          <div class="right-content">
+                            <h4>SWITZERLAND</h4>
+                            <span>Europe</span>
+                            <div class="main-button">
+                              <a href="about.html">Explore More</a>
+                            </div>
+                            <p>
+                              Woox Travel is a professional Bootstrap 5 theme
+                              HTML CSS layout for your website. You can use this
+                              layout for your commercial work.
+                            </p>
+                            <ul class="info">
+                              <li>
+                                <i class="fa fa-user"></i> 8.66 Mil People
+                              </li>
+                              <li><i class="fa fa-globe"></i> 41.290 km2</li>
+                              <li><i class="fa fa-home"></i> $1.100.200</li>
+                            </ul>
+                            <div class="text-button">
+                              <a href="about.html"
+                                >Need Directions ?
+                                <i class="fa fa-arrow-right"></i
+                              ></a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="item">
+                      <div class="row">
+                        <div class="col-lg-4 col-sm-5">
+                          <div class="image">
+                            <img src="assets/images/country-01.jpg" alt="" />
+                          </div>
+                        </div>
+                        <div class="col-lg-8 col-sm-7">
+                          <div class="right-content">
+                            <h4>SWITZERLAND</h4>
+                            <span>Europe</span>
+                            <div class="main-button">
+                              <a href="about.html">Explore More</a>
+                            </div>
+                            <p>
+                              Woox Travel is a professional Bootstrap 5 theme
+                              HTML CSS layout for your website. You can use this
+                              layout for your commercial work.
+                            </p>
+                            <ul class="info">
+                              <li>
+                                <i class="fa fa-user"></i> 8.66 Mil People
+                              </li>
+                              <li><i class="fa fa-globe"></i> 41.290 km2</li>
+                              <li><i class="fa fa-home"></i> $1.100.200</li>
+                            </ul>
+                            <div class="text-button">
+                              <a href="about.html"
+                                >Need Directions ?
+                                <i class="fa fa-arrow-right"></i
+                              ></a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                     <div class="item">
                       <div class="row">
                         <div class="col-lg-4 col-sm-5">
@@ -232,7 +406,7 @@
                   <div class="col-lg-12">
                     <div id="map">
                       <iframe
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12469.776493332698!2d-80.14036379941481!3d25.907788681148624!2m3!1f357.26927939317244!2f20.870722720054623!3f0!3m2!1i1024!2i768!4f35!3m3!1m2!1s0x88d9add4b4ac788f%3A0xe77469d09480fcdb!2sSunny%20Isles%20Beach!5e1!3m2!1sen!2sth!4v1642869952544!5m2!1sen!2sth"
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.0709101917414!2d106.77992637480655!3d10.882211289273082!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3174d89aad780e49%3A0x54542761d4c22175!2zS8O9IHTDumMgeMOhIEtodSBCIC0gxJDhuqFpIGjhu41jIFF14buRYyBnaWEgVFAuSENN!5e0!3m2!1svi!2s!4v1719408369271!5m2!1svi!2s"
                         width="100%"
                         height="980px"
                         frameborder="0"
@@ -250,5 +424,20 @@
     </div>
     <!-- Footer Page -->
     <th:block th:replace="~{Layout/layoutUser::footer}"></th:block>
+    <script>
+      const iconArrowElement = document.querySelector("#icon_arrow");
+      const boxElement = document.querySelector(".box");
+      iconArrowElement.addEventListener("click", function () {
+        boxElement.classList.toggle("active");
+        if (iconArrowElement.classList.contains("fa-chevron-down")) {
+          iconArrowElement.classList.remove("fa-chevron-down");
+          iconArrowElement.classList.add("fa-chevron-up");
+        } else {
+          iconArrowElement.classList.remove("fa-chevron-up");
+          iconArrowElement.classList.add("fa-chevron-down");
+        }
+        boxElement.id = "display";
+      });
+    </script>
   </body>
 </html>

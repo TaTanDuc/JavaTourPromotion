@@ -31,7 +31,7 @@ import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/destinations")
+@RequestMapping("/")
 public class DestinationController {
 
     @Autowired
@@ -44,7 +44,7 @@ public class DestinationController {
     private CityService cityService; // Đảm bảo bạn đã inject CategoryService
     @Autowired
     private ProviceService proviceService;
-    @GetMapping()
+    @GetMapping({"/", "/destinations"})
     public String showDestinationList(Model model) {
         model.addAttribute("destination", destinationService.getAllDestination());
         return "Homepage/Home";
