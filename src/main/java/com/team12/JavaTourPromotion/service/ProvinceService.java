@@ -1,7 +1,9 @@
 package com.team12.JavaTourPromotion.service;
 
+import com.team12.JavaTourPromotion.model.Cities;
 import com.team12.JavaTourPromotion.model.Provinces;
 import com.team12.JavaTourPromotion.repository.ProvinceRepository;
+import com.team12.JavaTourPromotion.viewmodel.ProvinceGetVM;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,14 +15,19 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 @Transactional
-public class ProviceService {
+public class ProvinceService {
+
     private final ProvinceRepository provinceRepository;
-    public List<Provinces> getAllProvinces() {
-        return provinceRepository.findAll();
+
+    public List<ProvinceGetVM> getAllProvinces() {
+        return provinceRepository.findAll()
+                .stream()
+                .map(ProvinceGetVM::from)
+                .toList();
     }
 
-    public Optional<Provinces> getProvinceById(Long id) {
-        return provinceRepository.findById(id);
+    public Optional<ProvinceGetVM> getProvinceById(Long id) {
+        return provinceRepository.findById(id).map(ProvinceGetVM::from);
     }
     // Add a new product to the database
     public Provinces addProvince(Provinces provinces) {

@@ -1,26 +1,24 @@
 package com.team12.JavaTourPromotion.controller;
 
 import com.team12.JavaTourPromotion.model.Comments;
-import com.team12.JavaTourPromotion.model.Destinations;
 import com.team12.JavaTourPromotion.service.CommentService;
-import com.team12.JavaTourPromotion.service.DestinationService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @Controller
 @RequiredArgsConstructor
-
-
+@RestController
 public class  CommentController {
     @Autowired
-    private CommentService commentService;
-    @Autowired
-    private DestinationService destinationService;// Đảm bảo bạn đã inject CategoryService
+    private CommentService commentService; // Đảm bảo bạn đã inject CategoryService
     // Display a list of all products
     @GetMapping("/comments")
     public String showCommentList(Model model) {
@@ -28,19 +26,14 @@ public class  CommentController {
         return "/comments/comment-list";
     }
     // Process the form for adding a new product
-    @PostMapping("/add")
-    public String addComment(@Valid @ModelAttribute Comments comment, BindingResult result, @RequestParam Long destinationId) {
+    @PostMapping("/comments/add")
+    public String addComment(@Valid Comments comment, BindingResult result) {
         if (result.hasErrors()) {
-            return "redirect:/destination/" + destinationId; // Replace with the actual view for destination details
+            return "/comments/add-comment";
         }
 
-        Destinations destination = destinationService.getDestinationById(destinationId)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid destination Id:" + destinationId));
-
-        comment.setDestination(destination);
         commentService.addComment(comment);
-
-        return "redirect:/destination/" + destinationId; // Replace with the actual view for destination details
+        return "redirect:/comments";
     }
     @GetMapping("comments/delete/{id}")
     public String deleteProduct(@PathVariable Long id) {

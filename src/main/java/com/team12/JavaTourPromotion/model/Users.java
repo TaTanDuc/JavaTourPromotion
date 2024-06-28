@@ -43,22 +43,22 @@ public class Users implements UserDetails {
     private String email;
 
     @Column(name = "ProfileImagePath")
-    private String ProfileImgPath;
+    private String profileImgPath;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "User_Role",
         joinColumns = @JoinColumn(name = "user_id"),
         inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Roles> roles = new HashSet<>();
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Comments> comments;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Bookmarks> bookmarks;
 
     @Column(name = "Banned", columnDefinition = "boolean default false")
-    private boolean Banned;
+    private boolean banned;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities(){
@@ -97,12 +97,13 @@ public class Users implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
     public boolean isBanned() {
-        return Banned;
+        return banned;
     }
 
     public void setBanned(boolean Banned) {
-        this.Banned = Banned;
+        this.banned = Banned;
     }
 
     @Override

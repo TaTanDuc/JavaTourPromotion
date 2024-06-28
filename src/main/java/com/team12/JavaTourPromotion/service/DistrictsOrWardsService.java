@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 @Transactional
 public class DistrictsOrWardsService {
     private final DistrictsOrWardsRepository DistrictsOrWardsRepository;
+
     public List<DistrictsOrWards> getAllDistrictsOrWards() {
         return DistrictsOrWardsRepository.findAll();
     }
@@ -23,8 +24,16 @@ public class DistrictsOrWardsService {
     public Optional<DistrictsOrWards> getDistrictsOrWards(Long id) {
         return DistrictsOrWardsRepository.findById(id);
     }
+
     // Add a new product to the database
     public DistrictsOrWards addDistrictsOrWards(DistrictsOrWards city) {
         return DistrictsOrWardsRepository.save(city);
+    }
+
+    public void deleteDistrictsOrWards(Long id) {
+        if (!DistrictsOrWardsRepository.existsById(id)) {
+            throw new IllegalStateException("DistrictOrWards with ID " + id + " does not exist.");
+        }
+         DistrictsOrWardsRepository.deleteById(id);
     }
 }

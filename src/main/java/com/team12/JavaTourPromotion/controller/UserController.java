@@ -19,6 +19,7 @@ import java.io.IOException;
 
 @Controller
 @RequiredArgsConstructor
+@RestController
 public class UserController {
     public static String UPLOADED_FOLDER = "C:/Users/RON/OneDrive/Desktop/JavaTourPromotion/src/main/resources/static/UserImage/";
     public static String DEFAULT_IMAGE = "C:/Users/RON/OneDrive/Desktop/JavaTourPromotion/src/main/resources/static/UserImage/anonymous.png";

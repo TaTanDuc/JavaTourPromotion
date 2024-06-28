@@ -26,7 +26,7 @@ public class Categories {
     @Size(min = 5 , max = 20, message = "Category's name must be 10 to 50 characters!")
     private String Name;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "Categories_Destinations",
                 joinColumns = @JoinColumn(name = "CategoryID"),
                 inverseJoinColumns = @JoinColumn(name = "DestinationID"))
