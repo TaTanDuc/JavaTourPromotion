@@ -1,7 +1,7 @@
 package com.team12.JavaTourPromotion.controller;
 
 import com.team12.JavaTourPromotion.model.Provinces;
-import com.team12.JavaTourPromotion.service.ProviceService;
+import com.team12.JavaTourPromotion.service.ProvinceService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +20,7 @@ import java.util.List;
 public class ProvinceController {
 
     @Autowired
-    private final ProviceService proviceService;
+    private final ProvinceService provinceService;
     @GetMapping("/provinces/add")
     public String showAddForm(Model model) {
         model.addAttribute("province", new Provinces());
@@ -31,21 +31,21 @@ public class ProvinceController {
         if (result.hasErrors()) {
             return "/provinces/add-province";
         }
-        proviceService.addProvince(province);
+        provinceService.addProvince(province);
         return "redirect:/provinces";
     }
     // Hiển thị danh sách danh mục
-    @GetMapping("/provinces")
-    public String listProvinces(Model model) {
-        List<Provinces> provinces = proviceService.getAllProvinces();
-        model.addAttribute("provinces", provinces);
-        return "/provinces/provinces-list";
-    }
+//    @GetMapping("/provinces")
+//    public String listProvinces(Model model) {
+//        List<Provinces> provinces = provinceService.getAllProvinces();
+//        model.addAttribute("provinces", provinces);
+//        return "/provinces/provinces-list";
+//    }
 
     // GET request to show category edit form
     @GetMapping("/provinces/edit/{id}")
     public String showUpdateForm(@PathVariable("id") Long id, Model model) {
-        Provinces province = proviceService.getProvinceById(id)
+        Provinces province = provinceService.getProvinceById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid province Id:" + id));
         model.addAttribute("province", province);
         return "/provinces/update-province";
@@ -58,8 +58,8 @@ public class ProvinceController {
             province.setId(id);
             return "/provinces/update-provinces";
         }
-        proviceService.updateProvince(province);
-        model.addAttribute("provinces", proviceService.getAllProvinces());
+        provinceService.updateProvince(province);
+        model.addAttribute("provinces", provinceService.getAllProvinces());
         return "redirect:/provinces";
     }
     // GET request for deleting category

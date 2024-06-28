@@ -20,11 +20,11 @@ public class Reports {
     @Size(min = 10,message = "Content must be 10 or more characters!")
     private String Content;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "UserID")
     private Users user;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne
     @JoinColumn(name = "CommentID")
     private Comments comment;
 }

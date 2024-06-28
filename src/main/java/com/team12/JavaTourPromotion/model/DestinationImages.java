@@ -11,7 +11,7 @@ import lombok.*;
 @Table(name = "DesImages")
 public class DestinationImages {
     @Id
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     private Destinations destination;
 
     @Column(name = "Path")

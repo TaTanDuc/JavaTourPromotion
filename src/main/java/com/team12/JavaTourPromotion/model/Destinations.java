@@ -1,5 +1,6 @@
 package com.team12.JavaTourPromotion.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.*;
@@ -37,28 +38,31 @@ public class Destinations {
     @NotBlank(message = "Image must not be blank!")
     private String ImageUrl;
 
-    @OneToMany(mappedBy = "destination")
+    @OneToMany(mappedBy = "destination", cascade = CascadeType.ALL)
     private List<Comments> comments;
 
-    @OneToMany(mappedBy = "destination")
+    @OneToMany(mappedBy = "destination", cascade = CascadeType.ALL)
     private List<DestinationImages> images;
 
-    @OneToMany(mappedBy = "destination")
+    @OneToMany(mappedBy = "destination", cascade = CascadeType.ALL)
     private Set<Bookmarks> bookmarks;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "ProvinceID")
+    @ManyToOne
+    @JoinColumn(name = "ProvinceID", referencedColumnName = "id")
+    @JsonIgnore
     private Provinces province;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "CityID")
+    @ManyToOne
+    @JoinColumn(name = "CityID", referencedColumnName = "id")
+    @JsonIgnore
     private Cities city;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "DoW_ID")
+    @ManyToOne
+    @JoinColumn(name = "DoW_ID", referencedColumnName = "id")
+    @JsonIgnore
     private DistrictsOrWards DoW;
 
-    @ManyToMany(mappedBy = "destinations")
+    @ManyToMany(mappedBy = "destinations", cascade = CascadeType.ALL)
     private Set<Categories> categories;
 
     public void calculateAverageScore() {

@@ -1,5 +1,6 @@
 package com.team12.JavaTourPromotion.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -11,12 +12,13 @@ import lombok.*;
 @Table(name = "Bookmarks")
 public class Bookmarks {
     @Id
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "UserID")
     private Users user;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "DestinationID")
+    @JsonIgnore
     private Destinations destination;
 
 }

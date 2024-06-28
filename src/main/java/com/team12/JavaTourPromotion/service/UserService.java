@@ -38,7 +38,6 @@ public class UserService implements UserDetailsService {
     public void setDefaultRole(String username) {
         userRepository.findByUsername(username).ifPresentOrElse(
                 user -> {
-
                     user.getRoles().add(roleRepository.findRoleById(Role.USER.value));
                     userRepository.save(user);
                 },
