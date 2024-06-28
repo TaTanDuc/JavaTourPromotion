@@ -1,0 +1,16 @@
+INSERT INTO categories (NAME) VALUE
+('Giải trí'),
+('Khách sạn'),
+('Resort'),
+('Sinh thái'),
+('Chùa'),
+('Văn hóa'),
+('Bãi Biển'),
+('Ẩm thực'),
+('Cắm trại'),
+('Phố cổ'),
+('Mạo hiểm'),
+('Thể thao'),
+('Nghỉ dưỡng'),
+('Bảo tường'),
+('Núi non');
