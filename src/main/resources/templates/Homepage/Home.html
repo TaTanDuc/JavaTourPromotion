@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="utf-8" />
     <meta
@@ -191,7 +191,7 @@
       <div class="visit-country">
         <div class="container">
           <div class="row">
-            <div class="col-lg-5">
+            <div class="col-lg-6">
               <div class="section-heading">
                 <h2>Top 9 Thành phố Hot nhất hiện nay</h2>
               </div>
@@ -427,6 +427,11 @@
     <script>
       const iconArrowElement = document.querySelector("#icon_arrow");
       const boxElement = document.querySelector(".box");
+      const btnSearchElement = document.querySelector(".btn_search");
+      const countryElement = document.querySelector(".visit-country");
+      console.log(btnSearchElement, countryElement);
+
+      // Thao tác sự kiện mở filter và đòng filter
       iconArrowElement.addEventListener("click", function () {
         boxElement.classList.toggle("active");
         if (iconArrowElement.classList.contains("fa-chevron-down")) {
@@ -437,6 +442,11 @@
           iconArrowElement.classList.add("fa-chevron-down");
         }
         boxElement.id = "display";
+      });
+
+      // Thao tác sự kiện search API
+      btnSearchElement.addEventListener("click", function () {
+        countryElement.scrollIntoView({ behavior: "smooth" });
       });
     </script>
   </body>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="utf-8" />
     <meta
@@ -11,20 +11,18 @@
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
       rel="stylesheet"
     />
-
-    <title>TDL Travel Reservation Page</title>
-    <th:block th:replace="~{layout::min-css}"></th:block>
-    <th:block th:replace="~{layout::fontawesome-css}"></th:block>
-    <th:block th:replace="~{layout::wooxtravel-css}"></th:block>
-    <th:block th:replace="~{layout::owl-css}"></th:block>
-    <th:block th:replace="~{layout::animate-css}"></th:block>
-    <th:block th:replace="~{layout::bundle-css}"></th:block>
+    <th:block th:replace="~{Layout/layoutUser::min-css}"></th:block>
+    <th:block th:replace="~{Layout/layoutUser::fontawesome-css}"></th:block>
+    <th:block th:replace="~{Layout/layoutUser::wooxtravel-css}"></th:block>
+    <th:block th:replace="~{Layout/layoutUser::owl-css}"></th:block>
+    <th:block th:replace="~{Layout/layoutUser::animate-css}"></th:block>
+    <th:block th:replace="~{Layout/layoutUser::bundle-css}"></th:block>
   </head>
 
   <body>
-    <th:block th:replace="~{layout::loading}"></th:block>
-    <!-- Header Page -->
-    <th:block th:replace="~{layout::header}"></th:block>
+    <th:block th:replace="~{Layout/layoutUser::loading}"></th:block>
+
+    <th:block th:replace="~{Layout/layoutUser::header}"></th:block>
     <div class="container">
       <div class="second-page-heading">
         <div class="container">
@@ -202,6 +200,6 @@
         </div>
       </div>
     </div>
-    <th:block th:replace="~{layout::footer}"></th:block>
+    <th:block th:replace="~{Layout/layoutUser::footer}"></th:block>
   </body>
 </html>
