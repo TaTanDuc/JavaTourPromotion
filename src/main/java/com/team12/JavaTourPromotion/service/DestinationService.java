@@ -9,11 +9,14 @@ import lombok.RequiredArgsConstructor;
 import org.hibernate.annotations.NotFound;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.thymeleaf.util.StringUtils;
 
 import javax.print.attribute.standard.Destination;
+import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 @Service
@@ -40,7 +43,7 @@ public class DestinationService {
                                 (cityId == null || des.getCity().getId().equals(cityId)) &&
                                 (dowId == null || des.getDoW().getId().equals(dowId)) &&
                                 (categoriesId == null || categoriesId.isEmpty() || des.getCategories().stream().map(Categories::getId).toList().containsAll(categoriesId)) &&
-                                (string == null || des.getName().contains(string))
+                                (string == null || des.getName().matches("(?i)(.*)"+string+"(.*)(?i)"))
                 )
                 .map(DestinationGetVM::from)
                 .collect(Collectors.toList());
