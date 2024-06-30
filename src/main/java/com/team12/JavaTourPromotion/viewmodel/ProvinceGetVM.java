@@ -14,7 +14,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Builder
-public record ProvinceGetVM(Long id, String name, Set<cities> citySet, Set<destinations> destinationSet){
+public record ProvinceGetVM(Long id, String name){
 
     public static ProvinceGetVM from(@NotNull Provinces province) {
 
@@ -30,9 +30,7 @@ public record ProvinceGetVM(Long id, String name, Set<cities> citySet, Set<desti
 
         return new ProvinceGetVM(
                 province.getId(),
-                province.getName(),
-                simpleCities,
-                simpleDes
+                province.getName()
         );
     }
 

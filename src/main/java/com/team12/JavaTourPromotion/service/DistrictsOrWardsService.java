@@ -3,6 +3,7 @@ package com.team12.JavaTourPromotion.service;
 
 import com.team12.JavaTourPromotion.model.DistrictsOrWards;
 import com.team12.JavaTourPromotion.repository.DistrictsOrWardsRepository;
+import com.team12.JavaTourPromotion.viewmodel.DoWGetVM;
 import jakarta.validation.constraints.NotNull;
 
 import java.util.List;
@@ -17,8 +18,13 @@ import org.springframework.stereotype.Service;
 public class DistrictsOrWardsService {
     private final DistrictsOrWardsRepository DistrictsOrWardsRepository;
 
-    public List<DistrictsOrWards> getAllDistrictsOrWards() {
-        return DistrictsOrWardsRepository.findAll();
+    public List<DoWGetVM> getAllDoWsByCity(Long cityId) {
+        return DistrictsOrWardsRepository.findAll()
+                .stream()
+                .filter(dow ->
+                        (dow.getCity().getId().equals(cityId)))
+                .map(DoWGetVM::from)
+                .toList();
     }
 
     public Optional<DistrictsOrWards> getDistrictsOrWards(Long id) {
