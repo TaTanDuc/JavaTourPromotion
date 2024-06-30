@@ -50,8 +50,8 @@ public class DestinationService {
     }
 
     // Retrieve a product by its id
-    public Optional<Destinations> getDestinationById(Long id) {
-        return destinationRepository.findById(id);
+    public Optional<DestinationGetVM> getDestinationById(Long id) {
+        return destinationRepository.findById(id).map(DestinationGetVM::from);
     }
 
     // Add a new product to the database

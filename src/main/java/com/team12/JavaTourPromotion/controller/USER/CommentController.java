@@ -1,4 +1,4 @@
-package com.team12.JavaTourPromotion.controller;
+package com.team12.JavaTourPromotion.controller.USER;
 
 import com.team12.JavaTourPromotion.model.Comments;
 import com.team12.JavaTourPromotion.service.CommentService;

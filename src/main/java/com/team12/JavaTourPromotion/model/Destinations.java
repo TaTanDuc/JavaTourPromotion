@@ -49,17 +49,14 @@ public class Destinations {
 
     @ManyToOne
     @JoinColumn(name = "ProvinceID", referencedColumnName = "id")
-    @JsonIgnore
     private Provinces province;
 
     @ManyToOne
     @JoinColumn(name = "CityID", referencedColumnName = "id")
-    @JsonIgnore
     private Cities city;
 
     @ManyToOne
     @JoinColumn(name = "DoW_ID", referencedColumnName = "id")
-    @JsonIgnore
     private DistrictsOrWards DoW;
 
     @ManyToMany(mappedBy = "destinations", cascade = CascadeType.ALL)
