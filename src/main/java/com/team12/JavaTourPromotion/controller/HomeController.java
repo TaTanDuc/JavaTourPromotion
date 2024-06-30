@@ -2,9 +2,7 @@ package com.team12.JavaTourPromotion.controller;
 
 import com.team12.JavaTourPromotion.model.*;
 import com.team12.JavaTourPromotion.service.*;
-import com.team12.JavaTourPromotion.viewmodel.CategoryGetVM;
-import com.team12.JavaTourPromotion.viewmodel.DestinationGetVM;
-import com.team12.JavaTourPromotion.viewmodel.ProvinceGetVM;
+import com.team12.JavaTourPromotion.viewmodel.*;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
@@ -25,6 +23,8 @@ public class HomeController {
     private final DestinationService destinationService;
     private final CategoryService categoryService;
     private final ProvinceService provinceService;
+    private final CityService cityService;
+    private final DistrictsOrWardsService dowService;
 
     String errorPath = "";
 
@@ -78,6 +78,24 @@ public class HomeController {
         List<CategoryGetVM> list = categoryService.getAllCategories();
         if(list.isEmpty())
             throw new RuntimeException("List of categories is empty!");
+        else
+            return ResponseEntity.ok(list);
+    }
+
+    @GetMapping("/citiesByProvince{id}")
+    public ResponseEntity<List<CityGetVM>> getAllCitiesByProvince(@PathVariable Long id){
+        List<CityGetVM> list = cityService.getAllCityByProvince(id);
+        if(list.isEmpty())
+            throw new RuntimeException("List of cities is empty!");
+        else
+            return ResponseEntity.ok(list);
+    }
+
+    @GetMapping("/dowsByCity{id}")
+    public ResponseEntity<List<DoWGetVM>> getAllDoWsByCity(@PathVariable Long id){
+        List<DoWGetVM> list = dowService.getAllDoWsByCity(id);
+        if(list.isEmpty())
+            throw new RuntimeException("List of cities is empty!");
         else
             return ResponseEntity.ok(list);
     }
