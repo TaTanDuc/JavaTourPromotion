@@ -1,4 +1,4 @@
-package com.team12.JavaTourPromotion.controller;
+package com.team12.JavaTourPromotion.controller.ADMIN;
 
 import com.team12.JavaTourPromotion.service.DestinationService;
 import lombok.RequiredArgsConstructor;

@@ -1,12 +1,9 @@
-package com.team12.JavaTourPromotion.controller;
+package com.team12.JavaTourPromotion.controller.ADMIN;
 
-import org.springframework.http.ResponseEntity;
 import com.team12.JavaTourPromotion.service.CategoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RequiredArgsConstructor
 @RestController

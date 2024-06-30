@@ -16,7 +16,9 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Transactional
 public class ProvinceService {
+
     private final ProvinceRepository provinceRepository;
+
     public List<ProvinceGetVM> getAllProvinces() {
         return provinceRepository.findAll()
                 .stream()
@@ -24,8 +26,8 @@ public class ProvinceService {
                 .toList();
     }
 
-    public Optional<Provinces> getProvinceById(Long id) {
-        return provinceRepository.findById(id);
+    public Optional<ProvinceGetVM> getProvinceById(Long id) {
+        return provinceRepository.findById(id).map(ProvinceGetVM::from);
     }
     // Add a new product to the database
     public Provinces addProvince(Provinces provinces) {

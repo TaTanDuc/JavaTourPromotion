@@ -25,7 +25,6 @@ public class DistrictsOrWards {
 
     @ManyToOne
     @JoinColumn(name = "CityID", referencedColumnName = "id")
-    @JsonIgnore
     private Cities city;
 
     @OneToMany(mappedBy = "DoW", cascade = CascadeType.ALL)

@@ -17,8 +17,11 @@ import java.util.stream.Collectors;
 public record ProvinceGetVM(Long id, String name, Set<cities> citySet, Set<destinations> destinationSet){
 
     public static ProvinceGetVM from(@NotNull Provinces province) {
+
         Set<cities> simpleCities = province.getCities().stream()
-                .map(city -> new cities(city.getId(), city.getName()))
+                .map(city -> new cities(city.getId(), city.getName(), city.getDoW()
+                        .stream()
+                            .map(dow -> new dows(dow.getId(), dow.getName())).collect(Collectors.toSet())))
                 .collect(Collectors.toSet());
 
         Set<destinations> simpleDes = province.getDestinations().stream()
@@ -33,7 +36,8 @@ public record ProvinceGetVM(Long id, String name, Set<cities> citySet, Set<desti
         );
     }
 
-    // Define a simplified City record or class
-    public record cities(Long id, String name) {}
+    // Define a simplified views
+    public record cities(Long id, String name, Set<dows> dowSet) {}
     public record destinations(Long id, String name) {}
+    public record dows(Long id, String name) {}
 }

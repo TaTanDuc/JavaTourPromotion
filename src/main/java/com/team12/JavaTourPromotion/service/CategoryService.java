@@ -3,6 +3,7 @@ package com.team12.JavaTourPromotion.service;
 
 import com.team12.JavaTourPromotion.model.Categories;
 import com.team12.JavaTourPromotion.repository.CategoryRepository;
+import com.team12.JavaTourPromotion.viewmodel.CategoryGetVM;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,8 +22,11 @@ public class CategoryService {
      * Retrieve all categories from the database.
      * @return a list of categories
      */
-    public List<Categories> getAllCategories(){
-        return categoryRepository.findAll();
+    public List<CategoryGetVM> getAllCategories(){
+        return categoryRepository.findAll()
+                .stream()
+                .map(CategoryGetVM::from)
+                .toList();
     }
     public Optional<Categories> getCategoryById(Long id) {
         return categoryRepository.findById(id);
