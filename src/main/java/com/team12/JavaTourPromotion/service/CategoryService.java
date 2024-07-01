@@ -3,25 +3,20 @@ package com.team12.JavaTourPromotion.service;
 
 import com.team12.JavaTourPromotion.model.Categories;
 import com.team12.JavaTourPromotion.repository.CategoryRepository;
-import com.team12.JavaTourPromotion.viewmodel.CategoryGetVM;
+import com.team12.JavaTourPromotion.GetVM.CategoryGetVM;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import jakarta.validation.constraints.NotNull;
 import java.util.List;
 import java.util.Optional;
-/**
- * Service class for managing categories.
- */
+
 @Service
 @RequiredArgsConstructor
 @Transactional
 public class CategoryService {
     private final CategoryRepository categoryRepository;
-    /**
-     * Retrieve all categories from the database.
-     * @return a list of categories
-     */
+
     public List<CategoryGetVM> getAllCategories(){
         return categoryRepository.findAll()
                 .stream()
@@ -31,8 +26,9 @@ public class CategoryService {
     public Optional<Categories> getCategoryById(Long id) {
         return categoryRepository.findById(id);
     }
-    public void addCategory(Categories category) {
-        categoryRepository.save(category);
+
+    public Categories addCategory(Categories category) {
+        return categoryRepository.save(category);
     }
 
     public void updateCategory(@NotNull Categories category) {
@@ -44,6 +40,7 @@ public class CategoryService {
         existingCategory.setDestinations(category.getDestinations());
         categoryRepository.save(existingCategory);
     }
+
     public void deleteCategoryById(Long id) {
         if (!categoryRepository.existsById(id)) {
             throw new IllegalStateException("Category with ID " + id + " does not exist.");

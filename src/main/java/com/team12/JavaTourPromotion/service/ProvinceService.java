@@ -1,9 +1,8 @@
 package com.team12.JavaTourPromotion.service;
 
-import com.team12.JavaTourPromotion.model.Cities;
 import com.team12.JavaTourPromotion.model.Provinces;
 import com.team12.JavaTourPromotion.repository.ProvinceRepository;
-import com.team12.JavaTourPromotion.viewmodel.ProvinceGetVM;
+import com.team12.JavaTourPromotion.GetVM.ProvinceGetVM;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,25 +27,6 @@ public class ProvinceService {
 
     public Optional<ProvinceGetVM> getProvinceById(Long id) {
         return provinceRepository.findById(id).map(ProvinceGetVM::from);
-    }
-    // Add a new product to the database
-    public Provinces addProvince(Provinces provinces) {
-        return provinceRepository.save(provinces);
-    }
-    // Update an existing product
-    public Provinces updateProvince(@NotNull Provinces province) {
-        Provinces existingProvince = provinceRepository.findById(province.getId())
-                .orElseThrow(() -> new IllegalStateException("Product with ID " + province.getId() + " does not exist."));
-        existingProvince.setName(province.getName());
-
-        return provinceRepository.save(existingProvince);
-    }
-    // Delete a product by its id
-    public void deleteProvinceById(Long id) {
-        if (!provinceRepository.existsById(id)) {
-            throw new IllegalStateException("Province with ID " + id + " does not exist.");
-        }
-        provinceRepository.deleteById(id);
     }
 
 }

@@ -1,22 +1,17 @@
 package com.team12.JavaTourPromotion.service;
 
+import com.team12.JavaTourPromotion.GetVM.DestinationDetailGetVM;
 import com.team12.JavaTourPromotion.model.Categories;
 import com.team12.JavaTourPromotion.model.Destinations;
 import com.team12.JavaTourPromotion.repository.DestinationRepository;
-import com.team12.JavaTourPromotion.viewmodel.DestinationGetVM;
+import com.team12.JavaTourPromotion.GetVM.DestinationGetVM;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.annotations.NotFound;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.thymeleaf.util.StringUtils;
 
-import javax.print.attribute.standard.Destination;
-import java.text.Normalizer;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 @Service
@@ -26,7 +21,6 @@ public class DestinationService {
 
     private final DestinationRepository destinationRepository;
 
-    // Retrieve all products from the database
     public List<DestinationGetVM> getAllDestination() {
         return destinationRepository.findAll()
                 .stream()
@@ -49,17 +43,18 @@ public class DestinationService {
                 .collect(Collectors.toList());
     }
 
-    // Retrieve a product by its id
     public Optional<DestinationGetVM> getDestinationById(Long id) {
         return destinationRepository.findById(id).map(DestinationGetVM::from);
     }
 
-    // Add a new product to the database
+    public Optional<DestinationDetailGetVM> getDestinationDetailId(Long id) {
+        return destinationRepository.findById(id).map(DestinationDetailGetVM::from);
+    }
+
     public Destinations addDestination(Destinations destination) {
         return destinationRepository.save(destination);
     }
 
-    // Update an existing destination
     public Destinations updateDestination(@NotNull Destinations destination) {
         Destinations existingDestination = destinationRepository.findById(destination.getId())
                 .orElseThrow(() -> new IllegalStateException("Destination with ID " +
@@ -75,7 +70,6 @@ public class DestinationService {
         return destinationRepository.save(existingDestination);
     }
 
-    // Delete a product by its id
     public void deleteProductById(Long id) {
         if (!destinationRepository.existsById(id)) {
             throw new IllegalStateException("Destination with ID " + id + " does not exist.");

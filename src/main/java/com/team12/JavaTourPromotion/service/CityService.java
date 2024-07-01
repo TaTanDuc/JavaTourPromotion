@@ -1,7 +1,7 @@
 package com.team12.JavaTourPromotion.service;
 
 import com.team12.JavaTourPromotion.repository.CityRepository;
-import com.team12.JavaTourPromotion.viewmodel.CityGetVM;
+import com.team12.JavaTourPromotion.GetVM.CityGetVM;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
