@@ -56,7 +56,7 @@ INSERT INTO cities (name, provinceid) VALUES
 ('Thành phố Thanh Hóa', 55), ('Thành phố Sầm Sơn', 55),
 ('Thành phố Huế', 56), ('Huyện Quảng Điền', 56),
 ('Thành phố Mỹ Tho', 57), ('Thành phố Gò Công', 57),
-('Thành phố Hồ Chí Minh', 58), ('Thành phố Thủ Đức',58)
+('Thành phố Hồ Chí Minh', 58), ('Thành phố Thủ Đức',58),
 ('Thành phố Trà Vinh', 59), ('Huyện Duyên Hải', 59),
 ('Thành phố Tuyên Quang', 60), ('Huyện Na Hang', 60),
 ('Thành phố Vĩnh Long', 61), ('Thị xã Bình Minh', 61),
