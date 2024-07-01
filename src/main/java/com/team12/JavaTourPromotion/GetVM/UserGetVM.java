@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public record UserGetVM (Long id, String username, String name,List<comments> commentsList){
+public record UserGetVM (Long id, String username, String name,List<comments> commentsList, List<bookmark> bookmarksList){
 
     public static UserGetVM from(@NotNull Users user) {
 
@@ -21,15 +21,22 @@ public record UserGetVM (Long id, String username, String name,List<comments> co
                         comments.getRating())
                 ).toList();
 
+        List<bookmark> simpleBookmark = user.getBookmarks().stream()
+                .map(bookmarks -> new bookmark(
+                        new destinations(bookmarks.getDestination().getId(), bookmarks.getDestination().getName()))
+                ).toList();
+
         return new UserGetVM(
                 user.getId(),
                 user.getUsername(),
                 user.getName(),
-                simpleComments
+                simpleComments,
+                simpleBookmark
         );
     }
 
     // Define a simplified views
     public record comments(Long id, String Username, destinations destination, int rating) {}
     public record destinations(Long id, String name) {}
+    public record bookmark(destinations destination){}
 }

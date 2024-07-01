@@ -2,6 +2,7 @@ package com.team12.JavaTourPromotion.service;
 
 import com.team12.JavaTourPromotion.GetVM.UserGetVM;
 import com.team12.JavaTourPromotion.Role;
+import com.team12.JavaTourPromotion.model.Bookmarks;
 import com.team12.JavaTourPromotion.model.Users;
 import com.team12.JavaTourPromotion.repository.IRoleRepository;
 import com.team12.JavaTourPromotion.repository.IUserRepository;
@@ -94,5 +95,10 @@ public class UserService implements UserDetailsService {
     public Optional<UserGetVM> findUserByUsername(String username) throws UsernameNotFoundException{
         return userRepository.findByUsername(username).map(UserGetVM::from);
     }
-
+//
+//    public void userAddBookmark(String username, Bookmarks bookmarks){
+//        Users user = userRepository.findByUsername(username)
+//                .orElseThrow(() -> new UsernameNotFoundException("User not found"));;
+//        ;
+//    }
 }

@@ -17,7 +17,7 @@ import java.io.IOException;
 @RequiredArgsConstructor
 @Controller
 @RequestMapping("/api/v1/security")
-public class SecurityAPI {
+public class SecureAPI {
 
     private final static String UPLOADED_FOLDER = "./UserProfileImg";
 
@@ -62,19 +62,19 @@ public class SecurityAPI {
         userService.setDefaultRole(user.getUsername());
         return "redirect:/login";
     }
-
-    @PostMapping("/register")
-    public String register(@Valid @ModelAttribute("user") Users user, @NotNull BindingResult bindingResult, Model model) {
-        if (bindingResult.hasErrors()) {
-            var errors = bindingResult.getAllErrors()
-                    .stream()
-                    .map(DefaultMessageSourceResolvable::getDefaultMessage)
-                    .toArray(String[]::new);
-            model.addAttribute("errors", errors);
-            return "Login/register"; // Trả về lại view "register" nếu có lỗi
-        }
-        userService.addUser(user);
-        userService.setDefaultRole(user.getUsername());
-        return "redirect:Login/login";
-    }
+//
+//    @PostMapping("/register")
+//    public String register(@Valid @ModelAttribute("user") Users user, @NotNull BindingResult bindingResult, Model model) {
+//        if (bindingResult.hasErrors()) {
+//            var errors = bindingResult.getAllErrors()
+//                    .stream()
+//                    .map(DefaultMessageSourceResolvable::getDefaultMessage)
+//                    .toArray(String[]::new);
+//            model.addAttribute("errors", errors);
+//            return "Login/register"; // Trả về lại view "register" nếu có lỗi
+//        }
+//        userService.addUser(user);
+//        userService.setDefaultRole(user.getUsername());
+//        return "redirect:Login/login";
+//    }
 }
