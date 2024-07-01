@@ -10,7 +10,11 @@ import lombok.*;
 @Entity
 @Table(name = "DesImages")
 public class DestinationImages {
+
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    
     @ManyToOne
     private Destinations destination;
 

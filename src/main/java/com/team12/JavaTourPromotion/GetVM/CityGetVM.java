@@ -1,4 +1,4 @@
-package com.team12.JavaTourPromotion.viewmodel;
+package com.team12.JavaTourPromotion.GetVM;
 
 import com.team12.JavaTourPromotion.model.Cities;
 

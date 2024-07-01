@@ -3,8 +3,7 @@ package com.team12.JavaTourPromotion.service;
 
 import com.team12.JavaTourPromotion.model.DistrictsOrWards;
 import com.team12.JavaTourPromotion.repository.DistrictsOrWardsRepository;
-import com.team12.JavaTourPromotion.viewmodel.DoWGetVM;
-import jakarta.validation.constraints.NotNull;
+import com.team12.JavaTourPromotion.GetVM.DoWGetVM;
 
 import java.util.List;
 import java.util.Optional;
@@ -27,13 +26,8 @@ public class DistrictsOrWardsService {
                 .toList();
     }
 
-    public Optional<DistrictsOrWards> getDistrictsOrWards(Long id) {
-        return DistrictsOrWardsRepository.findById(id);
-    }
-
-    // Add a new product to the database
-    public DistrictsOrWards addDistrictsOrWards(DistrictsOrWards city) {
-        return DistrictsOrWardsRepository.save(city);
+    public DistrictsOrWards addDistrictsOrWards(DistrictsOrWards dow) {
+        return DistrictsOrWardsRepository.save(dow);
     }
 
     public void deleteDistrictsOrWards(Long id) {

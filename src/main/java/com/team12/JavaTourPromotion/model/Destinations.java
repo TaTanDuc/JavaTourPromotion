@@ -48,15 +48,12 @@ public class Destinations {
     private Set<Bookmarks> bookmarks;
 
     @ManyToOne
-    @JoinColumn(name = "ProvinceID", referencedColumnName = "id")
     private Provinces province;
 
     @ManyToOne
-    @JoinColumn(name = "CityID", referencedColumnName = "id")
     private Cities city;
 
     @ManyToOne
-    @JoinColumn(name = "DoW_ID", referencedColumnName = "id")
     private DistrictsOrWards DoW;
 
     @ManyToMany(mappedBy = "destinations", cascade = CascadeType.ALL)

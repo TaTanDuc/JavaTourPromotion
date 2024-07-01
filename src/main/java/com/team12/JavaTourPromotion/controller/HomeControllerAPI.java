@@ -1,24 +1,17 @@
 package com.team12.JavaTourPromotion.controller;
 
-import com.team12.JavaTourPromotion.model.*;
 import com.team12.JavaTourPromotion.service.*;
-import com.team12.JavaTourPromotion.viewmodel.*;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
+import com.team12.JavaTourPromotion.GetVM.*;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.ObjectNotFoundException;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.jdbc.support.CustomSQLErrorCodesTranslation;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/v1/home")
-public class HomeController {
+public class HomeControllerAPI {
 
     private final DestinationService destinationService;
     private final CategoryService categoryService;
@@ -68,8 +61,8 @@ public class HomeController {
     }
 
     @GetMapping("/destination/{id}")
-    public ResponseEntity<DestinationGetVM> getDesByID(@PathVariable Long id) {
-        return ResponseEntity.ok(destinationService.getDestinationById(id)
+    public ResponseEntity<DestinationDetailGetVM> getDesByID(@PathVariable Long id) {
+        return ResponseEntity.ok(destinationService.getDestinationDetailId(id)
                 .orElseThrow(() -> new RuntimeException("Province with id: " + id + " can't be found!")));
     }
 
@@ -82,7 +75,7 @@ public class HomeController {
             return ResponseEntity.ok(list);
     }
 
-    @GetMapping("/citiesByProvince{id}")
+    @GetMapping("/citiesByProvince/{id}")
     public ResponseEntity<List<CityGetVM>> getAllCitiesByProvince(@PathVariable Long id){
         List<CityGetVM> list = cityService.getAllCityByProvince(id);
         if(list.isEmpty())
@@ -91,7 +84,7 @@ public class HomeController {
             return ResponseEntity.ok(list);
     }
 
-    @GetMapping("/dowsByCity{id}")
+    @GetMapping("/dowsByCity/{id}")
     public ResponseEntity<List<DoWGetVM>> getAllDoWsByCity(@PathVariable Long id){
         List<DoWGetVM> list = dowService.getAllDoWsByCity(id);
         if(list.isEmpty())
@@ -99,5 +92,4 @@ public class HomeController {
         else
             return ResponseEntity.ok(list);
     }
-
 }

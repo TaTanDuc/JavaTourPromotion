@@ -1,17 +1,21 @@
 package com.team12.JavaTourPromotion.service;
 
+import com.team12.JavaTourPromotion.GetVM.UserGetVM;
 import com.team12.JavaTourPromotion.Role;
+import com.team12.JavaTourPromotion.model.Bookmarks;
 import com.team12.JavaTourPromotion.model.Users;
 import com.team12.JavaTourPromotion.repository.IRoleRepository;
 import com.team12.JavaTourPromotion.repository.IUserRepository;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.List;
 import java.util.Optional;
@@ -22,20 +26,19 @@ import java.util.Optional;
 
 public class UserService implements UserDetailsService {
 
-    @Autowired
-    private IUserRepository userRepository;
-    @Autowired
-    private IRoleRepository roleRepository;
+    private final IUserRepository userRepository;
+    private final IRoleRepository roleRepository;
 
-    public List<Users> getAllUsers() {
-        return userRepository.findAll();
+    public List<UserGetVM> getAllUsers() {
+        return userRepository.findAll()
+                .stream().map(UserGetVM::from).toList();
     }
-    // Retrieve all products from the database
-    // Retrieve a product by its id
+
     public void addUser(@NotNull Users user) {
         user.setPassword(user.getPassword());
         userRepository.save(user);
     }
+
     public void setDefaultRole(String username) {
         userRepository.findByUsername(username).ifPresentOrElse(
                 user -> {
@@ -48,7 +51,7 @@ public class UserService implements UserDetailsService {
                 }
         );
     }
-    // Tải thông tin chi tiết người dùng để xác thực.
+
     @Override
     public UserDetails loadUserByUsername(String username) throws
             UsernameNotFoundException {
@@ -64,11 +67,7 @@ public class UserService implements UserDetailsService {
                 .disabled(!user.isEnabled())
                 .build();
     }
-    // Tìm kiếm người dùng dựa trên tên đăng nhập.
-    public Optional<Users> findByUsername(String username) throws
-            UsernameNotFoundException {
-        return userRepository.findByUsername(username);
-    }
+
     public boolean existsByUsername(String username)
     {
         return userRepository.existsByUsername(username);
@@ -78,6 +77,7 @@ public class UserService implements UserDetailsService {
     {
         return userRepository.existsByEmail(username);
     }
+
     @Transactional
     public void banUser(String username) {
         Users user = userRepository.findByUsername(username)
@@ -93,4 +93,14 @@ public class UserService implements UserDetailsService {
         user.setBanned(false);
         userRepository.save(user);
     }
+
+    public Optional<UserGetVM> findUserByUsername(String username) throws UsernameNotFoundException{
+        return userRepository.findByUsername(username).map(UserGetVM::from);
+    }
+//
+//    public void userAddBookmark(String username, Bookmarks bookmarks){
+//        Users user = userRepository.findByUsername(username)
+//                .orElseThrow(() -> new UsernameNotFoundException("User not found"));;
+//        ;
+//    }
 }

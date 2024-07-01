@@ -29,7 +29,6 @@ public class Comments {
     private String Content;
 
     @Column(name = "Rating" , nullable = false)
-    @NotBlank(message = "You must give a rating!")
     @Min(value = 1 , message = "Can't rate less than 1 stars!")
     @Max(value = 5 , message = "Can't rate more than 5 stars!")
     private int Rating;
@@ -37,13 +36,7 @@ public class Comments {
     @Column(name = "ReviewedStatus", columnDefinition = "boolean default false")
     private boolean Status;
 
-
-    @PrePersist
-    @PreUpdate
-    @PostRemove
-    private void updateDestinationScore() {
-        if (destination != null) {
-            destination.calculateAverageScore();
-        }
+    public void setStatus(boolean status){
+        this.Status = status;
     }
 }
