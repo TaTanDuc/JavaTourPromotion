@@ -25,50 +25,8 @@ import java.util.Optional;
 @RequestMapping("/api/v1/user")
 public class UserControllerAPI {
 
-    private final static String UPLOADED_FOLDER = "./UserProfileImg";
-
     private final UserService userService;
     private final CommentService commentService;
-
-    @PostMapping("/register")
-    public String register(@Valid @ModelAttribute("user") Users user,
-                           @NotNull BindingResult bindingResult,
-                           Model model, @RequestParam("image") MultipartFile file) {
-        if (userService.existsByUsername(user.getUsername()))
-        {
-            bindingResult.rejectValue("username", "error.user", "Username already exists");
-        }
-
-        if (userService.existsByEmail(user.getEmail()))
-        {
-            bindingResult.rejectValue("Email", "error.user", "Email already exists");
-        }
-
-        if (bindingResult.hasErrors()) { // Kiểm tra nếu có lỗi validate
-            var errors = bindingResult.getAllErrors()
-                    .stream()
-                    .map(DefaultMessageSourceResolvable::getDefaultMessage)
-                    .toArray(String[]::new);
-            model.addAttribute("errors", errors);
-            return "users/register"; // Trả về lại view "register" nếu có lỗi
-        }
-        if (file != null && !file.isEmpty()) {
-            try {
-                byte[] bytes = file.getBytes();
-                java.nio.file.Path path = java.nio.file.Paths.get(UPLOADED_FOLDER + file.getOriginalFilename());
-                java.nio.file.Files.write(path, bytes);
-                user.setProfileImgPath("/UserImage/" + file.getOriginalFilename());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        else {
-            user.setProfileImgPath("/UserImage/anonymous.png");
-        }
-        userService.addUser(user);
-        userService.setDefaultRole(user.getUsername());
-        return "redirect:/login";
-    }
 
     @GetMapping("/profile/{username}")
     public ResponseEntity<Optional<UserGetVM>> userProfile(@PathVariable Principal username){
