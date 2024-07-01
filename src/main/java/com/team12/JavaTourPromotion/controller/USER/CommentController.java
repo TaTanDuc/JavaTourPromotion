@@ -27,20 +27,20 @@ public class  CommentController {
         return "/comments/comment-list";
     }
     // Process the form for adding a new product
-    @PostMapping("/add")
-    public String addComment(@Valid @ModelAttribute Comments comment, BindingResult result, @RequestParam Long destinationId) {
-        if (result.hasErrors()) {
-            return "redirect:/destination/" + destinationId; // Replace with the actual view for destination details
-        }
+    // @PostMapping("/add")
+    // public String addComment(@Valid @ModelAttribute Comments comment, BindingResult result, @RequestParam Long destinationId) {
+    //     if (result.hasErrors()) {
+    //         return "redirect:/destination/" + destinationId; // Replace with the actual view for destination details
+    //     }
 
-        Destinations destination = destinationService.getDestinationById(destinationId)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid destination Id:" + destinationId));
+    //     Destinations destination = destinationService.getDestinationById(destinationId)
+    //             .orElseThrow(() -> new IllegalArgumentException("Invalid destination Id:" + destinationId));
 
-        comment.setDestination(destination);
-        commentService.addComment(comment);
+    //     comment.setDestination(destination);
+    //     commentService.addComment(comment);
 
-        return "redirect:/destination/" + destinationId; // Replace with the actual view for destination details
-    }
+    //     return "redirect:/destination/" + destinationId; // Replace with the actual view for destination details
+    // }
     @GetMapping("comments/delete/{id}")
     public String deleteProduct(@PathVariable Long id) {
         commentService.deleteCommentById(id);

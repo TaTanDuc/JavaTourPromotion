@@ -145,7 +145,71 @@ hgroup {
 * {
   box-sizing: border-box;
 }
+#snackbar {
+  visibility: hidden;
+  min-width: 250px;
+  margin-left: -125px;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  border-radius: 2px;
+  padding: 16px;
+  position: fixed;
+  z-index: 999;
+  top: 30px;
+  left: 50%;
+  font-size: 17px;
+}
 
+#snackbar.show {
+  visibility: visible;
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+@-webkit-keyframes fadein {
+  from {
+    top: 0;
+    opacity: 0;
+  }
+  to {
+    top: 30px;
+    opacity: 1;
+  }
+}
+
+@keyframes fadein {
+  from {
+    top: 0;
+    opacity: 0;
+  }
+  to {
+    top: 30px;
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes fadeout {
+  from {
+    top: 30px;
+    opacity: 1;
+  }
+  to {
+    top: 0;
+    opacity: 0;
+  }
+}
+
+@keyframes fadeout {
+  from {
+    top: 30px;
+    opacity: 1;
+  }
+  to {
+    top: 0;
+    opacity: 0;
+  }
+}
 html,
 body {
   font-family: "Poppins", sans-serif;
@@ -834,19 +898,22 @@ label {
   color: black;
 }
 #section-1 .active {
+  visibility: visible !important;
   opacity: 1 !important;
+  transition: 0.5s ease-in all;
 }
 #section-1 .box {
   padding: 10px 20px;
   border-radius: 10px 0 0 10px;
-  top: 72%;
+  top: 76%;
   left: 13%;
   z-index: 100;
   position: absolute;
-  min-width: 1101px;
+  width: 1101px;
   background: gray;
-  transition: 0.5s ease-in;
+  transition: 0.5s ease-in all;
   opacity: 0;
+  visibility: hidden;
 }
 
 #section-1 .box .item-box + .item-box {
@@ -862,7 +929,7 @@ label {
   margin: 0;
 }
 #section-1 .box label {
-  width: 130px;
+  width: 153px;
 }
 input[type="checkbox"] {
   /* Add if not using autoprefixer */
@@ -929,6 +996,8 @@ input[type="checkbox"]:focus {
   display: flex;
   margin-top: 20px;
   gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 #section-1 .checkbox-list label {
   display: flex;

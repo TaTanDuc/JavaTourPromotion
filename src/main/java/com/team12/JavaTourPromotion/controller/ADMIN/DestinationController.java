@@ -31,7 +31,6 @@ public class DestinationController {
     private final DestinationService destinationService;
     @GetMapping({"/", "/destinations"})
     public String showDestinationList(Model model) {
-        model.addAttribute("destination", destinationService.getAllDestination());
         return "Homepage/Home";
     }
     @GetMapping("/About")
@@ -45,7 +44,12 @@ public class DestinationController {
     @GetMapping("/Login")
     public String showLogin(Model model) {
         return "Login/login";
-    }   
+    }  
+    @GetMapping("/DetailDestination/{id}")
+    public String showDetailDestination(@PathVariable Long id,Model model) {
+        model.addAttribute("destinationId", id);
+        return "Homepage/Detail";
+    } 
 //     @GetMapping("/books")
 // //  public ResponseEntity<List<DES>> getAllBooks(Integer pageNo, Integer pageSize, String sortBy) {
 // //  return ResponseEntity.ok(destinationService.getAllDestination(

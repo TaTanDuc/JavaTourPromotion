@@ -16,14 +16,21 @@
     <th:block th:replace="~{Layout/layoutUser::owl-css}"></th:block>
     <th:block th:replace="~{Layout/layoutUser::animate-css}"></th:block>
     <th:block th:replace="~{Layout/layoutUser::bundle-css}"></th:block>
+    <link href="toastr.css" rel="stylesheet" />
 
     <title>TDL Travel Bootstrap 5 Theme</title>
   </head>
 
   <body>
+    <style>
+      .detail {
+        display: none !important;
+      }
+    </style>
     <th:block th:replace="~{Layout/layoutUser::loading}"></th:block>
 
     <th:block th:replace="~{Layout/layoutUser::header}"></th:block>
+    <div id="snackbar">Thông tin địa điểm không tồn tại</div>
     <div class="container-user">
       <section id="section-1">
         <div class="content-slider">
@@ -91,6 +98,7 @@
                         <input
                           type="text"
                           placeholder="Tìm kiếm một địa điểm mà bạn quan tâm"
+                          class="valueDestination"
                         />
                         <i class="fa-solid fa-chevron-down" id="icon_arrow"></i>
                         <a class="btn_search"
@@ -105,59 +113,29 @@
                   </div>
                 </div>
                 <div class="box">
-                  <!-- <form action="" method="post"> -->
-                  <!-- Select box 1 -->
-                  <div class="list_box">
-                    <div class="item-box">
-                      <label for="cars">Choose a car:</label>
-                      <select name="cars" id="provinces">
-                        <option value="volvo">Volvo</option>
-                        <option value="saab">Saab</option>
-                        <option value="mercedes">Mercedes</option>
-                        <option value="audi">Audi</option>
-                      </select>
+                  <form action="" method="post">
+                    <div class="list_box">
+                      <div class="item-box">
+                        <label for="cars">Province:</label>
+                        <select name="provinces" id="provinces"></select>
+                      </div>
+                      <!-- Select box 2 -->
+                      <div class="item-box">
+                        <label for="cars">City:</label>
+                        <select name="cars" id="cities">
+                          <option value="">Select a city</option>
+                        </select>
+                      </div>
+                      <!-- Select box 3 -->
+                      <div class="item-box">
+                        <label for="cars">Dow:</label>
+                        <select name="cars" id="dows">
+                          <option value="">Select a District or Ward</option>
+                        </select>
+                      </div>
+                      <ul class="checkbox-list"></ul>
                     </div>
-                    <!-- Select box 2 -->
-                    <div class="item-box">
-                      <label for="cars">Choose a car:</label>
-                      <select name="cars" id="cars">
-                        <option value="volvo">Volvo</option>
-                        <option value="saab">Saab</option>
-                        <option value="mercedes">Mercedes</option>
-                        <option value="audi">Audi</option>
-                      </select>
-                    </div>
-                    <!-- Select box 3 -->
-                    <div class="item-box">
-                      <label for="cars">Choose a car:</label>
-                      <select name="cars" id="cars">
-                        <option value="volvo">Volvo</option>
-                        <option value="saab">Saab</option>
-                        <option value="mercedes">Mercedes</option>
-                        <option value="audi">Audi</option>
-                      </select>
-                    </div>
-
-                    <ul class="checkbox-list">
-                      <li class="checkbox-item">
-                        <label class="form-control">
-                          <input type="checkbox" name="checkbox" />
-                          Vui chơi
-                        </label>
-                      </li>
-                      <li class="checkbox-item">
-                        <label class="form-control">
-                          <input
-                            type="checkbox"
-                            name="checkbox-checked"
-                            checked
-                          />
-                          Du lịch
-                        </label>
-                      </li>
-                    </ul>
-                  </div>
-                  <!-- </form> -->
+                  </form>
                 </div>
               </form>
             </div>
@@ -193,7 +171,9 @@
           <div class="row">
             <div class="col-lg-6">
               <div class="section-heading">
-                <h2>Top 9 Thành phố Hot nhất hiện nay</h2>
+                <h2 class="country-heading">
+                  Top 5 Thành phố Hot nhất hiện nay
+                </h2>
               </div>
             </div>
           </div>
@@ -201,214 +181,25 @@
             <div class="col-lg-8">
               <div class="items">
                 <div class="row">
+                  <div class="col-lg-12" id="list-city"></div>
                   <div class="col-lg-12">
-                    <!-- Item  -->
-                    <div class="item">
-                      <div class="row">
-                        <div class="col-lg-4 col-sm-5">
-                          <div class="image">
-                            <img src="assets/images/country-01.jpg" alt="" />
-                          </div>
-                        </div>
-                        <div class="col-lg-8 col-sm-7">
-                          <div class="right-content">
-                            <h4>SWITZERLAND</h4>
-                            <span>Europe</span>
-                            <div class="main-button">
-                              <a href="about.html">Explore More</a>
-                            </div>
-                            <p>
-                              Woox Travel is a professional Bootstrap 5 theme
-                              HTML CSS layout for your website. You can use this
-                              layout for your commercial work.
-                            </p>
-                            <ul class="info">
-                              <li>
-                                <i class="fa fa-user"></i> 8.66 Mil People
-                              </li>
-                              <li><i class="fa fa-globe"></i> 41.290 km2</li>
-                              <li><i class="fa fa-home"></i> $1.100.200</li>
-                            </ul>
-                            <div class="text-button">
-                              <a href="about.html"
-                                >Need Directions ?
-                                <i class="fa fa-arrow-right"></i
-                              ></a>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="item">
-                      <div class="row">
-                        <div class="col-lg-4 col-sm-5">
-                          <div class="image">
-                            <img src="assets/images/country-01.jpg" alt="" />
-                          </div>
-                        </div>
-                        <div class="col-lg-8 col-sm-7">
-                          <div class="right-content">
-                            <h4>SWITZERLAND</h4>
-                            <span>Europe</span>
-                            <div class="main-button">
-                              <a href="about.html">Explore More</a>
-                            </div>
-                            <p>
-                              Woox Travel is a professional Bootstrap 5 theme
-                              HTML CSS layout for your website. You can use this
-                              layout for your commercial work.
-                            </p>
-                            <ul class="info">
-                              <li>
-                                <i class="fa fa-user"></i> 8.66 Mil People
-                              </li>
-                              <li><i class="fa fa-globe"></i> 41.290 km2</li>
-                              <li><i class="fa fa-home"></i> $1.100.200</li>
-                            </ul>
-                            <div class="text-button">
-                              <a href="about.html"
-                                >Need Directions ?
-                                <i class="fa fa-arrow-right"></i
-                              ></a>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="item">
-                      <div class="row">
-                        <div class="col-lg-4 col-sm-5">
-                          <div class="image">
-                            <img src="assets/images/country-01.jpg" alt="" />
-                          </div>
-                        </div>
-                        <div class="col-lg-8 col-sm-7">
-                          <div class="right-content">
-                            <h4>SWITZERLAND</h4>
-                            <span>Europe</span>
-                            <div class="main-button">
-                              <a href="about.html">Explore More</a>
-                            </div>
-                            <p>
-                              Woox Travel is a professional Bootstrap 5 theme
-                              HTML CSS layout for your website. You can use this
-                              layout for your commercial work.
-                            </p>
-                            <ul class="info">
-                              <li>
-                                <i class="fa fa-user"></i> 8.66 Mil People
-                              </li>
-                              <li><i class="fa fa-globe"></i> 41.290 km2</li>
-                              <li><i class="fa fa-home"></i> $1.100.200</li>
-                            </ul>
-                            <div class="text-button">
-                              <a href="about.html"
-                                >Need Directions ?
-                                <i class="fa fa-arrow-right"></i
-                              ></a>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="item">
-                      <div class="row">
-                        <div class="col-lg-4 col-sm-5">
-                          <div class="image">
-                            <img src="assets/images/country-01.jpg" alt="" />
-                          </div>
-                        </div>
-                        <div class="col-lg-8 col-sm-7">
-                          <div class="right-content">
-                            <h4>SWITZERLAND</h4>
-                            <span>Europe</span>
-                            <div class="main-button">
-                              <a href="about.html">Explore More</a>
-                            </div>
-                            <p>
-                              Woox Travel is a professional Bootstrap 5 theme
-                              HTML CSS layout for your website. You can use this
-                              layout for your commercial work.
-                            </p>
-                            <ul class="info">
-                              <li>
-                                <i class="fa fa-user"></i> 8.66 Mil People
-                              </li>
-                              <li><i class="fa fa-globe"></i> 41.290 km2</li>
-                              <li><i class="fa fa-home"></i> $1.100.200</li>
-                            </ul>
-                            <div class="text-button">
-                              <a href="about.html"
-                                >Need Directions ?
-                                <i class="fa fa-arrow-right"></i
-                              ></a>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="item">
-                      <div class="row">
-                        <div class="col-lg-4 col-sm-5">
-                          <div class="image">
-                            <img src="assets/images/country-01.jpg" alt="" />
-                          </div>
-                        </div>
-                        <div class="col-lg-8 col-sm-7">
-                          <div class="right-content">
-                            <h4>SWITZERLAND</h4>
-                            <span>Europe</span>
-                            <div class="main-button">
-                              <a href="about.html">Explore More</a>
-                            </div>
-                            <p>
-                              Woox Travel is a professional Bootstrap 5 theme
-                              HTML CSS layout for your website. You can use this
-                              layout for your commercial work.
-                            </p>
-                            <ul class="info">
-                              <li>
-                                <i class="fa fa-user"></i> 8.66 Mil People
-                              </li>
-                              <li><i class="fa fa-globe"></i> 41.290 km2</li>
-                              <li><i class="fa fa-home"></i> $1.100.200</li>
-                            </ul>
-                            <div class="text-button">
-                              <a href="about.html"
-                                >Need Directions ?
-                                <i class="fa fa-arrow-right"></i
-                              ></a>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-lg-12">
-                    <ul class="page-numbers">
-                      <li>
-                        <a href="#"><i class="fa fa-arrow-left"></i></a>
-                      </li>
-                      <li><a href="#">1</a></li>
-                      <li class="active"><a href="#">2</a></li>
-                      <li><a href="#">3</a></li>
-                      <li>
-                        <a href="#"><i class="fa fa-arrow-right"></i></a>
-                      </li>
-                    </ul>
+                    <div
+                      id="pagination"
+                      style="display: flex; justify-content: center; gap: 20px"
+                    ></div>
                   </div>
                 </div>
               </div>
             </div>
             <div class="col-lg-4">
-              <div class="side-bar-map">
-                <div class="row">
+              <div class="side-bar-map" style="height: 100%">
+                <div class="row" style="height: 100%">
                   <div class="col-lg-12">
-                    <div id="map">
+                    <div id="map" style="height: 100%">
                       <iframe
                         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.0709101917414!2d106.77992637480655!3d10.882211289273082!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3174d89aad780e49%3A0x54542761d4c22175!2zS8O9IHTDumMgeMOhIEtodSBCIC0gxJDhuqFpIGjhu41jIFF14buRYyBnaWEgVFAuSENN!5e0!3m2!1svi!2s!4v1719408369271!5m2!1svi!2s"
                         width="100%"
-                        height="980px"
+                        height="100%"
                         frameborder="0"
                         style="border: 0; border-radius: 23px"
                         allowfullscreen=""
@@ -424,13 +215,13 @@
     </div>
     <!-- Footer Page -->
     <th:block th:replace="~{Layout/layoutUser::footer}"></th:block>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script src="toastr.js"></script>
     <script>
       const iconArrowElement = document.querySelector("#icon_arrow");
       const boxElement = document.querySelector(".box");
       const btnSearchElement = document.querySelector(".btn_search");
       const countryElement = document.querySelector(".visit-country");
-      console.log(btnSearchElement, countryElement);
-
       // Thao tác sự kiện mở filter và đòng filter
       iconArrowElement.addEventListener("click", function () {
         boxElement.classList.toggle("active");
@@ -441,12 +232,300 @@
           iconArrowElement.classList.remove("fa-chevron-up");
           iconArrowElement.classList.add("fa-chevron-down");
         }
-        boxElement.id = "display";
       });
 
       // Thao tác sự kiện search API
-      btnSearchElement.addEventListener("click", function () {
-        countryElement.scrollIntoView({ behavior: "smooth" });
+      // btnSearchElement.addEventListener("click", function () {
+      //   countryElement.scrollIntoView({ behavior: "smooth" });
+      // });
+      // Fetch API destination
+      $(document).ready(function () {
+        $.ajax({
+          url: "http://localhost:8080/api/v1/home/provinces",
+          type: "GET",
+          dataType: "json",
+          success: function (data) {
+            let options =
+              '<option value="">------- Select a province -------</option>';
+            $.each(data, function (i, item) {
+              options += `<option value="${item.id}">${item.name}</option>`;
+            });
+            $("#provinces").html(options);
+          },
+          error: function (xhr, status, error) {
+            console.error("Error fetching data: ", status, error);
+          },
+        });
+      });
+      // Fetch Top 5 Destination
+      $(document).ready(function () {
+        $.ajax({
+          url: "http://localhost:8080/api/v1/home/destinations",
+          type: "GET",
+          dataType: "json",
+          success: function (data) {
+            const itemsPerPage = 5;
+            let currentPage = 1;
+            const totalPages = Math.ceil(data.length / itemsPerPage);
+
+            function renderPage(page) {
+              let start = (page - 1) * itemsPerPage;
+              let end = start + itemsPerPage;
+              let paginatedItems = data.slice(start, end);
+
+              let itemDestination = "";
+              $.each(paginatedItems, function (i, item) {
+                itemDestination += `<div class="item">
+                                <div class="row">
+                                    <div class="col-lg-4 col-sm-5">
+                                        <div class="image">
+                                            <img src="${item.image}" alt="${item.name}" />
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-8 col-sm-7">
+                                        <div class="right-content">
+                                            <h4>${item.name}</h4> 
+                                            <span>${item.provinceName}, ${item.cityName}, ${item.DoWName}</span>
+                                            <div class="main-button">
+                                                <a href="/DetailDestination/${item.id}" data-id="${item.id} class ="explore-more" >Explore More</a>
+                                            </div>
+                                            <p>${item.content}</p>
+                                            <ul class="categories_list" style="display: flex; gap: 10px; border-top: none;">`;
+
+                $.each(item.categoriesList, function (j, category) {
+                  itemDestination += `
+                                                <li style="width: 120px; text-align: center; padding: 10px 0; background: wheat; border-radius: 10px; color: black;">
+                                                    ${category.name}
+                                                </li>`;
+                });
+
+                itemDestination += `
+                                            </ul>
+                                            <ul class="info">
+                                                <li><i class="fa fa-user"></i> 8.66 Mil People</li>
+                                                <li><i class="fa fa-globe"></i> 41.290 km2</li>
+                                                <li><i class="fa fa-home"></i> $1.100.200</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>`;
+              });
+              $("#list-city").html(itemDestination);
+            }
+
+            function renderPagination() {
+              if (totalPages <= 1) return;
+
+              let paginationHTML = "";
+              for (let i = 1; i <= totalPages; i++) {
+                paginationHTML += `<button class="page-link" style ="padding: 8px 10px;width: 50px;border-radius:5px;background: #22b3c1;" data-page="${i}">${i}</button>`;
+              }
+              $("#pagination").html(paginationHTML);
+
+              $(".page-link").click(function () {
+                let selectedPage = $(this).data("page");
+                currentPage = selectedPage;
+                renderPage(currentPage);
+              });
+            }
+
+            renderPage(currentPage);
+            renderPagination();
+          },
+          error: function (xhr, status, error) {
+            console.error("Error fetching destinations: ", status, error);
+          },
+        });
+      });
+      $(document).on("click", ".explore-more", function (e) {
+        e.preventDefault(); // Ngăn chặn hành vi mặc định của thẻ <a>
+        const destinationId = $(this).data("id");
+        const newUrl = `/DetailDestination/${destinationId}`;
+
+        // Thay đổi URL bằng history.pushState để không reload trang
+        history.pushState(null, null, newUrl);
+      });
+      // Fetch APi of categories
+      $(document).ready(function () {
+        $.ajax({
+          url: "http://localhost:8080/api/v1/home/categories",
+          type: "GET",
+          dataType: "json",
+          success: function (data) {
+            let categoryItem = "";
+            $.each(data, function (i, item) {
+              categoryItem += ` <li class="checkbox-item">
+                          <label class="form-control">
+                            <input type="checkbox" value = ${item.id} name="checkbox" />
+                           ${item.name}
+                          </label>
+                        </li>`;
+            });
+            $(".checkbox-list").html(categoryItem);
+          },
+          error: function (xhr, status, error) {
+            console.error("Error fetching data: ", status, error);
+          },
+        });
+      });
+      // Fetch API citiesByProvinces
+      $("#provinces").change(function () {
+        let provinceId = $(this).val();
+        if (provinceId) {
+          $.ajax({
+            url: `http://localhost:8080/api/v1/home/citiesByProvince${provinceId}`,
+            type: "GET",
+            dataType: "json",
+            success: function (data) {
+              let cityOptions = '<option value="">Select a city</option>';
+              $.each(data, function (i, item) {
+                cityOptions += `<option value="${item.id}">${item.name}</option>`;
+              });
+              $("#cities").html(cityOptions);
+            },
+            error: function (xhr, status, error) {
+              console.error("Error fetching cities: ", status, error);
+            },
+          });
+        } else {
+          $("#cities").html('<option value="">Select a city</option>');
+        }
+      });
+      $("#cities").change(function () {
+        let DowId = $(this).val();
+        if (DowId) {
+          $.ajax({
+            url: `http://localhost:8080/api/v1/home/dowsByCity${DowId}`,
+            type: "GET",
+            dataType: "json",
+            success: function (data) {
+              let dowsOptions =
+                '<option value="">Select a District or Ward</option>';
+              $.each(data, function (i, item) {
+                dowsOptions += `<option value="${item.id}">${item.name}</option>`;
+              });
+              $("#dows").html(dowsOptions);
+            },
+            error: function (xhr, status, error) {
+              console.error("Error fetching cities: ", status, error);
+            },
+          });
+        } else {
+          $("#dows").html('<option value="">Select a city</option>');
+        }
+      });
+      $(".btn_search").click(function () {
+        let queryValue = $(".valueDestination").val();
+        let valueProvince = $("#provinces").val();
+        let valueCity = $("#cities").val();
+        let dowValue = $("#dows").val();
+        let categoriesValue = [];
+        $(".checkbox-item input[type='checkbox']:checked").each(function () {
+          categoriesValue.push($(this).val());
+        });
+
+        let categoriesQuery = categoriesValue.join("&");
+
+        $.ajax({
+          url: `http://localhost:8080/api/v1/home/destinations/search?ProvinceID=${valueProvince}&CityID=${valueCity}&DoWID=${dowValue}&Categories=${categoriesQuery}&string=${queryValue}`,
+          type: "GET",
+          dataType: "json",
+          success: function (data) {
+            $("html, body").animate({
+              scrollTop: $(".visit-country").offset().top,
+            });
+            $.each(data, function (i, item) {
+              if (queryValue == "") {
+                $(".country-heading").text("Danh sách địa điểm ");
+              } else {
+                $(".country-heading").text(
+                  `"${
+                    (data, length)
+                  } địa điểm liên quan tới kết quả tìm kiếm của bạn "`
+                );
+              }
+
+              $("#list-city").html("");
+              $("#pagination").html("");
+              const itemsPerPage = 5;
+              let currentPage = 1;
+              const totalPages = Math.ceil(data.length / itemsPerPage);
+
+              function renderPage(page) {
+                let start = (page - 1) * itemsPerPage;
+                let end = start + itemsPerPage;
+                let paginatedItems = data.slice(start, end);
+
+                let itemDestination = "";
+                $.each(paginatedItems, function (i, item) {
+                  itemDestination += `<div class="item">
+                                <div class="row">
+                                    <div class="col-lg-4 col-sm-5">
+                                        <div class="image">
+                                            <img src="${item.image}" alt="${item.name}" />
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-8 col-sm-7">
+                                        <div class="right-content">
+                                            <h4>${item.name}</h4>
+                                            <span>${item.provinceName}, ${item.cityName}, ${item.DoWName}</span>
+                                            <div class="main-button">
+                                                <a href="/DetailDestination">Explore More</a>
+                                            </div>
+                                            <p>${item.content}</p>
+                                            <ul class="categories_list" style="display: flex; gap: 10px; border-top: none;">`;
+
+                  $.each(item.categoriesList, function (j, category) {
+                    itemDestination += `
+                                                <li style="width: 120px; text-align: center; padding: 10px 0; background: wheat; border-radius: 10px; color: black;">
+                                                    ${category.name}
+                                                </li>`;
+                  });
+
+                  itemDestination += `
+                                            </ul>
+                                            <ul class="info">
+                                                <li><i class="fa fa-user"></i> 8.66 Mil People</li>
+                                                <li><i class="fa fa-globe"></i> 41.290 km2</li>
+                                                <li><i class="fa fa-home"></i> $1.100.200</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>`;
+                });
+                $("#list-city").html(itemDestination);
+              }
+
+              function renderPagination() {
+                if (totalPages <= 1) return;
+
+                let paginationHTML = "";
+                for (let i = 1; i <= totalPages; i++) {
+                  paginationHTML += `<button class="page-link" style ="padding: 8px 10px;width: 50px;border-radius:5px;background: #22b3c1;" data-page="${i}">${i}</button>`;
+                }
+                $("#pagination").html(paginationHTML);
+
+                $(".page-link").click(function () {
+                  let selectedPage = $(this).data("page");
+                  currentPage = selectedPage;
+                  renderPage(currentPage);
+                });
+              }
+
+              renderPage(currentPage);
+              renderPagination();
+            });
+          },
+          error: function (xhr, status, error) {
+            var x = $("#snackbar");
+            x.addClass("show");
+            setTimeout(function () {
+              x.removeClass("show");
+            }, 3000);
+          },
+        });
       });
     </script>
   </body>
