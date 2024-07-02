@@ -60,7 +60,6 @@ public class DestinationService {
     public Optional<DestinationGetVM> getDestinationById(Long id) {
         return destinationRepository.findById(id).map(DestinationGetVM::from);
     }
-
     public Optional<DestinationDetailGetVM> getDestinationDetailId(Long id) {
         return destinationRepository.findById(id).map(DestinationDetailGetVM::from);
     }

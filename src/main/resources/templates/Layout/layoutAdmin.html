@@ -407,7 +407,7 @@
 <!--</html>-->
 
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
   <!-- Basic Page Info -->
   <meta charset="utf-8">
@@ -508,7 +508,7 @@
             <div class="header-right">
 
               <div class="user-info-dropdown">
-                <div class="dropdown">
+                <div class="dropdown" style="display:flex;">
                   <a
                     class="dropdown-toggle"
                     href="#"
@@ -518,7 +518,11 @@
                     <span class="user-icon">
                       <img src="/assets/Admin/vendors/images/photo1.jpg" alt="" />
                     </span>
-                    <span class="user-name">admin</span>
+
+                      <form th:action="@{/logout}" method="post" style="">
+                          <span class="user-name">admin</span>
+                          <button  style="background-color: lightseagreen;color: revert-layer;" class="btn btn-outline-light" type="submit">Logout</button>
+                      </form>
                   </a>
 
                 </div>

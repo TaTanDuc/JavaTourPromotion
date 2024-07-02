@@ -107,6 +107,13 @@ public class UserService implements UserDetailsService {
     public Optional<UserGetVM> findUserByUsername(String username) throws UsernameNotFoundException{
         return userRepository.findByUsername(username).map(UserGetVM::from);
     }
+    public Optional<Users> findByUsername(String username) throws UsernameNotFoundException {
+        return userRepository.findByUsername(username);
+    }
+    public Users getUserByUsername(String username) {
+        return userRepository.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found with username: " + username));
+    }
 //
 //    public void userAddBookmark(String username, Bookmarks bookmarks){
 //        Users user = userRepository.findByUsername(username)
