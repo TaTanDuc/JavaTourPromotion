@@ -61,20 +61,9 @@ public class AdminControllerAPI {
     }
     private static final String UPLOAD_DIR = "src/main/resources/static/images/";
     @PostMapping("/destination/add")
-    public ResponseEntity<Destinations> addDestination(@RequestBody Destinations destination,
-                                                      @RequestParam(value = "imageFile", required = false) MultipartFile imageFile,
-                                                      @RequestParam(value = "imageFiles", required = false) MultipartFile[] imageFiles) {
+    public ResponseEntity<Destinations> addDestination(@RequestBody Destinations destination) {
         try {
-            if (imageFile != null && !imageFile.isEmpty()) {
-                handleSingleImageUpload(destination, imageFile);
-            }
-
-            if (imageFiles != null && imageFiles.length > 0) {
-                handleMultipleImageUploads(destination, imageFiles);
-            }
-
             destinationService.addDestination(destination);
-
             return ResponseEntity.ok().body(destination);
         } catch (Exception e) {
             e.printStackTrace();
