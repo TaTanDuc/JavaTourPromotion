@@ -1,5 +1,4 @@
 package com.team12.JavaTourPromotion;
-
 import  com.team12.JavaTourPromotion.service.UserService;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
