@@ -38,7 +38,7 @@ public class Destinations {
     @NotBlank(message = "Image must not be blank!")
     private String ImageUrl;
 
-    @OneToMany(mappedBy = "destination", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "destination", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Comments> comments;
 
     @OneToMany(mappedBy = "destination", cascade = CascadeType.ALL)
@@ -61,4 +61,16 @@ public class Destinations {
 
     @ManyToMany(mappedBy = "destinations", cascade = CascadeType.ALL)
     private Set<Categories> categories;
+
+    public void calculateAverageScore() {
+        if (comments == null || comments.isEmpty()) {
+            this.Score = 0;
+        } else {
+            double average = comments.stream()
+                    .mapToInt(Comments::getRating)
+                    .average()
+                    .orElse(0.0);
+            this.Score = (float) average;
+        }
+    }
 }

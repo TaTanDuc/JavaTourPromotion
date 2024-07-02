@@ -1,35 +1,11 @@
 package com.team12.JavaTourPromotion.controller;
 
-import com.team12.JavaTourPromotion.model.Destinations;
-import com.team12.JavaTourPromotion.model.DestinationImages;
-import com.team12.JavaTourPromotion.service.CityService;
-import com.team12.JavaTourPromotion.service.DistrictsOrWardsService;
-import com.team12.JavaTourPromotion.service.CategoryService;
-import com.team12.JavaTourPromotion.service.DestinationService;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
-
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
-public class DestinationController {
+public class DestinationControllerTungTest {
 
 //    @Autowired
 //    private DestinationService destinationService;
