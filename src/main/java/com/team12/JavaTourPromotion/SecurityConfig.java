@@ -40,7 +40,7 @@ public class SecurityConfig {
             throws Exception {
         return http
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/v1/home/**","/api/v1/user/**","/api/v1/inspector/**","/api/v1/admin/**").permitAll()//.hasAuthority("ADMIN")
+                        .requestMatchers("/api/v1/home/**","/api/v1/user/**","/api/v1/inspector/**","/api/v1/admin/**","/api/v1/security/**").permitAll()//.hasAuthority("ADMIN")
 //                        .requestMatchers("/api/user/**","/api/inspector/**").hasAuthority("INSPECTOR")
 //                        .requestMatchers("/api/user/**").hasAuthority("USER")
 //                        .requestMatchers("/api/home/**").permitAll()

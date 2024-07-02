@@ -41,9 +41,4 @@ public class  CommentController {
 
     //     return "redirect:/destination/" + destinationId; // Replace with the actual view for destination details
     // }
-    @GetMapping("comments/delete/{id}")
-    public String deleteProduct(@PathVariable Long id) {
-        commentService.deleteCommentById(id);
-        return "redirect:/comments";
-    }
 }
