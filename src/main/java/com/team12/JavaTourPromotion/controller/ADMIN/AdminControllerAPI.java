@@ -41,6 +41,13 @@ public class AdminControllerAPI {
         categoryService.deleteCategoryById(id);
         return ResponseEntity.ok().build();
     }
+    @DeleteMapping("/destination/{id}")
+    public ResponseEntity<Void> deleteDestination(@PathVariable Long id) {
+        Destinations destinations = destinationService.getDestinationById11(id)
+                .orElseThrow(() -> new RuntimeException("Destination not found on :: "+ id));
+        destinationService.deleteDestinationById(id);
+        return ResponseEntity.ok().build();
+    }
 
     @PostMapping("/destination/add")
     public ResponseEntity<Destinations> addDestination(@RequestBody Destinations destination){
