@@ -25,7 +25,6 @@ public class Cities {
 
     @ManyToOne
     @JoinColumn(name = "ProvinceID", referencedColumnName = "id")
-    @JsonIgnore
     private Provinces province;
 
     @OneToMany(mappedBy = "city", cascade = CascadeType.ALL)

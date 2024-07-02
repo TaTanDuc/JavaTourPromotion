@@ -23,7 +23,7 @@ public class Categories {
 
     @Column(name = "Name" , nullable = false)
     @NotBlank(message = "Category's name must not be blank!")
-    @Size(min = 5 , max = 20, message = "Category's name must be 10 to 50 characters!")
+    @Size(min = 5 , max = 20, message = "Category's name must be 5 to 20 characters!")
     private String Name;
 
     @ManyToMany(cascade = CascadeType.ALL)

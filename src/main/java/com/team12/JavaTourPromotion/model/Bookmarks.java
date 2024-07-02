@@ -18,7 +18,6 @@ public class Bookmarks {
 
     @ManyToOne
     @JoinColumn(name = "DestinationID")
-    @JsonIgnore
     private Destinations destination;
 
 }

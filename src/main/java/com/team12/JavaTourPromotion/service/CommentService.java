@@ -1,10 +1,13 @@
 package com.team12.JavaTourPromotion.service;
 
+import com.team12.JavaTourPromotion.GetVM.CommentGetVM;
 import com.team12.JavaTourPromotion.model.Comments;
-import com.team12.JavaTourPromotion.model.Destinations;
+import com.team12.JavaTourPromotion.model.Users;
 import com.team12.JavaTourPromotion.repository.CommentRepository;
 import com.team12.JavaTourPromotion.repository.DestinationRepository;
+import com.team12.JavaTourPromotion.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -14,39 +17,36 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 @Transactional
-
 public class CommentService {
+
     private final CommentRepository commentRepository;
-    private final DestinationRepository destinationsRepository;
-    public List<Comments> getAllComments() {
-        return commentRepository.findAll();
+    private final UserRepository userRepository;
+    private final DestinationRepository destinationRepository;
+
+    public List<CommentGetVM> getAllComments(){
+        return commentRepository.findAll()
+                .stream().map(CommentGetVM::from).toList();
     }
 
-    public Optional<Comments> getCommentById(Long id) {
-        return commentRepository.findById(id);
+    public Comments addComment(Long id ,String username, Comments comment){
+        comment.setUser(userRepository.findByUsername(username));
+        comment.setDestination(destinationRepository.getDesById(id));
+        return commentRepository.save(comment);
     }
-    // Add a new product to the database
+
     @Transactional
-    public Comments addComment(Comments comment) {
-        Comments savedComment = commentRepository.save(comment);
-        updateDestinationScore(savedComment.getDestination().getId());
-        return savedComment;
+    public void hideComment(Long id) {
+        Comments comments = commentRepository.findById(id)
+                .orElseThrow(() -> new UsernameNotFoundException("Comment not found"));
+        comments.setStatus(true);
+        commentRepository.save(comments);
     }
-    // Update an existing product
 
-    // Delete a product by its id
-    public void deleteCommentById(Long id) {
-        if (!commentRepository.existsById(id)) {
-            throw new IllegalStateException("Province with ID " + id + " does not exist.");
-        }
-        commentRepository.deleteById(id);
-    }
-    private void updateDestinationScore(Long destinationId) {
-        Optional<Destinations> destinationOpt = destinationsRepository.findById(destinationId);
-        if (destinationOpt.isPresent()) {
-            Destinations destination = destinationOpt.get();
-            destination.calculateAverageScore();
-            destinationsRepository.save(destination);
-        }
+    @Transactional
+    public void unhideComment(Long id) {
+        Comments comments = commentRepository.findById(id)
+                .orElseThrow(() -> new UsernameNotFoundException("Comment not found"));
+        comments.setStatus(false);
+        commentRepository.save(comments);
     }
 }

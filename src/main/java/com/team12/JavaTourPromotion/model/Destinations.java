@@ -38,7 +38,7 @@ public class Destinations {
     @NotBlank(message = "Image must not be blank!")
     private String ImageUrl;
 
-    @OneToMany(mappedBy = "destination", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "destination", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Comments> comments;
 
     @OneToMany(mappedBy = "destination", cascade = CascadeType.ALL)
@@ -49,17 +49,14 @@ public class Destinations {
 
     @ManyToOne
     @JoinColumn(name = "ProvinceID", referencedColumnName = "id")
-    @JsonIgnore
     private Provinces province;
 
     @ManyToOne
     @JoinColumn(name = "CityID", referencedColumnName = "id")
-    @JsonIgnore
     private Cities city;
 
     @ManyToOne
     @JoinColumn(name = "DoW_ID", referencedColumnName = "id")
-    @JsonIgnore
     private DistrictsOrWards DoW;
 
     @ManyToMany(mappedBy = "destinations", cascade = CascadeType.ALL)
@@ -70,7 +67,6 @@ public class Destinations {
             this.Score = 0;
         } else {
             double average = comments.stream()
-                    .filter(comment -> comment.getDestination().equals(this))
                     .mapToInt(Comments::getRating)
                     .average()
                     .orElse(0.0);
