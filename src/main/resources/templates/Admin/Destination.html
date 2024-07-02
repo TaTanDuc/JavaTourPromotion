@@ -64,14 +64,18 @@
 						<form method="post" id="desForm" enctype="multipart/form-data">
 							<input type="hidden" asp-for="Id" />
 							<div class="col-md-6">
-								<label asp-for="ImageUrl" class="control-label">Main Image</label>
+								<label for="ImageUrl" class="control-label">Main Image</label>
 								<input type="file" id="ImageUrl" class="form-control" />
 							</div>
+
 							<div class="col-md-6">
-								<label for="Name" class="control-label"></label>
+								<label for="Name" class="control-label">Name</label>
 								<input type="text" id="Name" class="form-control" />
 							</div>
-
+							<div class="col-md-6">
+								<label for="Content" class="control-label">Content</label>
+								<input type="text" id="Content" class="form-control" />
+							</div>
 
 							<div class="col-md-6">
 								<label for="categoryId">Category</label>
@@ -98,18 +102,13 @@
 								</select>
 							</div>
 							<div class="col-md-6">
-								<label asp-for="Images" class="control-label"></label>
-								<input type="file" asp-for="Images" class="form-control" multiple />
-								<span asp-validation-for="Images" class="text-danger"></span>
+								<label for="Images" class="control-label"></label>
+								<input type="file" id="Images" class="form-control" multiple />
 							</div>
 
 
-							<div class="col-md-12" style="padding-top:30px">
-								<div class="col-sm-9 text-secondary">
+							
 									<button type="submit"  class="btn btn-primary text-white button">Save</button>
-								</div>
-
-							</div>
 						</form>
 					</div>
 				</div>
@@ -124,7 +123,7 @@
 			loadDestinations();
 			$("#desForm").on('submit', function(e) {
 				e.preventDefault();
-				saveCategory();
+				saveDestination();
 			});
 			  $.ajax({
 			url: 'http://localhost:8080/api/v1/home/categories',
@@ -166,15 +165,16 @@
 			});
 			 $('#provinceId').change(function() {
 			var selectedProvinceId = $(this).val();
-			console.log('Selected Province ID:', selectedProvinceId);
+
 
 			// Gọi ajax request mới với selectedCategoryId
 			$.ajax({
-				url: 'http://localhost:8080/api/v1/home/citiesByProvince/' + selectedProvinceId,
-				type: 'GET',
-				success: function(response) {
-					var select = $('#cityId');
+				url: 'http://localhost:8080/api/v1/home/citiesByProvince/'+selectedProvinceId,
 
+				type: 'GET',
+				success: function(data) {
+					var select = $('#cityId');
+					console.log('Selected Province ID:', selectedProvinceId);
 					$.each(data, function(index, city) {
 						// Tạo option cho từng category
 						var option = $('<option></option>')
@@ -196,7 +196,7 @@
 			$.ajax({
 				url: 'http://localhost:8080/api/v1/home/dowsByCity/' + selectedCityId,
 				type: 'GET',
-				success: function(response) {
+				success: function(data) {
 					var select = $('#dowId');
 
 					$.each(data, function(index, DoW) {
@@ -240,6 +240,7 @@
 		function getDestinationData() {
 			return {
 				Name: $('#Name').val(),
+				Content: $('#Content').val(),
 				provinceId: $('#provinceId').val(),
 				cityId:$('#cityId').val(),
 				dowId:$('#dowId').val(),
@@ -266,7 +267,7 @@
 		}
 	   function saveDestination() {
 			const destinationData = getDestinationData();
-			postDestinationData(destinationData);
+			postDestination(destinationData);
 		}
 
 
@@ -276,7 +277,7 @@
 					url: `http://localhost:8080/api/v1/admin/destination/${id}`,
 					type: 'DELETE',
 					success: function() {
-						loadCategories();
+						loadDestinations();
 					}
 				});
 			}
@@ -284,6 +285,7 @@
 
 		function resetForm() {
 			 $('#Name').val('');
+			 $('#Content').val('');
 			$('#provinceId').val('');
 			$('#cityId').val('');
 			$('#dowId').val('');
