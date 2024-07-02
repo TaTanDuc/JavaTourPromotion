@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
   <head>
     <!-- Basic Page Info -->
     <meta charset="utf-8" />
@@ -25,72 +25,122 @@
         height: 230px;
       "
     >
-      <form action="" id="loginForm">
-        <label style="font-size: 20px; font-weight: 700"
-          >UserName:</label
-        >
-        <input
-          type="text"
-          style="
-            width: 100%;
-            padding: 10px 5px;
-            font-size: 20px;
-            border: none;
-            border-radius: 10px;
-            margin-top: 10px;
-          "
-          id="username"
-          placeholder="Vui lòng nhập thông tin tài khoản"
-        />
-        <label
-          style="
-            display: block;
-            font-size: 20px;
-            font-weight: 700;
-            margin-top: 5px;
-          "
-          >Password:</label
-        >
-        <input
-          type="password"
-          style="
-            width: 100%;
-            padding: 10px 5px;
-            font-size: 20px;
-            border: none;
-            border-radius: 10px;
-            margin-top: 10px;
-          "
-          id="password"
-          placeholder="Vui lòng nhập thông tin password"
-        />
-        <button
-          style="
-            width: 100%;
-            border: none;
-            border-radius: 10px;
-            padding: 10px;
-            margin-top: 20px;
-            font-size: 20px;
-            background: darkkhaki;
-          "
-          type="submit"
-        >
-          Đăng Nhập
-        </button>
-        <a
-          href="/register"
-          style="
-            display: block;
-            width: 50;
-            text-align: center;
-            text-decoration: none;
-            margin: 10px;
-          "
-          >Đăng ký</a
-        >
+      <form th:action="@{/login}" method="post" id="loginForm">
+        <div th:if="${param.error}" class="alert alert-danger">
+          Invalid username and password.
+        </div>
+        <div th:if="${param.logout}" class="alert alert-success">
+          You have been logged out.
+        </div>
+        <div class="form-group mb-4">
+          <label for="username" style="font-size: 20px; font-weight: 700"
+            >UserName:</label
+          >
+          <input
+            class="form-control"
+            required
+            type="text"
+            style="
+              width: 100%;
+              padding: 10px 5px;
+              font-size: 20px;
+              border: none;
+              border-radius: 10px;
+              margin-top: 10px;
+            "
+            id="username"
+            name="username"
+            placeholder="Vui lòng nhập thông tin tài khoản"
+          />
+        </div>
+        <div class="form-group mb-4">
+          <label
+            for="password"
+            style="
+              display: block;
+              font-size: 20px;
+              font-weight: 700;
+              margin-top: 5px;
+            "
+            >Password:</label
+          >
+          <input
+            type="password"
+            class="form-control"
+            required
+            id="password"
+            name="password"
+            style="
+              width: 100%;
+              padding: 10px 5px;
+              font-size: 20px;
+              border: none;
+              border-radius: 10px;
+              margin-top: 10px;
+            "
+            placeholder="Vui lòng nhập thông tin password"
+          />
+        </div>
+
+        <div class="d-grid gap-2 form-action">
+          <button
+            style="
+              width: 100%;
+              border: none;
+              border-radius: 10px;
+              padding: 10px;
+              margin-top: 20px;
+              font-size: 20px;
+              background: darkkhaki;
+            "
+            type="submit"
+            class="btn btn-primary btn-lg btn-block"
+          >
+            Login
+          </button>
+          <p
+            style="
+              display: block;
+              width: 50;
+              text-align: center;
+              text-decoration: none;
+              margin: 10px;
+            "
+            class="mt-3 mb-0"
+          >
+            Don't have an account?
+            <a class="text-info text-center" th:href="${'/register'}"
+              >Sign up?</a
+            >
+          </p>
+        </div>
       </form>
-      <script></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+      <!--      <script>-->
+      <!--        $("#loginForm").on("submit", function (event) {-->
+      <!--          event.preventDefault(); // Prevent the default form submission-->
+
+      <!--          const username = $("#username").val();-->
+      <!--          const password = $("#password").val();-->
+
+      <!--          $.ajax({-->
+      <!--            url: `http://localhost:8080/api/v1/security/login/${username}&${password}`,-->
+      <!--            type: "POST",-->
+      <!--            dataType: "json",-->
+      <!--            success: function (data) {-->
+      <!--              if (data.success) {-->
+      <!--                // Giả sử API trả về một đối tượng JSON với trường 'success'-->
+      <!--                window.location.href = "/Destination";-->
+      <!--              }-->
+      <!--            },-->
+      <!--            error: function (xhr, status, error) {-->
+      <!--              console.log("Error:", error);-->
+      <!--              // Handle error, e.g., show an error message-->
+      <!--              alert("Có lỗi xảy ra. Vui lòng thử lại sau.");-->
+      <!--            },-->
+      <!--          });-->
+      <!--        });-->
+      <!--      </script>-->
     </div>
   </body>
 </html>

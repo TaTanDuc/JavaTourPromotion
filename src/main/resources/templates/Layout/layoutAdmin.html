@@ -504,42 +504,71 @@
       </div>
     </div>
 
-    <header th:fragment="header">
-      <div class="header">
-        <div class="header-left">
-          <div class="menu-icon dw dw-menu"></div>
-        </div>
-        <div class="header-right">
-          <div class="user-info-dropdown">
-            <div class="dropdown">
-              <a
-                class="dropdown-toggle"
-                href="#"
-                role="button"
-                data-toggle="dropdown"
-              >
-                <span class="user-icon">
-                  <img src="/assets/Admin/vendors/images/photo1.jpg" alt="" />
-                </span>
-                <span class="user-name">Ross C. Lopez</span>
-              </a>
-              <div
-                class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list"
-              >
-                <a class="dropdown-item" href="profile.html"
-                  ><i class="dw dw-user1"></i> Profile</a
-                >
-                <a class="dropdown-item" href="profile.html"
-                  ><i class="dw dw-settings2"></i> Setting</a
-                >
-                <a class="dropdown-item" href="faq.html"
-                  ><i class="dw dw-help"></i> Help</a
-                >
-                <a class="dropdown-item" href="login.html"
-                  ><i class="dw dw-logout"></i> Log Out</a
-                >
+  <header th:fragment="header">
+          <div class="header">
+            <div class="header-left">
+              <div class="menu-icon dw dw-menu"></div>
+            </div>
+            <div class="header-right">
+
+              <div class="user-info-dropdown">
+                <div class="dropdown">
+                  <a
+                    class="dropdown-toggle"
+                    href="#"
+                    role="button"
+                    data-toggle="dropdown"
+                  >
+                    <span class="user-icon">
+                      <img src="/assets/Admin/vendors/images/photo1.jpg" alt="" />
+                    </span>
+                    <span class="user-name">admin</span>
+                  </a>
+
+                </div>
               </div>
             </div>
+              <div  class="left-side-bar">
+                  <div class="brand-logo">
+                      <a href="index.html">
+                          <img
+                                  src="/assets/Admin/vendors/images/deskapp-logo.svg"
+                                  alt=""
+                                  class="dark-logo"
+                          />
+                          <img
+                                  src="/assets/Admin/vendors/images/deskapp-logo-white.svg"
+                                  alt=""
+                                  class="light-logo"
+                          />
+                      </a>
+                      <div class="close-sidebar" data-toggle="left-sidebar-close">
+                          <i class="ion-close-round"></i>
+                      </div>
+                  </div>
+                  <div class="menu-block customscroll">
+                      <div class="sidebar-menu">
+                          <ul id="accordion-menu">
+                              <li>
+                                  <a href="/admin/categories" class="dropdown-toggle no-arrow">
+                                      <span class="micon fa fa-dashboard"></span><span class="mtext">Category</span>
+                                  </a>
+                              </li>
+                              <li>
+                                  <a href="/admin/users" class="dropdown-toggle no-arrow  ">
+                                      <span class="micon fa fa-users"></span><span class="mtext">User</span>
+                                  </a>
+                              </li>
+                              <li>
+                                  <a href="/admin/destinations" class="dropdown-toggle no-arrow ">
+                                      <span class="micon fa fa-th me-2"></span><span class="mtext">Destination</span>
+                                  </a>
+                              </li>
+                          </ul>
+                      </div>
+                  </div>
+              </div>
+              <div class="mobile-menu-overlay"></div>
           </div>
         </div>
         <div class="left-side-bar">

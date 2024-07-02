@@ -12,6 +12,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -22,6 +23,7 @@ import java.io.IOException;
 import java.security.Principal;
 import java.util.Optional;
 
+@CrossOrigin(origins = "*", allowedHeaders = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/v1/user")
@@ -31,23 +33,14 @@ public class UserControllerAPI {
     private final CommentService commentService;
     private final DestinationService destinationService;
 
-    @GetMapping("/profile/{username}")
-    public ResponseEntity<Optional<UserGetVM>> userProfile(@PathVariable Principal username){
-        return ResponseEntity.ok(userService.findUserByUsername(username.getName()));
+    @GetMapping("/profile")
+    public ResponseEntity<Optional<UserGetVM>> userProfile(String username){
+        return ResponseEntity.ok(userService.findUserByUsername(username));
     }
 
-    @GetMapping("/comment/add")
-    public Comments addComment(@RequestParam(value = "destination") Long id, Comments comment, Principal principal){
-        destinationService.avgScore();
-        return commentService.addComment(id,principal.getName(),comment);
-    }
-
-    @GetMapping("/login")
-    public ResponseEntity<UserGetVM> login(@RequestParam(value = "username") String username,
-                                           @RequestParam(value = "password") String password){
-        if(userService.checkLogin(username,password))
-            return ResponseEntity.ok(userService.findUserByUsername(username).orElseThrow());
-        else
-            return ResponseEntity.notFound().build();
+    @PostMapping("/comment/add")
+    public Comments addComment(@RequestParam(value = "destination") Long id,@RequestParam(value = "username") String username,@RequestBody  Comments comment){
+        //destinationService.avgScore();
+        return commentService.addComment(id,username,comment);
     }
 }

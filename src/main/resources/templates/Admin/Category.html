@@ -26,32 +26,18 @@
 
       gtag("config", "UA-119386393-1");
     </script>
-  </head>
-  <body>
-    <th:block th:replace="~{Layout/layoutAdmin::loading}"></th:block>
-    <!-- Header Page -->
-    <th:block th:replace="~{Layout/layoutAdmin::header}"></th:block>
-    <div class="main-container" th:fragment="content">
-      <div class="xs-pd-20-10 pd-ltr-20">
-        <div class="row clearfix progress-box">
-          <div class="col-lg-12">
-            <div class="card-box mb-30">
-              <div class="pd-20">
-                <h2 class="text-blue h2">Category Information</h2>
-              </div>
-              <div class="pb-20">
-                <table
-                  class="table project-list-table table-nowrap align-middle table-borderless"
-                >
-                  <thead>
-                    <tr>
-                      <th scope="col" style="width: 430px">Category</th>
-                      <th scope="col">Action</th>
-                    </tr>
-                  </thead>
-                  <tbody id="categoryList"></tbody>
-                </table>
-              </div>
+</head>
+<body>
+<th:block th:replace="~{Layout/layoutAdmin::loading}"></th:block>
+<!-- Header Page -->
+<th:block th:replace="~{Layout/layoutAdmin::header}"></th:block>
+<div class="main-container" th:fragment="content">
+		<div class="xs-pd-20-10 pd-ltr-20">
+			<div class="row clearfix progress-box">
+				<div class="col-lg-12">
+					<div class="card-box mb-30">
+						<div class="pd-20">
+							<h2 class="text-blue h2">Category Information</h2>
 
               <form id="categoryForm">
                 <input type="hidden" id="categoryID" />

@@ -34,8 +34,7 @@ public class Users implements UserDetails {
     @Size(min = 8, max = 20, message = "Username must be 8 to 20 characters!")
     private String username;
 
-    @Column(name = "Password", length = 20, nullable = false)
-    @Size(min = 8, max = 20, message = "Password must be 8 to 20 characters!")
+    @Column(name = "Password", nullable = false)
     @NotBlank(message = "Password is required")
     private String password;
 
@@ -73,6 +72,10 @@ public class Users implements UserDetails {
     @Override
     public String getPassword(){
         return password;
+    }
+
+    public boolean getBanned(){
+        return banned;
     }
 
     @Override
