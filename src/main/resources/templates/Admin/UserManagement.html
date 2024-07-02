@@ -1,145 +1,140 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-	<!-- Basic Page Info -->
-	<meta charset="utf-8">
-	<title>Admin Page</title>
-	<th:block th:replace="~{Layout/layoutAdmin::touch-icon}"></th:block>
-	<th:block th:replace="~{Layout/layoutAdmin::all-min}"></th:block>
-	<th:block th:replace="~{Layout/layoutAdmin::favicon-32x32}"></th:block>
-	<th:block th:replace="~{Layout/layoutAdmin::favicon-16x16}"></th:block>
-	<th:block th:replace="~{Layout/layoutAdmin::core-css}"></th:block>
-	<th:block th:replace="~{Layout/layoutAdmin::font-css}"></th:block>
-	<th:block th:replace="~{Layout/layoutAdmin::min-css}"></th:block>
-	<th:block th:replace="~{Layout/layoutAdmin::responsive-css}"></th:block>
-	<th:block th:replace="~{Layout/layoutAdmin::style-css}"></th:block>
-	<script
-			async
-			src="https://www.googletagmanager.com/gtag/js?id=UA-119386393-1"
-	></script>
-	<script>
-		window.dataLayer = window.dataLayer || [];
-        function gtag() {
-          dataLayer.push(arguments);
-        }
-        gtag("js", new Date());
+  <head>
+    <!-- Basic Page Info -->
+    <meta charset="utf-8" />
+    <title>Admin Page</title>
+    <th:block th:replace="~{Layout/layoutAdmin::touch-icon}"></th:block>
+    <th:block th:replace="~{Layout/layoutAdmin::all-min}"></th:block>
+    <th:block th:replace="~{Layout/layoutAdmin::favicon-32x32}"></th:block>
+    <th:block th:replace="~{Layout/layoutAdmin::favicon-16x16}"></th:block>
+    <th:block th:replace="~{Layout/layoutAdmin::core-css}"></th:block>
+    <th:block th:replace="~{Layout/layoutAdmin::font-css}"></th:block>
+    <th:block th:replace="~{Layout/layoutAdmin::min-css}"></th:block>
+    <th:block th:replace="~{Layout/layoutAdmin::responsive-css}"></th:block>
+    <th:block th:replace="~{Layout/layoutAdmin::style-css}"></th:block>
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-119386393-1"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
 
-        gtag("config", "UA-119386393-1");
-	</script>
-</head>
-<body>
-	<!-- Header Page -->
-	<th:block th:replace="~{Layout/layoutAdmin::loading}"></th:block>
-	<!-- Header Page -->
-	<th:block th:replace="~{Layout/layoutAdmin::header}"></th:block>
-	<!-- Content Page -->
+      gtag("config", "UA-119386393-1");
+    </script>
+  </head>
+  <body>
+    <!-- Header Page -->
+    <th:block th:replace="~{Layout/layoutAdmin::loading}"></th:block>
+    <!-- Header Page -->
+    <th:block th:replace="~{Layout/layoutAdmin::header}"></th:block>
+    <!-- Content Page -->
 
-	<div th:fragment="content" class="main-container">
-		<div class="xs-pd-20-10 pd-ltr-20">
-			<div class="row clearfix progress-box">
-				<div class="col-lg-12">
-					<div class="card-box mb-30">
-						<div class="pd-20">
-							<h2 class="text-blue h2">User Management</h2>
-
-						</div>
-						<div class="pb-20">
-
-							<table class="table project-list-table table-nowrap align-middle table-borderless">
-								<thead>
-								<tr>
-									<th scope="col">Avata</th>
-									<th scope="col">Name</th>
-									<th scope="col" style="width: 200px;height:100px">Action</th>
-								</tr>
-								</thead>
-								<tbody id="userList"></tbody>
-							</table>
-						</div>
-					</div>
-				</div>
-			</div>
-
-		</div>
-	</div>
-	<!-- Footer Page -->
-	<th:block th:replace="~{Layout/layoutAdmin::footer}"></th:block>
-	<script>
-		let name;
-		$(document).ready(function() {
-			loadUsers();
-
-		});
-		function loadUsers() {
-			$.ajax({
-				url: 'http://localhost:8080/api/v1/admin/users',
-				type: 'GET',
-				success: function(users) {
-					let userList = '';
-					$.each(users, function(index, user) {
-
-						name=user.username;
-						userList += `<tr>
+    <div th:fragment="content" class="main-container">
+      <div class="xs-pd-20-10 pd-ltr-20">
+        <div class="row clearfix progress-box">
+          <div class="col-lg-12">
+            <div class="card-box mb-30">
+              <div class="pd-20">
+                <h2 class="text-blue h2">User Management</h2>
+              </div>
+              <div class="pb-20">
+                <table
+                  class="table project-list-table table-nowrap align-middle table-borderless"
+                >
+                  <thead>
+                    <tr>
+                      <th scope="col">Avata</th>
+                      <th scope="col">Name</th>
+                      <th scope="col" style="width: 200px; height: 100px">
+                        Action
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody id="userList"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Footer Page -->
+    <th:block th:replace="~{Layout/layoutAdmin::footer}"></th:block>
+    <script>
+      let username;
+      $(document).ready(function () {
+        loadUsers();
+      });
+      function loadUsers() {
+        $.ajax({
+          url: "http://localhost:8080/api/v1/admin/users",
+          type: "GET",
+          success: function (users) {
+            let userList = "";
+            $.each(users, function (index, user) {
+              username = user.username;
+              userList += `<tr>
 											<td><img src="${user.imageUrl}"  width="500px" class="img-fluid" alt="Avata user"></td>
-											<td><span class="badge badge-soft-danger mb-0">${user.username}</span></td>
+											<td><span class="badge badge-soft-danger mb-0">${username}</span></td>
 
 											<td>
                                     <ul class="list-inline mb-0">`;
 
-												if (!user.banned) {
-													userList += `<li class="list-inline-item">
-																	<button onclick="banUser('${name}')" data-bs-toggle="tooltip" data-bs-placement="top" title="Ban" class="px-2 text-danger">
+              if (!user.banned) {
+                userList += `<li class="list-inline-item">
+																	<button onclick="banUser('${username}')" data-bs-toggle="tooltip" data-bs-placement="top" title="Ban" class="px-2 text-danger">
 																		<i class="bi bi-lock"></i> Ban
 																	</button>
 																 </li>`;
-												} else {
-													userList += `<li class="list-inline-item">
-																	<button onclick="unbanUser('${name}')" data-bs-toggle="tooltip" data-bs-placement="top" title="Unban" class="px-2 text-success">
+              } else {
+                userList += `<li class="list-inline-item">
+																	<button onclick="unbanUser('${username}')" data-bs-toggle="tooltip" data-bs-placement="top" title="Unban" class="px-2 text-success">
 																		<i class="bi bi-unlock"></i> Unban
 																	</button>
 																 </li>`;
-												}
+              }
 
-												userList += `</ul>
+              userList += `</ul>
                             </td>
 										</tr>`;
-					});
-					$('#userList').html(userList);
-				}
-			});
-		}
+            });
+            $("#userList").html(userList);
+          },
+        });
+      }
 
+      function banUser(name1) {
+        $.ajax({
+          url: `http://localhost:8080/api/v1/admin/ban/${name1}`,
+          type: "PUT",
+          success: function () {
+            loadUsers();
+          },
+          error: function (xhr, status, error) {
+            alert("Failed to ban user: " + error);
+          },
+        });
+      }
 
-		function banUser(name1) {
-			if (confirm('Are you sure you want to ban this user?')) {
-
-				$.ajax({
-					url: `http://localhost:8080/api/v1/admin/ban/${name1}`,
-					type: 'PUT',
-					success: function() {
-						loadUsers();
-					},
-					error: function(xhr, status, error) {
-						alert('Failed to ban user: ' + error);
-					}
-				});
-			}
-		}
-
-		function unbanUser(name1) {
-			if (confirm('Are you sure you want to unban this user?')) {
-				$.ajax({
-					url: `http://localhost:8080/api/v1/admin/unban/${name1}`,
-					type: 'PUT',
-					success: function() {
-						loadUsers();
-					},
-					error: function(xhr, status, error) {
-						alert('Failed to unban user: ' + error);
-					}
-				});
-			}
-		}
-	</script>
-</body>
+      function unbanUser(name1) {
+        if (confirm("Are you sure you want to unban this user?")) {
+          $.ajax({
+            url: `http://localhost:8080/api/v1/admin/unban/${name1}`,
+            type: "PUT",
+            success: function () {
+              loadUsers();
+            },
+            error: function (xhr, status, error) {
+              alert("Failed to unban user: " + error);
+            },
+          });
+        }
+      }
+    </script>
+  </body>
 </html>
