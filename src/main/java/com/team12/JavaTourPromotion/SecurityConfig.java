@@ -45,37 +45,37 @@ public class SecurityConfig {
 //                        .requestMatchers("/api/home/**").permitAll()
                                 .anyRequest().permitAll()
                 )
-//                .logout(logout -> logout
-//                        .logoutUrl("/logout")
-//                        .logoutSuccessUrl("/login")
-//                        .deleteCookies("JSESSIONID")
-//                        .invalidateHttpSession(true)
-//                        .clearAuthentication(true)
-//                        .permitAll()
-//                )
-//                .formLogin(formLogin -> formLogin
-//                        .loginPage("/login")
-//                        .loginProcessingUrl("/login")
-//                        .defaultSuccessUrl("/")
-//                        .failureUrl("/login?error")
-//                        .permitAll()
-//                )
-//                .rememberMe(rememberMe -> rememberMe
-//                                .key("promotionTourSecurity")
-//                                .rememberMeCookieName("promotionTourSecurity")
-//                                .tokenValiditySeconds(24 * 60 * 60)
-//                .userDetailsService(userDetailsService())
-//                )
-//                .exceptionHandling(exceptionHandling -> exceptionHandling
-//                        .accessDeniedPage("/403")
-//                )
-//                .sessionManagement(sessionManagement -> sessionManagement
-//                        .maximumSessions(1)
-//                        .expiredUrl("/login")
-//                )
-//                .httpBasic(httpBasic -> httpBasic
-//                        .realmName("promotionTourSecurity")
-//                )
+                .logout(logout -> logout
+                        .logoutUrl("/logout")
+                        .logoutSuccessUrl("/login")
+                        .deleteCookies("JSESSIONID")
+                        .invalidateHttpSession(true)
+                        .clearAuthentication(true)
+                        .permitAll()
+                )
+                .formLogin(formLogin -> formLogin
+                        .loginPage("/login")
+                        .loginProcessingUrl("/login")
+                        .defaultSuccessUrl("/destinations")
+                        .failureUrl("/login?error")
+                        .permitAll()
+                )
+                .rememberMe(rememberMe -> rememberMe
+                                .key("promotionTourSecurity")
+                                .rememberMeCookieName("promotionTourSecurity")
+                                .tokenValiditySeconds(24 * 60 * 60)
+                .userDetailsService(userDetailsService())
+                )
+                .exceptionHandling(exceptionHandling -> exceptionHandling
+                        .accessDeniedPage("/403")
+                )
+                .sessionManagement(sessionManagement -> sessionManagement
+                        .maximumSessions(1)
+                        .expiredUrl("/login")
+                )
+                .httpBasic(httpBasic -> httpBasic
+                        .realmName("promotionTourSecurity")
+                )
                 .csrf(AbstractHttpConfigurer::disable)
                 .build();
         }

@@ -29,6 +29,7 @@ public record UserGetVM (Long id, String username,boolean banned, String name,Li
         return new UserGetVM(
                 user.getId(),
                 user.getUsername(),
+                user.getBanned(),
                 user.getName(),
                 simpleComments,
                 simpleBookmark

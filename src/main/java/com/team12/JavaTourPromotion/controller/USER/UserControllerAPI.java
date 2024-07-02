@@ -1,7 +1,6 @@
 package com.team12.JavaTourPromotion.controller.USER;
 
 import com.team12.JavaTourPromotion.GetVM.UserGetVM;
-import com.team12.JavaTourPromotion.UserPrincipal;
 import com.team12.JavaTourPromotion.model.Comments;
 import com.team12.JavaTourPromotion.model.Destinations;
 import com.team12.JavaTourPromotion.model.Users;
@@ -39,9 +38,9 @@ public class UserControllerAPI {
         return ResponseEntity.ok(userService.findUserByUsername(username));
     }
 
-    @GetMapping("/comment/add")
-    public Comments addComment(@RequestParam(value = "destination") Long id, Comments comment,String username){
-        destinationService.avgScore();
+    @PostMapping("/comment/add")
+    public Comments addComment(@RequestParam(value = "destination") Long id,@RequestParam(value = "username") String username,@RequestBody  Comments comment){
+        //destinationService.avgScore();
         return commentService.addComment(id,username,comment);
     }
 }
