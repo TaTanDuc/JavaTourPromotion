@@ -2,16 +2,20 @@ package com.team12.JavaTourPromotion.service;
 
 import com.team12.JavaTourPromotion.GetVM.DestinationDetailGetVM;
 import com.team12.JavaTourPromotion.model.Categories;
+import com.team12.JavaTourPromotion.model.Comments;
 import com.team12.JavaTourPromotion.model.Destinations;
+import com.team12.JavaTourPromotion.model.Users;
 import com.team12.JavaTourPromotion.repository.DestinationRepository;
 import com.team12.JavaTourPromotion.GetVM.DestinationGetVM;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.OptionalDouble;
 import java.util.stream.Collectors;
 
 @Service
@@ -20,6 +24,16 @@ import java.util.stream.Collectors;
 public class DestinationService {
 
     private final DestinationRepository destinationRepository;
+
+    @Transactional
+    public void avgScore() {
+        List<Destinations> destination = destinationRepository.findAll();
+        destination.forEach(des -> {
+            double avgScore = des.getComments().stream().mapToDouble(Comments::getRating).average().orElse(0.0);
+            des.setScore((float) avgScore);
+            destinationRepository.save(des);
+        });
+    }
 
     public List<DestinationGetVM> getAllDestination() {
         return destinationRepository.findAll()
@@ -76,4 +90,5 @@ public class DestinationService {
         }
         destinationRepository.deleteById(id);
     }
+
 }

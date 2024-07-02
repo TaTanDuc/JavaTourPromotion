@@ -61,17 +61,4 @@ public class Destinations {
 
     @ManyToMany(mappedBy = "destinations", cascade = CascadeType.ALL)
     private Set<Categories> categories;
-
-    public void calculateAverageScore() {
-        if (comments == null || comments.isEmpty()) {
-            this.Score = 0;
-        } else {
-            double average = comments.stream()
-                    .filter(comment -> comment.getDestination().equals(this))
-                    .mapToInt(Comments::getRating)
-                    .average()
-                    .orElse(0.0);
-            this.Score = (float) average;
-        }
-    }
 }

@@ -2,8 +2,10 @@ package com.team12.JavaTourPromotion.controller.USER;
 
 import com.team12.JavaTourPromotion.GetVM.UserGetVM;
 import com.team12.JavaTourPromotion.model.Comments;
+import com.team12.JavaTourPromotion.model.Destinations;
 import com.team12.JavaTourPromotion.model.Users;
 import com.team12.JavaTourPromotion.service.CommentService;
+import com.team12.JavaTourPromotion.service.DestinationService;
 import com.team12.JavaTourPromotion.service.UserService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
@@ -27,6 +29,7 @@ public class UserControllerAPI {
 
     private final UserService userService;
     private final CommentService commentService;
+    private final DestinationService destinationService;
 
     @GetMapping("/profile/{username}")
     public ResponseEntity<Optional<UserGetVM>> userProfile(@PathVariable Principal username){
@@ -35,6 +38,7 @@ public class UserControllerAPI {
 
     @GetMapping("/comment/add")
     public Comments addComment(@RequestParam(value = "destination") Long id, Comments comment, Principal principal){
+        destinationService.avgScore();
         return commentService.addComment(id,principal.getName(),comment);
     }
 }
