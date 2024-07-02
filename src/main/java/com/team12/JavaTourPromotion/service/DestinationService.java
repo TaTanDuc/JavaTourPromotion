@@ -84,11 +84,13 @@ public class DestinationService {
         return destinationRepository.save(existingDestination);
     }
 
-    public void deleteProductById(Long id) {
+    public void deleteDestinationById(Long id) {
         if (!destinationRepository.existsById(id)) {
             throw new IllegalStateException("Destination with ID " + id + " does not exist.");
         }
         destinationRepository.deleteById(id);
     }
-
+    public Optional<Destinations> getDestinationById11(Long id) {
+        return destinationRepository.findById(id);
+    }
 }

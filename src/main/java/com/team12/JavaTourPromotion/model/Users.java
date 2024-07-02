@@ -25,7 +25,7 @@ public class Users implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "Name", length = 50)
+    @Column(name = "Name", length = 50) 
     @Size(min = 10, max = 50, message = "Name must be 10 to 50 characters")
     private String name;
 
