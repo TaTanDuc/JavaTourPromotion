@@ -12,6 +12,7 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -39,9 +40,10 @@ public class UserControllerAPI {
         return ResponseEntity.ok(userService.findUserByUsername(username));
     }
 
-    @GetMapping("/comment/add")
-    public Comments addComment(@RequestParam(value = "destination") Long id, Comments comment,String username){
-        destinationService.avgScore();
-        return commentService.addComment(id,username,comment);
+    @PostMapping("/comment/add")
+    public ResponseEntity addComment(@RequestParam(value = "destination") Long id, Comments comment,String username){
+        //destinationService.avgScore();
+        commentService.addComment(id,username,comment);
+        return ResponseEntity.ok(HttpStatus.OK);
     }
 }
