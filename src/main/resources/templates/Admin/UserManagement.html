@@ -1,17 +1,17 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 	<!-- Basic Page Info -->
 	<meta charset="utf-8">
 	<title>DeskApp - Bootstrap Admin Dashboard HTML Template</title>
-	<th:block th:replace="~{layout::touch-icon}"></th:block>
-    <th:block th:replace="~{layout::favicon-32x32}"></th:block>
-    <th:block th:replace="~{layout::favicon-16x16}"></th:block>
-    <th:block th:replace="~{layout::core-css}"></th:block>
-    <th:block th:replace="~{layout::font-css}"></th:block>
-    <th:block th:replace="~{layout::min-css}"></th:block>
-    <th:block th:replace="~{layout::responsive-css}"></th:block>
-    <th:block th:replace="~{layout::style-css}"></th:block>
+	<th:block th:replace="~{Layout/layoutAdmin::touch-icon}"></th:block>
+    <th:block th:replace="~{Layout/layoutAdmin::favicon-32x32}"></th:block>
+    <th:block th:replace="~{Layout/layoutAdmin::favicon-16x16}"></th:block>
+    <th:block th:replace="~{Layout/layoutAdmin::core-css}"></th:block>
+    <th:block th:replace="~{Layout/layoutAdmin::font-css}"></th:block>
+    <th:block th:replace="~{Layout/layoutAdmin::min-css}"></th:block>
+    <th:block th:replace="~{Layout/layoutAdmin::responsive-css}"></th:block>
+    <th:block th:replace="~{Layout/layoutAdmin::style-css}"></th:block>
     <script
       async
       src="https://www.googletagmanager.com/gtag/js?id=UA-119386393-1"
@@ -28,7 +28,7 @@
 </head>
 <body>
 	<!-- Header Page -->
-	<th:block th:replace="~{layout::header}"></th:block>
+	<th:block th:replace="~{Layout/layoutAdmin::header}"></th:block>
 	<!-- Content Page -->
 	<div class="main-container">
 		<div class="pd-ltr-20 xs-pd-20-10">
@@ -693,5 +693,6 @@
 		</div>
 	</div>
 	<!-- Footer Page -->
-	<th:block th:replace="~{layout::footer}"></th:block>
+	<th:block th:replace="~{Layout/layoutAdmin::footer}"></th:block>
+</body>
 </html>

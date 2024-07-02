@@ -2,7 +2,6 @@
 package com.team12.JavaTourPromotion.controller;
 
 import com.team12.JavaTourPromotion.model.Comments;
-import com.team12.JavaTourPromotion.model.Destinations;
 import com.team12.JavaTourPromotion.service.CommentService;
 import com.team12.JavaTourPromotion.service.DestinationService;
 import jakarta.validation.Valid;
@@ -17,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 
 
-public class  CommentController {
+public class CommentControllerTungTest {
     @Autowired
     private CommentService commentService;
     @Autowired
@@ -31,21 +30,21 @@ public class  CommentController {
     // Process the form for adding a new product
     @PostMapping("/add")
     public String addComment(@Valid @ModelAttribute Comments comment, BindingResult result, @RequestParam Long destinationId) {
-        if (result.hasErrors()) {
-            return "redirect:/destination/" + destinationId; // Replace with the actual view for destination details
-        }
-
-        Destinations destination = destinationService.getDestinationById(destinationId)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid destination Id:" + destinationId));
-
-        comment.setDestination(destination);
-        commentService.addComment(comment);
-
+//        if (result.hasErrors()) {
+//            return "redirect:/destination/" + destinationId; // Replace with the actual view for destination details
+//        }
+//
+//        Destinations destination = destinationService.getDestinationById(destinationId)
+//                .orElseThrow(() -> new IllegalArgumentException("Invalid destination Id:" + destinationId));
+//
+//        comment.setDestination(destination);
+//        commentService.addComment(comment);
+//
         return "redirect:/destination/" + destinationId; // Replace with the actual view for destination details
-    }
+   }
     @GetMapping("comments/delete/{id}")
     public String deleteProduct(@PathVariable Long id) {
-        commentService.deleteCommentById(id);
+        //commentService.deleteCommentById(id);
         return "redirect:/comments";
-    }
+   }
 }
