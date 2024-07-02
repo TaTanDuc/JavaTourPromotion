@@ -26,15 +26,9 @@
         .addEventListener("submit", async function (event) {
           event.preventDefault(); // Prevent the default form submission
 
-          const username = document.getElementById("username").value;
-          const email = document.getElementById("email").value;
-          const password = document.getElementById("password").value;
-          console.log(username, email, password);
-          const data = {
-            username: username,
-            email: email,
-            password: password,
-          };
+<script>
+	document.getElementById('registerForm').addEventListener('submit', async function(event) {
+    event.preventDefault();
 
           try {
             const response = await fetch(
@@ -48,17 +42,34 @@
               }
             );
 
-            if (!response.ok) {
-              throw new Error("Network response was not ok");
-            }
-            const result = await response.json();
-            console.log("Success:", result);
-            alert("Registration successful! Redirecting to login page.");
-          } catch (error) {
-            console.log("Error:", error);
-            // Handle error, e.g., show an error message
-          }
+    const data = {
+        username: username,
+        email: email,
+        password: password
+    };
+
+    try {
+        const response = await fetch('https://your-server.com/api/register', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
         });
-    </script> -->
-  </body>
+
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+
+        const result = await response.json();
+        console.log('Success:', result);
+
+    } catch (error) {
+
+        console.error('Error:', error);
+
+    }
+});
+</script>
+</body>
 </html>

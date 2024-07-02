@@ -89,13 +89,19 @@ public class UserService implements UserDetailsService {
     @Transactional
     public void unbanUser(String username) {
         Users user = userRepository.findByUsername(username)
-                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+                .orElseThrow(() -> new UsernameNotFoundException("User not found!"));
         user.setBanned(false);
         userRepository.save(user);
     }
 
     public Optional<UserGetVM> findUserByUsername(String username) throws UsernameNotFoundException{
         return userRepository.findByUsername(username).map(UserGetVM::from);
+    }
+
+    public boolean checkLogin(String username, String password){
+        Users temp = userRepository.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found!"));
+        return temp.getPassword().equals(password);
     }
 //
 //    public void userAddBookmark(String username, Bookmarks bookmarks){

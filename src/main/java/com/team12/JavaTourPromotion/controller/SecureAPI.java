@@ -25,7 +25,7 @@ public class SecureAPI {
     private final UserService userService;
 
     @PostMapping("/register")
-    public ResponseEntity register(@RequestBody Users user) {
+    public ResponseEntity<String> register(@RequestBody Users user) {
 //        if (file != null && !file.isEmpty()) {
 //            try {
 //                byte[] bytes = file.getBytes();
@@ -41,6 +41,15 @@ public class SecureAPI {
 //        }
         userService.addUser(user);
         userService.setDefaultRole(user.getUsername());
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok("Register successful");
+    }
+
+    @PostMapping("/login/{username}&{password}")
+    public ResponseEntity<String> login(@PathVariable(value = "username") String username,
+                                        @PathVariable(value = "password") String password) {
+        if(userService.checkLogin(username,password))
+            return ResponseEntity.ok("Login successful!");
+        else
+            return ResponseEntity.notFound().build();
     }
 }
