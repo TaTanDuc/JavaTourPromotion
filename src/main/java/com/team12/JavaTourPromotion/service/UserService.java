@@ -42,15 +42,13 @@ public class UserService implements UserDetailsService {
                 .stream().map(UserGetVM::from).toList();
     }
 
-    public void addUser(@NotNull Users user) {
-        user.setPassword(user.getPassword());
+    public void save(@NotNull Users user) {
         userRepository.save(user);
     }
 
     public void setDefaultRole(String username) {
         userRepository.findByUsername(username).ifPresentOrElse(
                 user -> {
-
                     user.getRoles().add(roleRepository.findRoleById(Role.USER.value));
                     userRepository.save(user);
                 },
@@ -61,10 +59,11 @@ public class UserService implements UserDetailsService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws
-            UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+
         var user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+
         return org.springframework.security.core.userdetails.User
                 .withUsername(user.getUsername())
                 .password(user.getPassword())

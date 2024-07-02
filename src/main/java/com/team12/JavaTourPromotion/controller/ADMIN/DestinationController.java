@@ -45,10 +45,10 @@ public class DestinationController {
     public String showLogin(Model model) {
         return "Login/login";
     }  
-    @GetMapping("/register")
-    public String showRegister(Model model) {
-        return "Login/register";
-    }  
+//    @GetMapping("/register")
+//    public String showRegister(Model model) {
+//        return "Login/register";
+//    }
     @GetMapping("/DetailDestination/{id}")
     public String showDetailDestination(@PathVariable Long id,Model model) {
         model.addAttribute("destinationId", id);
