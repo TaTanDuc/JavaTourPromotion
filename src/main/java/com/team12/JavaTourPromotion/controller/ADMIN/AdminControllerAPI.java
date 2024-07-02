@@ -2,9 +2,11 @@ package com.team12.JavaTourPromotion.controller.ADMIN;
 
 import com.team12.JavaTourPromotion.GetVM.CategoryGetVM;
 import com.team12.JavaTourPromotion.GetVM.ProvinceGetVM;
+import com.team12.JavaTourPromotion.GetVM.UserGetVM;
 import com.team12.JavaTourPromotion.model.Categories;
 import com.team12.JavaTourPromotion.model.DestinationImages;
 import com.team12.JavaTourPromotion.model.Destinations;
+import com.team12.JavaTourPromotion.model.Users;
 import com.team12.JavaTourPromotion.repository.DestinationRepository;
 import com.team12.JavaTourPromotion.service.CategoryService;
 import com.team12.JavaTourPromotion.service.DestinationService;
@@ -127,4 +129,35 @@ public class AdminControllerAPI {
         userService.unbanUser(username);
         return ResponseEntity.ok().build();
     }
+    @GetMapping("/users")
+    public ResponseEntity<List<UserGetVM>> getAllUsers(){
+        List<UserGetVM> list = userService.getAllUsers();
+        if(list.isEmpty())
+            throw new RuntimeException("List of users is empty!");
+        else
+            return ResponseEntity.ok(list);
+    }
+//@PutMapping("/ban/{username}")
+//public ResponseEntity<Void> banUser(@PathVariable String username) {
+//    try {
+//        userService.banUser(username);
+//        return ResponseEntity.ok().build();
+//    } catch (Exception e) {
+//        // Log the error for debugging
+//        System.err.println("Error banning user: " + e.getMessage());
+//        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+//    }
+//}
+//
+//    @PutMapping("/unban/{username}")
+//    public ResponseEntity<Void> unBanUser(@PathVariable String username) {
+//        try {
+//            userService.unbanUser(username);
+//            return ResponseEntity.ok().build();
+//        } catch (Exception e) {
+//            // Log the error for debugging
+//            System.err.println("Error unbanning user: " + e.getMessage());
+//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+//        }
+//    }
 }
