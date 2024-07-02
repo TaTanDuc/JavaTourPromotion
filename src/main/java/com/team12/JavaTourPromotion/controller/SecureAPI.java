@@ -6,6 +6,7 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -24,57 +25,31 @@ public class SecureAPI {
     private final UserService userService;
 
     @PostMapping("/register")
-    public String register(@Valid @ModelAttribute("user") Users user,
-                           @NotNull BindingResult bindingResult,
-                           Model model, @RequestParam("image") MultipartFile file) {
-        if (userService.existsByUsername(user.getUsername()))
-        {
-            bindingResult.rejectValue("username", "error.user", "Username already exists");
-        }
-
-        if (userService.existsByEmail(user.getEmail()))
-        {
-            bindingResult.rejectValue("Email", "error.user", "Email already exists");
-        }
-
-        if (bindingResult.hasErrors()) { // Kiểm tra nếu có lỗi validate
-            var errors = bindingResult.getAllErrors()
-                    .stream()
-                    .map(DefaultMessageSourceResolvable::getDefaultMessage)
-                    .toArray(String[]::new);
-            model.addAttribute("errors", errors);
-            return "users/register"; // Trả về lại view "register" nếu có lỗi
-        }
-        if (file != null && !file.isEmpty()) {
-            try {
-                byte[] bytes = file.getBytes();
-                java.nio.file.Path path = java.nio.file.Paths.get(UPLOADED_FOLDER + file.getOriginalFilename());
-                java.nio.file.Files.write(path, bytes);
-                user.setProfileImgPath("/UserImage/" + file.getOriginalFilename());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        else {
-            user.setProfileImgPath("/UserImage/anonymous.png");
-        }
+    public ResponseEntity<String> register(@RequestBody Users user) {
+//        if (file != null && !file.isEmpty()) {
+//            try {
+//                byte[] bytes = file.getBytes();
+//                java.nio.file.Path path = java.nio.file.Paths.get(UPLOADED_FOLDER + file.getOriginalFilename());
+//                java.nio.file.Files.write(path, bytes);
+//                user.setProfileImgPath("/UserImage/" + file.getOriginalFilename());
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//        else {
+//            user.setProfileImgPath("/UserImage/anonymous.png");
+//        }
         userService.addUser(user);
         userService.setDefaultRole(user.getUsername());
-        return "redirect:/login";
+        return ResponseEntity.ok("Register successful");
     }
-//
-//    @PostMapping("/register")
-//    public String register(@Valid @ModelAttribute("user") Users user, @NotNull BindingResult bindingResult, Model model) {
-//        if (bindingResult.hasErrors()) {
-//            var errors = bindingResult.getAllErrors()
-//                    .stream()
-//                    .map(DefaultMessageSourceResolvable::getDefaultMessage)
-//                    .toArray(String[]::new);
-//            model.addAttribute("errors", errors);
-//            return "Login/register"; // Trả về lại view "register" nếu có lỗi
-//        }
-//        userService.addUser(user);
-//        userService.setDefaultRole(user.getUsername());
-//        return "redirect:Login/login";
-//    }
+
+    @PostMapping("/login/{username}&{password}")
+    public ResponseEntity<String> login(@PathVariable(value = "username") String username,
+                                        @PathVariable(value = "password") String password) {
+        if(userService.checkLogin(username,password))
+            return ResponseEntity.ok("Login successful!");
+        else
+            return ResponseEntity.notFound().build();
+    }
 }

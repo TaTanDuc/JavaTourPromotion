@@ -1,126 +1,121 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<!-- Basic Page Info -->
-	<meta charset="utf-8">
-	<title>DeskApp - Bootstrap Admin Dashboard HTML Template</title>
+  <head>
+    <!-- Basic Page Info -->
+    <meta charset="utf-8" />
+    <title>DeskApp - Bootstrap Admin Dashboard HTML Template</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  </head>
+  <body
+    style="
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background-image: url(/assets/User/images/image-top-1.jpg);
+    "
+  >
+    <div
+      class="box_login"
+      style="
+        background-color: wheat;
+        width: 500px;
+        border-radius: 10px;
+        padding: 20px;
+        height: 230px;
+      "
+    >
+      <form action="" id="loginForm">
+        <label for="" style="font-size: 20px; font-weight: 700"
+          >UserName:</label
+        >
+        <input
+          type="text"
+          style="
+            width: 100%;
+            padding: 10px 5px;
+            font-size: 20px;
+            border: none;
+            border-radius: 10px;
+            margin-top: 10px;
+          "
+          id="username"
+          placeholder="Vui lòng nhập thông tin tài khoản"
+        />
+        <label
+          for=""
+          style="
+            display: block;
+            font-size: 20px;
+            font-weight: 700;
+            margin-top: 5px;
+          "
+          >Password:</label
+        >
+        <input
+          type="password"
+          style="
+            width: 100%;
+            padding: 10px 5px;
+            font-size: 20px;
+            border: none;
+            border-radius: 10px;
+            margin-top: 10px;
+          "
+          id="password"
+          placeholder="Vui lòng nhập thông tin password"
+        />
+        <button
+          style="
+            width: 100%;
+            border: none;
+            border-radius: 10px;
+            padding: 10px;
+            margin-top: 20px;
+            font-size: 20px;
+            background: darkkhaki;
+          "
+          type="submit"
+        >
+          Đăng Nhập
+        </button>
+        <a
+          href="/register"
+          style="
+            display: block;
+            width: 50;
+            text-align: center;
+            text-decoration: none;
+            margin: 10px;
+          "
+          >Đăng ký</a
+        >
+      </form>
+      <script>
+        $("#loginForm").on("submit", function (event) {
+          event.preventDefault(); // Prevent the default form submission
 
-	<!-- Site favicon -->
-	<link rel="apple-touch-icon" sizes="180x180" href="vendors/images/apple-touch-icon.png">
-	<link rel="icon" type="image/png" sizes="32x32" href="vendors/images/favicon-32x32.png">
-	<link rel="icon" type="image/png" sizes="16x16" href="vendors/images/favicon-16x16.png">
+          const username = $("#username").val();
+          const password = $("#password").val();
 
-	<!-- Mobile Specific Metas -->
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
-	<!-- Google Font -->
-	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-	<!-- CSS -->
-	<link rel="stylesheet" type="text/css" href="vendors/styles/core.css">
-	<link rel="stylesheet" type="text/css" href="vendors/styles/icon-font.min.css">
-	<link rel="stylesheet" type="text/css" href="vendors/styles/style.css">
-
-	<!-- Global site tag (gtag.js) - Google Analytics -->
-	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-119386393-1"></script>
-	<script>
-		window.dataLayer = window.dataLayer || [];
-		function gtag(){dataLayer.push(arguments);}
-		gtag('js', new Date());
-
-		gtag('config', 'UA-119386393-1');
-	</script>
-</head>
-<body class="login-page">
-	<div class="login-header box-shadow">
-		<div class="container-fluid d-flex justify-content-between align-items-center">
-			<div class="brand-logo">
-				<a href="login.html">
-					<img src="vendors/images/deskapp-logo.svg" alt="">
-				</a>
-			</div>
-			<div class="login-menu">
-				<ul>
-					<li><a href="register">Register</a></li>
-				</ul>
-			</div>
-		</div>
-	</div>
-	<div class="login-wrap d-flex align-items-center flex-wrap justify-content-center">
-		<div class="container">
-			<div class="row align-items-center">
-				<div class="col-md-6 col-lg-7">
-					<img src="vendors/images/login-page-img.png" alt="">
-				</div>
-				<div class="col-md-6 col-lg-5">
-					<div class="login-box bg-white box-shadow border-radius-10">
-						<div class="login-title">
-							<h2 class="text-center text-primary">Login To DeskApp</h2>
-						</div>
-						<form>
-							<div class="select-role">
-								<div class="btn-group btn-group-toggle" data-toggle="buttons">
-									<label class="btn active">
-										<input type="radio" name="options" id="admin">
-										<div class="icon"><img src="vendors/images/briefcase.svg" class="svg" alt=""></div>
-										<span>I'm</span>
-										Manager
-									</label>
-									<label class="btn">
-										<input type="radio" name="options" id="user">
-										<div class="icon"><img src="vendors/images/person.svg" class="svg" alt=""></div>
-										<span>I'm</span>
-										Employee
-									</label>
-								</div>
-							</div>
-							<div class="input-group custom">
-								<input type="text" class="form-control form-control-lg" placeholder="Username">
-								<div class="input-group-append custom">
-									<span class="input-group-text"><i class="icon-copy dw dw-user1"></i></span>
-								</div>
-							</div>
-							<div class="input-group custom">
-								<input type="password" class="form-control form-control-lg" placeholder="**********">
-								<div class="input-group-append custom">
-									<span class="input-group-text"><i class="dw dw-padlock1"></i></span>
-								</div>
-							</div>
-							<div class="row pb-30">
-								<div class="col-6">
-									<div class="custom-control custom-checkbox">
-										<input type="checkbox" class="custom-control-input" id="customCheck1">
-										<label class="custom-control-label" for="customCheck1">Remember</label>
-									</div>
-								</div>
-								<div class="col-6">
-									<div class="forgot-password"><a href="forgot-password.html">Forgot Password</a></div>
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-sm-12">
-									<div class="input-group mb-0">
-										<!--
-											use code for form submit
-											<input class="btn btn-primary btn-lg btn-block" type="submit" value="Sign In">
-										-->
-										<a class="btn btn-primary btn-lg btn-block" href="index.html">Sign In</a>
-									</div>
-									<div class="font-16 weight-600 pt-10 pb-10 text-center" data-color="#707373">OR</div>
-									<div class="input-group mb-0">
-										<a class="btn btn-outline-primary btn-lg btn-block" href="register.html">Register To Create Account</a>
-									</div>
-								</div>
-							</div>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- js -->
-	<script src="vendors/scripts/core.js"></script>
-	<script src="vendors/scripts/script.min.js"></script>
-	<script src="vendors/scripts/process.js"></script>
-	<script src="vendors/scripts/layout-settings.js"></script>
-</body>
+          $.ajax({
+            url: `http://localhost:8080/api/v1/security/login/${username}&${password}`,
+            type: "POST",
+            dataType: "json",
+            success: function (data) {
+              if (data.success) {
+                // Giả sử API trả về một đối tượng JSON với trường 'success'
+                window.location.href = "/Destination";
+              }
+            },
+            error: function (xhr, status, error) {
+              console.log("Error:", error);
+              // Handle error, e.g., show an error message
+              alert("Có lỗi xảy ra. Vui lòng thử lại sau.");
+            },
+          });
+        });
+      </script>
+    </div>
+  </body>
 </html>

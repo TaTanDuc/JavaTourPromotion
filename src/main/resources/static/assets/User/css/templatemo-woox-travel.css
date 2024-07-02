@@ -1447,7 +1447,10 @@ footer p a:hover {
 About Page Style
 --------------------------------------------- 
 */
-
+.start_item.hovered i,
+.start_item.selected i {
+  color: gold;
+}
 .about-main-content {
   margin-top: 70px;
   background-image: url(../images/about-content-bg.jpg);
