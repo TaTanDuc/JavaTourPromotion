@@ -8,6 +8,7 @@ import com.team12.JavaTourPromotion.repository.IRoleRepository;
 import com.team12.JavaTourPromotion.repository.IUserRepository;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -22,12 +23,19 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 @Transactional
 
 public class UserService implements UserDetailsService {
 
     private final IUserRepository userRepository;
     private final IRoleRepository roleRepository;
+
+    public boolean checkLogin(String username, String password){
+        Users user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+        return user.getPassword().equals(password);
+    }
 
     public List<UserGetVM> getAllUsers() {
         return userRepository.findAll()
@@ -96,12 +104,6 @@ public class UserService implements UserDetailsService {
 
     public Optional<UserGetVM> findUserByUsername(String username) throws UsernameNotFoundException{
         return userRepository.findByUsername(username).map(UserGetVM::from);
-    }
-
-    public boolean checkLogin(String username, String password){
-        Users temp = userRepository.findByUsername(username)
-                .orElseThrow(() -> new UsernameNotFoundException("User not found!"));
-        return temp.getPassword().equals(password);
     }
 //
 //    public void userAddBookmark(String username, Bookmarks bookmarks){

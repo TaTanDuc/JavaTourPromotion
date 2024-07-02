@@ -41,4 +41,13 @@ public class UserControllerAPI {
         destinationService.avgScore();
         return commentService.addComment(id,principal.getName(),comment);
     }
+
+    @GetMapping("/login")
+    public ResponseEntity<UserGetVM> login(@RequestParam(value = "username") String username,
+                                           @RequestParam(value = "password") String password){
+        if(userService.checkLogin(username,password))
+            return ResponseEntity.ok(userService.findUserByUsername(username).orElseThrow());
+        else
+            return ResponseEntity.notFound().build();
+    }
 }

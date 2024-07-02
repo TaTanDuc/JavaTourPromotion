@@ -11,11 +11,16 @@ const contentDestinationElement = document.querySelector(
   "#content-destination"
 );
 const bestLocationElement = document.querySelector("#best-image");
+const formLoginElement = document.querySelector("#loginForm");
+const valueUsername = document.querySelector("#username");
+const valuePassword = document.querySelector("#password");
+
 let selectedRating = -1;
 let valueRating;
 let index = 0;
 let temp;
 let idString;
+console.log(stars);
 
 window.addEventListener("load", function () {
   // Lấy URL hiện tại
@@ -23,35 +28,35 @@ window.addEventListener("load", function () {
   let parts = originalUrl.split("/");
   idString = parts[parts.length - 1];
 
-  // Thực hiện fetch API
-  fetch(`http://localhost:8080/api/v1/home/destination/${idString}`)
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error("Network response was not ok " + response.statusText);
-      }
-      return response.json();
-    })
-    .then((data) => {
-      const {
-        name,
-        provinceName,
-        content,
-        DoWName,
-        cityName,
-        destinationsImagesList,
-        image,
-      } = data;
-      const { Path: Path1 } = destinationsImagesList[0];
-      const { Path: Path2 } = destinationsImagesList[1];
-      const { Path: Path3 } = destinationsImagesList[2];
-      const { Path: Path4 } = destinationsImagesList[3];
-      console.log(Path1, Path2);
-      // Kiểm tra dữ liệu trả về từ API
-      let options = "";
-      let optionsImage = "";
-      let optionsBestImage = "";
-      // Heading Option
-      options += `
+  if (idString) {
+    fetch(`http://localhost:8080/api/v1/home/destination/${idString}`)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok " + response.statusText);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        const {
+          name,
+          provinceName,
+          content,
+          DoWName,
+          cityName,
+          destinationsImagesList,
+          image,
+        } = data;
+        const { Path: Path1 } = destinationsImagesList[0];
+        const { Path: Path2 } = destinationsImagesList[1];
+        const { Path: Path3 } = destinationsImagesList[2];
+        const { Path: Path4 } = destinationsImagesList[3];
+        console.log(Path1, Path2);
+        // Kiểm tra dữ liệu trả về từ API
+        let options = "";
+        let optionsImage = "";
+        let optionsBestImage = "";
+        // Heading Option
+        options += `
                  <div class="content">
                               <div class="blur-bg" style = "background:url(${image})"></div>
                               <h4>Hãy cùng chúng tôi khám phá ${cityName}</h4>
@@ -63,8 +68,8 @@ window.addEventListener("load", function () {
                               </p>
                 </div>`;
 
-      //Image Option
-      optionsImage += ` <div>
+        //Image Option
+        optionsImage += ` <div>
                       <div class="owl-stage-outer"><div
                         class="owl-stage"
                         style="
@@ -316,7 +321,7 @@ window.addEventListener("load", function () {
                       </div>
                       <div class="owl-dots disabled"></div>
                     </div>`;
-      optionsBestImage += `<div class="options">
+        optionsBestImage += `<div class="options">
                 <div
                   class="option active"
                   style="
@@ -383,15 +388,16 @@ window.addEventListener("load", function () {
                   </div>
                 </div>
               </div>`;
-      AboutMainElement.style.backgroundImage = `url(${image})`;
-      contentElement.innerHTML = options;
-      titleDestinationElement.textContent = `${cityName}`;
-      destinationImageElement.innerHTML = optionsImage;
-      bestLocationElement.innerHTML = optionsBestImage;
-    })
-    .catch((error) => {
-      console.error("Lỗi khi fetch dữ liệu:", error);
-    });
+        AboutMainElement.style.backgroundImage = `url(${image})`;
+        contentElement.innerHTML = options;
+        titleDestinationElement.textContent = `${cityName}`;
+        destinationImageElement.innerHTML = optionsImage;
+        bestLocationElement.innerHTML = optionsBestImage;
+      })
+      .catch((error) => {
+        console.error("Lỗi khi fetch dữ liệu:", error);
+      });
+  }
 });
 function setRating(index) {
   stars.forEach((star, idx) => {
