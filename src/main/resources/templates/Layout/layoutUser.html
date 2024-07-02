@@ -10,12 +10,16 @@
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
       rel="stylesheet"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
     <title>WoOx Travel Bootstrap 5 Theme</title>
 
     <!-- Bootstrap core CSS -->
     <link
       th:fragment="min-css"
-      th:href="@{../../static/assets/User/vendor/bootstrap/css/bootstrap.min.css}"
+      th:href="@{/assets/User/vendor/bootstrap/css/bootstrap.min.css}"
       rel="stylesheet"
     />
 
@@ -23,22 +27,22 @@
     <link
       th:fragment="fontawesome-css"
       rel="stylesheet"
-      th:href="@{../../static/assets/User/css/fontawesome.css}"
+      th:href="@{/assets/User/css/fontawesome.css}"
     />
     <link
       th:fragment="wooxtravel-css"
       rel="stylesheet"
-      th:href="@{../../static/assets/User/css/templatemo-woox-travel.css}"
+      th:href="@{/assets/User/css/templatemo-woox-travel.css}"
     />
     <link
       th:fragment="owl-css"
       rel="stylesheet"
-      th:href="@{../../static/assets/User/css/owl.css}"
+      th:href="@{/assets/User/css/owl.css}"
     />
     <link
       th:fragment="animate-css"
       rel="stylesheet"
-      th:href="@{../../static/assets/User/css/animate.css}"
+      th:href="@{/assets/User/css/animate.css}"
     />
     <link
       th:fragment="bundle-css"
@@ -74,17 +78,19 @@ https://templatemo.com/tm-580-woox-travel
         <div class="col-12">
           <nav class="main-nav">
             <!-- ***** Logo Start ***** -->
-            <a href="index.html" class="logo">
+            <a href="/" class="logo">
               <img src="assets/images/logo.png" alt="" />
             </a>
             <!-- ***** Logo End ***** -->
             <!-- ***** Menu Start ***** -->
             <ul class="nav">
-              <li><a href="index.html" class="active">Home</a></li>
-              <li><a href="about.html">About</a></li>
-              <li><a href="deals.html">Deals</a></li>
-              <li><a href="reservation.html">Reservation</a></li>
-              <li><a href="reservation.html">Book Yours</a></li>
+              <li><a href="/destinations">Home</a></li>
+              <li><a href="/About">About</a></li>
+              <li><a href="/Contact">Contact</a></li>
+              <li><a href="/Login">Login</a></li>
+              <li>
+                <a href="reservation.html" class="detail">Detail Destination</a>
+              </li>
             </ul>
             <a class="menu-trigger">
               <span>Menu</span>
@@ -96,7 +102,7 @@ https://templatemo.com/tm-580-woox-travel
     </div>
   </header>
   <!-- ***** Header Area End ***** -->
-  <div class="container">
+  <div class="container-user">
     <div th:fragment="content"></div>
   </div>
 
@@ -105,14 +111,8 @@ https://templatemo.com/tm-580-woox-travel
     <div class="call-to-action">
       <div class="container">
         <div class="row">
-          <div class="col-lg-8">
+          <div class="col-lg-12" style="text-align: center">
             <h2>Are You Looking To Travel ?</h2>
-            <h4>Make A Reservation By Clicking The Button</h4>
-          </div>
-          <div class="col-lg-4">
-            <div class="border-button">
-              <a href="reservation.html">Book Yours Now</a>
-            </div>
           </div>
         </div>
       </div>
@@ -123,32 +123,30 @@ https://templatemo.com/tm-580-woox-travel
         <div class="row">
           <div class="col-lg-12">
             <p>
-              Copyright © 2036 <a href="#">WoOx Travel</a> Company. All rights
-              reserved. <br />Design:
+              <a href="#">TDL Travel</a> Company. All rights reserved.
+              <br />Design:
               <a
                 href="https://templatemo.com"
                 target="_blank"
                 title="free CSS templates"
-                >TemplateMo</a
+                >TDL Company</a
               >
             </p>
           </div>
         </div>
       </div>
     </footer>
+    <script th:src="@{/assets/User/vendor/jquery/jquery.min.js}"></script>
     <script
-      th:src="@{../../static/assets/User/vendor/jquery/jquery.min.js}"
-    ></script>
-    <script
-      th:src="@{../../static/assets/User/vendor/bootstrap/js/bootstrap.min.js}"
+      th:src="@{/assets/User/vendor/bootstrap/js/bootstrap.min.js}"
     ></script>
 
-    <script th:src="@{../../static/assets/User/js/isotope.min.js}"></script>
-    <script th:src="@{../../static/assets/User/owl-carousel.js}"></script>
-    <script th:src="@{../../static/assets/User/js/wow.js}"></script>
-    <script th:src="@{../../static/assets/User/js/tabs.js}"></script>
-    <script th:src="@{../../static/assets/User/js/popup.js}"></script>
-    <script th:src="@{../../static/assets/User/js/custom.js}"></script>
+    <script th:src="@{/assets/User/js/isotope.min.js}"></script>
+    <script th:src="@{/assets/User/js/owl-carousel.js}"></script>
+    <script th:src="@{/assets/User/js/tabs.js}"></script>
+    <script th:src="@{/assets/User/js/popup.js}"></script>
+    <script th:src="@{/assets/User/js/custom.js}"></script>
+    <script th:src="@{/assets/User/js/api.js}"></script>
 
     <script>
       function bannerSwitcher() {
@@ -163,9 +161,10 @@ https://templatemo.com/tm-580-woox-travel
         clearInterval(bannerTimer);
         bannerTimer = setInterval(bannerSwitcher, 5000);
       });
+      $(".option").click(function () {
+        $(".option").removeClass("active");
+        $(this).addClass("active");
+      });
     </script>
   </div>
-
-  <!-- Scripts -->
-  <!-- Bootstrap core JavaScript -->
 </html>

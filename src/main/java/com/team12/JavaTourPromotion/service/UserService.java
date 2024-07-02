@@ -23,6 +23,7 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 @Transactional
+
 public class UserService implements UserDetailsService {
 
     private final IUserRepository userRepository;
@@ -41,6 +42,7 @@ public class UserService implements UserDetailsService {
     public void setDefaultRole(String username) {
         userRepository.findByUsername(username).ifPresentOrElse(
                 user -> {
+
                     user.getRoles().add(roleRepository.findRoleById(Role.USER.value));
                     userRepository.save(user);
                 },
