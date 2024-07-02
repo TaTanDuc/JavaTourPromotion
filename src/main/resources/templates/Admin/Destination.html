@@ -222,21 +222,57 @@
 					let destinationList = '';
 					$.each(destinations, function(index, destination) {
 						destinationList += `<tr>
-											<td><img src="${destination.imageUrl}"  width="500px" class="img-fluid" alt="Destination Image"></td>
-											<td><span class="badge badge-soft-danger mb-0">${destination.name}</span></td>
-											<td><span class="badge badge-soft-danger mb-0">${destination.category.name}</span></td>
-											<td><span class="badge badge-soft-danger mb-0">${destination.province.name}</span></td>
-											<td><span class="badge badge-soft-danger mb-0">${destination.city.name}</span></td>
-											<td><span class="badge badge-soft-danger mb-0">${destination.DoW.name}</span></td>
-											<td>
-												<button onclick="deleteDestination($destination.id})" class="dw dw-delete-3"></button>
-											</td>
-										</tr>`;
+												<td><img src="${destination.image}" width="500px" class="img-fluid" alt="Destination Image"></td>
+												<td><span class="badge badge-soft-danger mb-0">${destination.name}</span></td>
+												<td><span class="badge badge-soft-danger mb-0">${destination.categoriesList.map(cat => cat.name).join(', ')}</span></td>
+												<td><span class="badge badge-soft-danger mb-0">${destination.provinceName}</span></td>
+												<td><span class="badge badge-soft-danger mb-0">${destination.cityName}</span></td>
+												<td><span class="badge badge-soft-danger mb-0">${destination.DoWName}</span></td>
+												<td>
+													<button onclick="deleteDestination(${destination.id})" class="dw dw-delete-3">Delete</button>
+												</td>
+											</tr>`;
 					});
 					$('#destinationList').html(destinationList);
+				},
+				error: function(xhr, status, error) {
+					console.error('Error loading destinations:', status, error);
 				}
 			});
 		}
+<!--		function getDestinationData() {-->
+<!--			return {-->
+<!--				Name: $('#Name').val(),-->
+<!--				Content: $('#Content').val(),-->
+<!--				provinceId: $('#provinceId').val(),-->
+<!--				cityId:$('#cityId').val(),-->
+<!--				dowId:$('#dowId').val(),-->
+<!--				categoryId:$('#categoryId').val(),-->
+<!--				ImageUrl:$('#ImageUrl').val(),-->
+<!--				Images:$('#Images').val(),-->
+
+<!--			};-->
+<!--		}-->
+<!--		function postDestination(destinationData) {-->
+<!--			$.ajax({-->
+<!--				url: 'http://localhost:8080/api/v1/admin/destination/add',-->
+<!--				type: 'POST',-->
+<!--				contentType: 'application/json',-->
+<!--				data: JSON.stringify(destinationData),-->
+<!--				success: function() {-->
+<!--					resetForm();-->
+<!--					loadDestinations();-->
+<!--				},-->
+<!--				error: function(xhr, status, error) {-->
+<!--					console.error('Error saving des:', status, error);-->
+<!--				}-->
+<!--			});-->
+<!--		}-->
+<!--	   function saveDestination() {-->
+<!--			const destinationData = getDestinationData();-->
+<!--			postDestination(destinationData);-->
+<!--		}-->
+
 		function getDestinationData() {
 			return {
 				Name: $('#Name').val(),
@@ -251,26 +287,28 @@
 			};
 		}
 		function postDestination(destinationData) {
+			console.log(destinationData)
 			$.ajax({
+
 				url: 'http://localhost:8080/api/v1/admin/destination/add',
 				type: 'POST',
-				contentType: 'application/json',
 				data: JSON.stringify(destinationData),
+				contentType: false,
+				processData: false,
 				success: function() {
 					resetForm();
 					loadDestinations();
 				},
 				error: function(xhr, status, error) {
-					console.error('Error saving des:', status, error);
+					console.error('Error saving destination:', status, error);
 				}
 			});
+
 		}
 	   function saveDestination() {
 			const destinationData = getDestinationData();
 			postDestination(destinationData);
-		}
-
-
+	}
 		function deleteDestination(id) {
 			if (confirm('Are you sure you want to delete this destination?')) {
 				$.ajax({

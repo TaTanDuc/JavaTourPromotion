@@ -75,6 +75,10 @@ public class Users implements UserDetails {
         return password;
     }
 
+    public boolean getBanned(){
+        return banned;
+    }
+
     @Override
     public String getUsername(){
         return username;
