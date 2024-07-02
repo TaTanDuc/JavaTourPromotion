@@ -10,6 +10,7 @@ const btnRatingElement = document.querySelector(".btn-Rating");
 const contentDestinationElement = document.querySelector(
   "#content-destination"
 );
+const bestLocationElement = document.querySelector("#best-image");
 let selectedRating = -1;
 let valueRating;
 let index = 0;
@@ -48,6 +49,7 @@ window.addEventListener("load", function () {
       // Kiểm tra dữ liệu trả về từ API
       let options = "";
       let optionsImage = "";
+      let optionsBestImage = "";
       // Heading Option
       options += `
                  <div class="content">
@@ -314,10 +316,78 @@ window.addEventListener("load", function () {
                       </div>
                       <div class="owl-dots disabled"></div>
                     </div>`;
+      optionsBestImage += `<div class="options">
+                <div
+                  class="option active"
+                  style="
+                    --optionBackground: url(${Path1});
+                  "
+                >
+                  <div class="shadow"></div>
+                  <div class="label">
+                    <div class="icon">
+                      <i class="fas fa-expand"></i>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="option"
+                  style="
+                    --optionBackground: url(${Path2});
+                  "
+                >
+                  <div class="shadow"></div>
+                  <div class="label">
+                    <div class="icon">
+                      <i class="fas fa-expand"></i>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="option"
+                  style="
+                    --optionBackground: url(${Path4});
+                  "
+                >
+                  <div class="shadow"></div>
+                  <div class="label">
+                    <div class="icon">
+                      <i class="fas fa-expand"></i>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="option"
+                  style="
+                    --optionBackground: url(${Path3});
+                  "
+                >
+                  <div class="shadow"></div>
+                  <div class="label">
+                    <div class="icon">
+                      <i class="fas fa-expand"></i>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="option"
+                  style="
+                    --optionBackground: url(${Path1});
+                  "
+                >
+                  <div class="shadow"></div>
+                  <div class="label">
+                    <div class="icon">
+                      <i class="fas fa-expand"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>`;
       AboutMainElement.style.backgroundImage = `url(${image})`;
       contentElement.innerHTML = options;
       titleDestinationElement.textContent = `${cityName}`;
       destinationImageElement.innerHTML = optionsImage;
+      bestLocationElement.innerHTML = optionsBestImage;
     })
     .catch((error) => {
       console.error("Lỗi khi fetch dữ liệu:", error);

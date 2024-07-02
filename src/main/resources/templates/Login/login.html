@@ -75,6 +75,7 @@
             font-size: 20px;
             background: darkkhaki;
           "
+          type="submit"
         >
           Đăng Nhập
         </button>
@@ -98,22 +99,13 @@
           const password = $("#password").val();
 
           $.ajax({
-            url: "http://localhost/api/v1/home/users",
-            type: "GET",
+            url: `http://localhost:8080/api/v1/security/login/${username}&${password}`,
+            type: "POST",
             dataType: "json",
             success: function (data) {
-              // Assuming the data is an array of user objects
-              const user = data.find(
-                (user) =>
-                  user.username === username && user.password === password
-              );
-
-              if (user) {
-                // If user is found, redirect to /Destination
+              if (data.success) {
+                // Giả sử API trả về một đối tượng JSON với trường 'success'
                 window.location.href = "/Destination";
-              } else {
-                // If user is not found, show an error message
-                alert("Sai thông tin đăng nhập. Vui lòng thử lại.");
               }
             },
             error: function (xhr, status, error) {
