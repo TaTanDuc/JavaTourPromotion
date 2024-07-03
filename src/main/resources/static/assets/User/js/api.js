@@ -11,6 +11,10 @@ const contentDestinationElement = document.querySelector(
   "#content-destination"
 );
 const bestLocationElement = document.querySelector("#best-image");
+const userNameElement = document.querySelector("#username-homepage");
+let userNameValue = userNameElement.textContent;
+let textContentElement = document.querySelector("#text-content");
+
 let selectedRating = -1;
 let valueRating;
 let index = 0;
@@ -20,19 +24,16 @@ let originalUrl = window.location.href;
 let parts = originalUrl.split("/");
 idString = parts[parts.length - 1];
 const listCommentElement = document.querySelector(".list_comment");
-if(idString){
-    $(document).ready(function () {
-     console.log(idString)
-            $.ajax({
-              url: `http://localhost:8080/api/v1/home/destination/${idString}`,
-              type: "GET",
-              dataType: "json",
-              success: function (data) {
-                let options ='';
-                $.each(data.commentsList, function (i, item) {
-                console.log(item)
-
-                  options += `<li class="comment_item" style="display: flex; gap: 20px">
+if (idString) {
+  $(document).ready(function () {
+    $.ajax({
+      url: `http://localhost:8080/api/v1/home/destination/${idString}`,
+      type: "GET",
+      dataType: "json",
+      success: function (data) {
+        let options = "";
+        $.each(data.commentsList, function (i, item) {
+          options += `<li class="comment_item" style="display: flex; gap: 20px">
                                                 <img
                                                   src="/assets/User/images/image-VịnhHạLong-01.jpg"
                                                   alt=""
@@ -44,14 +45,14 @@ if(idString){
                                                   <p>${item.content}</p>
                                                 </div>
                                               </li>`;
-                });
-                $(".list_comment").html(options);
-              },
-              error: function (xhr, status, error) {
-                console.error("Error fetching data: ", status, error);
-              },
-            });
-          });
+        });
+        $(".list_comment").html(options);
+      },
+      error: function (xhr, status, error) {
+        console.error("Error fetching data: ", status, error);
+      },
+    });
+  });
 }
 window.addEventListener("load", function () {
   // Lấy URL hiện tại
@@ -77,11 +78,11 @@ window.addEventListener("load", function () {
         destinationsImagesList,
         image,
       } = data;
+      titleDestinationElement.textContent = `${cityName}`;
       const { Path: Path1 } = destinationsImagesList[0];
       const { Path: Path2 } = destinationsImagesList[1];
       const { Path: Path3 } = destinationsImagesList[2];
       const { Path: Path4 } = destinationsImagesList[3];
-      console.log(Path1, Path2);
       // Kiểm tra dữ liệu trả về từ API
       let options = "";
       let optionsImage = "";
@@ -421,9 +422,9 @@ window.addEventListener("load", function () {
               </div>`;
       AboutMainElement.style.backgroundImage = `url(${image})`;
       contentElement.innerHTML = options;
-      titleDestinationElement.textContent = `${cityName}`;
       destinationImageElement.innerHTML = optionsImage;
       bestLocationElement.innerHTML = optionsBestImage;
+      titleDestinationElement;
     })
     .catch((error) => {
       console.error("Lỗi khi fetch dữ liệu:", error);
@@ -461,5 +462,30 @@ stars.forEach((star, index) => {
 });
 btnRatingElement.addEventListener("click", function () {
   const idDestination = parseInt(idString, 10);
-  console.log(temp, idDestination, contentDestinationElement.value);
 });
+if (idString) {
+  document.getElementById("btn-comment").addEventListener("click", function () {
+    const data = {
+      content: textContentElement.value,
+      rating: valueRating,
+    };
+
+    fetch(
+      `http://localhost:8080/api/v1/user/comment/add?destination=${idString}&username=${userNameValue}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      }
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        alert("Thêm bình luận thành công !!!!!");
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  });
+}

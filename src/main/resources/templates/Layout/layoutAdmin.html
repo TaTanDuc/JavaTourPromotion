@@ -9,7 +9,6 @@
 <!--    <meta charset="utf-8" />-->
 <!--    <title>Admin Page</title>-->
 
-
 <!--    &lt;!&ndash; Site favicon &ndash;&gt;-->
 <!--    <link-->
 <!--      th:fragment="touch-icon"-->
@@ -407,189 +406,225 @@
 <!--</html>-->
 
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
-<head>
-  <!-- Basic Page Info -->
-  <meta charset="utf-8">
-  <title>Admin Page</title>
-        <link
-          th:fragment="touch-icon"
-          rel="apple-touch-icon"
-          sizes="180x180"
-          th:href="@{/assets/Admin/vendors/images/apple-touch-icon.png}"
-        />
-        <link
-          th:fragment="all-min"
-          rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-        />
-        <link
-          th:fragment="favicon-32x32"
-          rel="icon"
-          type="image/png"
-          sizes="32x32"
-          th:href="@{/assets/Admin/vendors/images/favicon-32x32.png}"
-        />
-        <link
-          th:fragment="favicon-16x16"
-          rel="icon"
-          type="image/png"
-          sizes="16x16"
-          th:href="@{/assets/Admin/vendors/images/favicon-16x16.png}"
-        />
+<html
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.w3.org/1999/xhtml"
+>
+  <head>
+    <!-- Basic Page Info -->
+    <meta charset="utf-8" />
+    <title>Admin Page</title>
+    <link
+      th:fragment="touch-icon"
+      rel="apple-touch-icon"
+      sizes="180x180"
+      th:href="@{/assets/Admin/vendors/images/apple-touch-icon.png}"
+    />
+    <link
+      th:fragment="all-min"
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+    <link
+      th:fragment="favicon-32x32"
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      th:href="@{/assets/Admin/vendors/images/favicon-32x32.png}"
+    />
+    <link
+      th:fragment="favicon-16x16"
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      th:href="@{/assets/Admin/vendors/images/favicon-16x16.png}"
+    />
 
-        <!-- Mobile Specific Metas -->
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1, maximum-scale=1"
-        />
+    <!-- Mobile Specific Metas -->
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1"
+    />
 
-        <!-- Google Font -->
-        <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
-          rel="stylesheet"
-        />
-        <!-- CSS -->
-        <link
-          th:fragment="core-css"
-          rel="stylesheet"
-          th:href="@{/assets/Admin/vendors/styles/core.css}"
-        />
-        <link
-          th:fragment="font-css"
-          rel="stylesheet"
-          th:href="@{/assets/Admin/vendors/styles/icon-font.min.css}"
-        />
-        <link
-          th:fragment="min-css"
-          rel="stylesheet"
-          th:href="@{/assets/Admin/plugins/datatables/css/dataTables.bootstrap4.min.css}"
-        />
-        <link
-          th:fragment="responsive-css"
-          rel="stylesheet"
-          th:href="@{/assets/Admin/plugins/datatables/css/responsive.bootstrap4.min.css}"
-        />
-        <link
-          th:fragment="style-css"
-          rel="stylesheet"
-          type="text/css"
-          th:href="@{/assets/Admin/vendors/styles/style.css}"
-        />
-       <script async src="https://www.googletagmanager.com/gtag/js?id=UA-119386393-1"></script>
+    <!-- Google Font -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <!-- CSS -->
+    <link
+      th:fragment="core-css"
+      rel="stylesheet"
+      th:href="@{/assets/Admin/vendors/styles/core.css}"
+    />
+    <link
+      th:fragment="font-css"
+      rel="stylesheet"
+      th:href="@{/assets/Admin/vendors/styles/icon-font.min.css}"
+    />
+    <link
+      th:fragment="min-css"
+      rel="stylesheet"
+      th:href="@{/assets/Admin/plugins/datatables/css/dataTables.bootstrap4.min.css}"
+    />
+    <link
+      th:fragment="responsive-css"
+      rel="stylesheet"
+      th:href="@{/assets/Admin/plugins/datatables/css/responsive.bootstrap4.min.css}"
+    />
+    <link
+      th:fragment="style-css"
+      rel="stylesheet"
+      type="text/css"
+      th:href="@{/assets/Admin/vendors/styles/style.css}"
+    />
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-119386393-1"
+    ></script>
 
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
 
-    gtag('config', 'UA-119386393-1');
-  </script>
-</head>
-<body>
-  <div class="pre-loader" th:fragment="loading">
-    <div class="pre-loader-box">
-      <div class="loader-logo">
-        <img src="/assets/Admin/vendors/images/deskapp-logo.svg" alt="" />
+      gtag("config", "UA-119386393-1");
+    </script>
+  </head>
+  <body>
+    <div class="pre-loader" th:fragment="loading">
+      <div class="pre-loader-box">
+        <div class="loader-logo">
+          <img src="/assets/Admin/vendors/images/deskapp-logo.svg" alt="" />
+        </div>
+        <div class="loader-progress" id="progress_div">
+          <div class="bar" id="bar1"></div>
+        </div>
+        <div class="percent" id="percent1">0%</div>
+        <div class="loading-text">Loading...</div>
       </div>
-      <div class="loader-progress" id="progress_div">
-        <div class="bar" id="bar1"></div>
-      </div>
-      <div class="percent" id="percent1">0%</div>
-      <div class="loading-text">Loading...</div>
     </div>
-  </div>
 
-  <header th:fragment="header">
-          <div class="header">
-            <div class="header-left">
-              <div class="menu-icon dw dw-menu"></div>
-            </div>
-            <div class="header-right">
+    <header th:fragment="header">
+      <div class="header">
+        <div class="header-left">
+          <div class="menu-icon dw dw-menu"></div>
+        </div>
+        <div class="header-right">
+          <div class="user-info-dropdown">
+            <div class="dropdown">
+              <a
+                style="display: flex; gap: 18px"
+                ;
+                class="dropdown-toggle"
+                href="#"
+                role="button"
+                data-toggle="dropdown"
+              >
+                <span class="user-icon">
+                  <img src="/assets/Admin/vendors/images/photo1.jpg" alt="" />
+                </span>
 
-              <div class="user-info-dropdown">
-                <div class="dropdown" style="display:flex;">
-                  <a
-                    class="dropdown-toggle"
-                    href="#"
-                    role="button"
-                    data-toggle="dropdown"
+                <form th:action="@{/logout}" method="post" style="">
+                  <span
+                    class="user-name"
+                    style="display: block; font-size: 15px"
+                    >admin</span
                   >
-                    <span class="user-icon">
-                      <img src="/assets/Admin/vendors/images/photo1.jpg" alt="" />
-                    </span>
-
-                      <form th:action="@{/logout}" method="post" style="">
-                          <span class="user-name">admin</span>
-                          <button  style="background-color: lightseagreen;color: revert-layer;" class="btn btn-outline-light" type="submit">Logout</button>
-                      </form>
-                  </a>
-
-                </div>
-              </div>
+                  <button
+                    style="background-color: lightseagreen; color: revert-layer"
+                    class="btn btn-outline-light"
+                    type="submit"
+                  >
+                    Logout
+                  </button>
+                </form>
+              </a>
             </div>
-              <div  class="left-side-bar">
-                  <div class="brand-logo">
-                      <a href="index.html">
-                          <img
-                                  src="/assets/Admin/vendors/images/deskapp-logo.svg"
-                                  alt=""
-                                  class="dark-logo"
-                          />
-                          <img
-                                  src="/assets/Admin/vendors/images/deskapp-logo-white.svg"
-                                  alt=""
-                                  class="light-logo"
-                          />
-                      </a>
-                      <div class="close-sidebar" data-toggle="left-sidebar-close">
-                          <i class="ion-close-round"></i>
-                      </div>
-                  </div>
-                  <div class="menu-block customscroll">
-                      <div class="sidebar-menu">
-                          <ul id="accordion-menu">
-                              <li>
-                                  <a href="/admin/categories" class="dropdown-toggle no-arrow">
-                                      <span class="micon fa fa-dashboard"></span><span class="mtext">Category</span>
-                                  </a>
-                              </li>
-                              <li>
-                                  <a href="/admin/users" class="dropdown-toggle no-arrow  ">
-                                      <span class="micon fa fa-users"></span><span class="mtext">User</span>
-                                  </a>
-                              </li>
-                              <li>
-                                  <a href="/admin/destinations" class="dropdown-toggle no-arrow ">
-                                      <span class="micon fa fa-th me-2"></span><span class="mtext">Destination</span>
-                                  </a>
-                              </li>
-                          </ul>
-                      </div>
-                  </div>
-              </div>
-              <div class="mobile-menu-overlay"></div>
           </div>
+        </div>
+        <div class="left-side-bar">
+          <div class="brand-logo">
+            <a href="index.html">
+              <img
+                src="/assets/Admin/vendors/images/deskapp-logo.svg"
+                alt=""
+                class="dark-logo"
+              />
+              <img
+                src="/assets/Admin/vendors/images/deskapp-logo-white.svg"
+                alt=""
+                class="light-logo"
+              />
+            </a>
+            <div class="close-sidebar" data-toggle="left-sidebar-close">
+              <i class="ion-close-round"></i>
+            </div>
+          </div>
+          <div class="menu-block customscroll">
+            <div class="sidebar-menu">
+              <ul id="accordion-menu">
+                <li>
+                  <a href="/admin/categories" class="dropdown-toggle no-arrow">
+                    <span class="micon fa fa-dashboard"></span
+                    ><span class="mtext">Category</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="/admin/users" class="dropdown-toggle no-arrow">
+                    <span class="micon fa fa-users"></span
+                    ><span class="mtext">User</span>
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="/admin/destinations"
+                    class="dropdown-toggle no-arrow"
+                  >
+                    <span class="micon fa fa-th me-2"></span
+                    ><span class="mtext">Destination</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="mobile-menu-overlay"></div>
+      </div>
+    </header>
+    <main>
+      <div
+        th:replace="~{Layout/layoutAdmin :: content}"
+        class="admin-container"
+      ></div>
+    </main>
 
-        </header>
-<main>
-    <div th:replace="~{Layout/layoutAdmin :: content}" class="admin-container">
-    </div>
-</main>
-
-
-<footer th:fragment="footer">
+    <footer th:fragment="footer">
       <script th:src="@{/assets/Admin/vendors/scripts/core.js}"></script>
       <script th:src="@{/assets/Admin/vendors/scripts/script.min.js}"></script>
       <script th:src="@{/assets/Admin/vendors/scripts/process.js}"></script>
-      <script th:src="@{/assets/Admin/vendors/scripts/layout-settings.js}"></script>
-      <script th:src="@{/assets/Admin/plugins/apexcharts/apexcharts.min.js}"></script>
-      <script th:src="@{/assets/Admin/plugins/datatables/js/jquery.dataTables.min.js}"></script>
-      <script th:src="@{/assets/Admin/plugins/datatables/js/dataTables.bootstrap4.min.js}"></script>
-      <script th:src="@{/assets/Admin/plugins/datatables/js/dataTables.responsive.min.js}"></script>
-      <script th:src="@{/assets/Admin/plugins/datatables/js/responsive.bootstrap4.min.js}"></script>
+      <script
+        th:src="@{/assets/Admin/vendors/scripts/layout-settings.js}"
+      ></script>
+      <script
+        th:src="@{/assets/Admin/plugins/apexcharts/apexcharts.min.js}"
+      ></script>
+      <script
+        th:src="@{/assets/Admin/plugins/datatables/js/jquery.dataTables.min.js}"
+      ></script>
+      <script
+        th:src="@{/assets/Admin/plugins/datatables/js/dataTables.bootstrap4.min.js}"
+      ></script>
+      <script
+        th:src="@{/assets/Admin/plugins/datatables/js/dataTables.responsive.min.js}"
+      ></script>
+      <script
+        th:src="@{/assets/Admin/plugins/datatables/js/responsive.bootstrap4.min.js}"
+      ></script>
       <script th:src="@{/assets/Admin/vendors/scripts/dashboard.js}"></script>
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-      </footer>
-</body>
+    </footer>
+  </body>
 </html>

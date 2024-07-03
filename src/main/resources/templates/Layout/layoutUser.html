@@ -1,5 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html
+  lang="en"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.w3.org/1999/xhtml"
+>
   <head>
     <meta charset="utf-8" />
     <meta
@@ -79,7 +83,11 @@ https://templatemo.com/tm-580-woox-travel
           <nav class="main-nav">
             <!-- ***** Logo Start ***** -->
             <a href="/" class="logo">
-              <img src="assets/images/logo.png" alt="" />
+              <img
+                src="/assets/User/images/logo1.png"
+                style="width: 50px; height: 50px; border-radius: 50%"
+                alt=""
+              />
             </a>
             <!-- ***** Logo End ***** -->
             <!-- ***** Menu Start ***** -->
@@ -87,14 +95,27 @@ https://templatemo.com/tm-580-woox-travel
               <li><a href="/destinations">Home</a></li>
               <li><a href="/About">About</a></li>
               <li><a href="/Contact">Contact</a></li>
-              <li class="nav-item d-flex align-items-center" sec:authorize="isAuthenticated()">
-                    <span class="navbar-text text-white">
-                        Xin chào, <span sec:authentication="name" style="margin-right: 20px;"></span>
-                    </span>
+              <li
+                class="nav-item d-flex align-items-center"
+                sec:authorize="isAuthenticated()"
+              >
+                <span
+                  class="navbar-text text-white"
+                  style="margin-bottom: 10px"
+                >
+                  Xin chào,
+                  <span
+                    sec:authentication="name"
+                    id="username-homepage"
+                    style="margin-right: 20px"
+                  ></span>
+                </span>
               </li>
               <li class="nav-item" sec:authorize="isAuthenticated()">
                 <form th:action="@{/logout}" method="post">
-                  <button class="btn btn-outline-light" type="submit">Logout</button>
+                  <button class="btn btn-outline-light" type="submit">
+                    Logout
+                  </button>
                 </form>
               </li>
               <li class="nav-item" sec:authorize="!isAuthenticated()">

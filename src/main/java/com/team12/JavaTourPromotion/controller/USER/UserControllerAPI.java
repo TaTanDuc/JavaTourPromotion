@@ -48,8 +48,11 @@ public class UserControllerAPI {
 
 
     @PostMapping("/comment/add")
-    public Comments addComment(@RequestParam(value = "destination") Long id,@RequestParam(value = "username") String username,@RequestBody  Comments comment){
-        //destinationService.avgScore();
-        return commentService.addComment(id,username,comment);
+    public Comments addComment(@RequestParam(value = "destination") Long id, @RequestParam(value = "username") String username, @RequestBody Comments comment) {
+        Comments addedComment = commentService.addComment(id, username, comment);
+        destinationService.avgScore(id); // Tính lại điểm trung bình cho destination cụ thể
+        return addedComment;
     }
+
+
 }

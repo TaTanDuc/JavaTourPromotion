@@ -7,6 +7,8 @@ import com.team12.JavaTourPromotion.model.Destinations;
 import com.team12.JavaTourPromotion.model.Users;
 import com.team12.JavaTourPromotion.repository.DestinationRepository;
 import com.team12.JavaTourPromotion.GetVM.DestinationGetVM;
+
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -26,14 +28,19 @@ public class DestinationService {
     private final DestinationRepository destinationRepository;
 
     @Transactional
-    public void avgScore() {
-        List<Destinations> destination = destinationRepository.findAll();
-        destination.forEach(des -> {
-            double avgScore = des.getComments().stream().mapToDouble(Comments::getRating).average().orElse(0.0);
-            des.setScore((float) avgScore);
-            destinationRepository.save(des);
-        });
+    public void avgScore(Long destinationId) {
+        Destinations des = destinationRepository.findById(destinationId).orElseThrow(() -> new EntityNotFoundException("Destination not found"));
+        double avgScore = des.getComments().stream()
+            .mapToDouble(Comments::getRating)
+            .average()
+            .orElse(0.0);
+
+        System.out.println("Destination ID: " + des.getId() + ", Avg Score: " + avgScore);
+
+        des.setScore((float) avgScore);
+        destinationRepository.save(des);
     }
+
 
     public List<DestinationGetVM> getAllDestination() {
         return destinationRepository.findAll()
