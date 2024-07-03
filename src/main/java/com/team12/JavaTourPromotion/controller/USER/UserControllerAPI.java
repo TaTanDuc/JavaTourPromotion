@@ -40,7 +40,7 @@ public class UserControllerAPI {
         return ResponseEntity.ok(userService.findUserByUsername(username));
     }
 
-    @PostMapping("/comment/add")
+    @PostMapping("/comment/addu")
     public ResponseEntity addComment(@RequestParam(value = "destination") Long id, Comments comment,String username){
         //destinationService.avgScore();
         commentService.addComment(id,username,comment);
