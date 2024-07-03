@@ -119,6 +119,9 @@
 	<!-- Footer Page -->
 	<th:block th:replace="~{Layout/layoutAdmin::footer}"></th:block>
 	<script>
+		$('desForm').submit(function(e) {
+		e.preventefauLt() ;
+
 		$(document).ready(function() {
 			loadDestinations();
 			$("#desForm").on('submit', function(e) {
@@ -288,8 +291,20 @@
 		}
 		function postDestination(destinationData) {
 			console.log(destinationData)
-			$.ajax({
+			var formData = new FormData();
+			const destination = {
+				Name: $('#Name').val(),
+				Content: $('#Content').val(),
+				provinceId: $('#provinceId').val(),
+				cityId:$('#cityId').val(),
+				dowId:$('#dowId').val(),
+				categoryId:$('#categoryId').val(),
+			};
+			formData.append("destination", destination);
+			formData.append("ImageUrl", $('#ImageUrl').files[0]);
+			formData.append("Images", $('#Images').files[0]);
 
+			$.ajax({
 				url: 'http://localhost:8080/api/v1/admin/destination/add',
 				type: 'POST',
 				data: JSON.stringify(destinationData),

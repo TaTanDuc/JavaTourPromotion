@@ -114,45 +114,46 @@ public class AdminControllerAPI {
 //        destination.setImages(destinationImages);
 //    }
 @PostMapping("/destination/add")
-public ResponseEntity<?> addDestination(@Valid @RequestBody Destinations destination, BindingResult result,
-                                        @RequestParam("ImageUrl") MultipartFile imageFile,
-                                        @RequestParam("images") List<MultipartFile> imageFiles) {
+public ResponseEntity<Destinations> addDestination(@RequestParam("des") String destinationJson,
+                                                   @RequestParam("ImageUrl") MultipartFile imageUrl,
+                                                   @RequestParam("images") MultipartFile images) {
 
-    if (result.hasErrors()) {
-        return ResponseEntity.badRequest().body(result.getAllErrors());
-    }
-
-    try {
-        if (!imageFile.isEmpty()) {
-            byte[] bytes = imageFile.getBytes();
-            String fileName = StringUtils.cleanPath(imageFile.getOriginalFilename());
-            destination.setImageUrl(File.separator + "images" + File.separator + fileName); // Save the image URL
-            Path path = Paths.get("src/main/resources/static/images/" + fileName);
-            Files.write(path, bytes);
-        }
-
-        List<DestinationImages> destinationImages = new ArrayList<>();
-        for (MultipartFile file : imageFiles) {
-            if (!file.isEmpty()) {
-                byte[] bytes = file.getBytes();
-                String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-                Path path = Paths.get("src/main/resources/static/images/" + fileName);
-                Files.write(path, bytes);
-
-                DestinationImages destinationImage = new DestinationImages();
-                destinationImage.setPath(File.separator + "images" + File.separator + fileName);
-                destinationImage.setDestination(destination);
-                destinationImages.add(destinationImage);
-            }
-        }
-        destination.setImages(destinationImages);
-
-        destinationService.addDestination(destination);
-        return ResponseEntity.ok().build();
-    } catch (IOException e) {
-        e.printStackTrace(); // Xử lý lỗi khi ghi file
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-    }
+//    if (result.hasErrors()) {
+//        return ResponseEntity.badRequest().body(result.getAllErrors());
+//    }
+//
+//    try {
+//        if (!imageFile.isEmpty()) {
+//            byte[] bytes = imageFile.getBytes();
+//            String fileName = StringUtils.cleanPath(imageFile.getOriginalFilename());
+//            destination.setImageUrl(File.separator + "images" + File.separator + fileName); // Save the image URL
+//            Path path = Paths.get("src/main/resources/static/images/" + fileName);
+//            Files.write(path, bytes);
+//        }
+//
+//        List<DestinationImages> destinationImages = new ArrayList<>();
+//        for (MultipartFile file : imageFiles) {
+//            if (!file.isEmpty()) {
+//                byte[] bytes = file.getBytes();
+//                String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+//                Path path = Paths.get("src/main/resources/static/images/" + fileName);
+//                Files.write(path, bytes);
+//
+//                DestinationImages destinationImage = new DestinationImages();
+//                destinationImage.setPath(File.separator + "images" + File.separator + fileName);
+//                destinationImage.setDestination(destination);
+//                destinationImages.add(destinationImage);
+//            }
+//        }
+//        destination.setImages(destinationImages);
+//
+//        destinationService.addDestination(destination);
+//        return ResponseEntity.ok().build();
+//    } catch (IOException e) {
+//        e.printStackTrace(); // Xử lý lỗi khi ghi file
+//        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+//    }
+    return ResponseEntity.ok().build();
 }
 
     @PutMapping("/destination/edit/{id}")
