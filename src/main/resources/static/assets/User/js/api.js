@@ -57,6 +57,26 @@ if (idString) {
     });
   });
 }
+if (idString) {
+  document.getElementById("btn_comment").addEventListener("click", function () {
+    const data = {};
+
+    fetch("https://example.com/api", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Success:", data);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  });
+}
 window.addEventListener("load", function () {
   // Lấy URL hiện tại
   let originalUrl = window.location.href;

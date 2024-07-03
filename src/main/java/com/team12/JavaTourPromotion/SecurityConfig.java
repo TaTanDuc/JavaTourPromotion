@@ -40,9 +40,9 @@ public class SecurityConfig {
         return http
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/v1/home/**","/api/v1/user/**","/api/v1/inspector/**","/api/v1/admin/**","/api/v1/security/**").hasAuthority("ADMIN")
-                        .requestMatchers("/api/user/**","/api/inspector/**").hasAuthority("INSPECTOR")
-                        .requestMatchers("/api/user/**").hasAuthority("USER")
-                        .requestMatchers("/api/home/**").permitAll()
+                        .requestMatchers("/api/v1/user/**","/api/inspector/**").hasAuthority("INSPECTOR")
+                        .requestMatchers("/api/v1/user/**").hasAuthority("USER")
+                        .requestMatchers("/api/v1/home/**").permitAll()
                                 .anyRequest().permitAll()
                 )
                 .logout(logout -> logout
