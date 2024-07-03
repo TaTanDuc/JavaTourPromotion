@@ -14,6 +14,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -43,8 +44,10 @@ public class UserService implements UserDetailsService {
     }
 
     public void save(@NotNull Users user) {
+        user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
         userRepository.save(user);
     }
+
 
     public void setDefaultRole(String username) {
         userRepository.findByUsername(username).ifPresentOrElse(
@@ -103,6 +106,13 @@ public class UserService implements UserDetailsService {
 
     public Optional<UserGetVM> findUserByUsername(String username) throws UsernameNotFoundException{
         return userRepository.findByUsername(username).map(UserGetVM::from);
+    }
+    public Optional<Users> findByUsername(String username) throws UsernameNotFoundException {
+        return userRepository.findByUsername(username);
+    }
+    public Users getUserByUsername(String username) {
+        return userRepository.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found with username: " + username));
     }
 //
 //    public void userAddBookmark(String username, Bookmarks bookmarks){

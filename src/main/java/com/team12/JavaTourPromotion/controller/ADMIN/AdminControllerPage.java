@@ -11,4 +11,12 @@ public class AdminControllerPage {
     public String showAdminPage() {
         return "Admin/Category";
     }
+    @GetMapping("/destinations")
+    public String destinationPage() {
+        return "Admin/Destination";
+    }
+    @GetMapping("/users")
+    public String userPage() {
+        return "Admin/UserManagement";
+    }
 }

@@ -4,9 +4,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -37,22 +35,15 @@ public class SecurityConfig {
     }
 
     @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {
-        return authConfig.getAuthenticationManager();
-    }
-
-    @Bean
     public SecurityFilterChain securityFilterChain(@NotNull HttpSecurity http)
             throws Exception {
         return http
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/v1/home/**","/api/v1/user/**",
-                                                    "/api/v1/inspector/**","/api/v1/admin/**",
-                                                    "/api/v1/security/**","/admin/**").hasAuthority("ADMIN")
-                        .requestMatchers("/api/user/**","/api/inspector/**","/inspector/**").hasAuthority("INSPECTOR")
+                        .requestMatchers("/api/v1/home/**","/api/v1/user/**","/api/v1/inspector/**","/api/v1/admin/**","/api/v1/security/**").hasAuthority("ADMIN")
+                        .requestMatchers("/api/user/**","/api/inspector/**").hasAuthority("INSPECTOR")
                         .requestMatchers("/api/user/**").hasAuthority("USER")
-                        .requestMatchers("/api/home/**","/api/v1/test/**").permitAll()
-                        .anyRequest().permitAll()
+                        .requestMatchers("/api/home/**").permitAll()
+                                .anyRequest().permitAll()
                 )
                 .logout(logout -> logout
                         .logoutUrl("/logout")
@@ -65,8 +56,8 @@ public class SecurityConfig {
                 .formLogin(formLogin -> formLogin
                         .loginPage("/login")
                         .loginProcessingUrl("/login")
-                        .defaultSuccessUrl("/Homepage/Home", true)
-                        .failureUrl("/login")
+                        .defaultSuccessUrl("/destinations")
+                        .failureUrl("/login?error")
                         .permitAll()
                 )
                 .rememberMe(rememberMe -> rememberMe

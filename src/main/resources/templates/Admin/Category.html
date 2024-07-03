@@ -31,7 +31,7 @@
 <th:block th:replace="~{Layout/layoutAdmin::loading}"></th:block>
 <!-- Header Page -->
 <th:block th:replace="~{Layout/layoutAdmin::header}"></th:block>
-<div class="admin-container" th:fragment="content">
+<div class="main-container" th:fragment="content">
 		<div class="xs-pd-20-10 pd-ltr-20">
 			<div class="row clearfix progress-box">
 				<div class="col-lg-12">
@@ -54,6 +54,7 @@
 
 							</table>
 						</div>
+
 						<form id="categoryForm">
 							<input type="hidden" id="categoryID">
 							<div class="mb-3">

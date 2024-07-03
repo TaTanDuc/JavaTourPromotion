@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public record UserGetVM (Long id, String username, String name, String img,List<comments> commentsList, List<bookmark> bookmarksList){
+public record UserGetVM (Long id,String avata, String username,boolean banned, String name,List<comments> commentsList, List<bookmark> bookmarksList){
 
     public static UserGetVM from(@NotNull Users user) {
 
@@ -28,9 +28,10 @@ public record UserGetVM (Long id, String username, String name, String img,List<
 
         return new UserGetVM(
                 user.getId(),
+                user.getAvata(),
                 user.getUsername(),
+                user.getBanned(),
                 user.getName(),
-                user.getProfileImgPath(),
                 simpleComments,
                 simpleBookmark
         );

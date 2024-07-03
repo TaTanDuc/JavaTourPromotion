@@ -74,6 +74,13 @@ public class Users implements UserDetails {
         return password;
     }
 
+    public boolean getBanned(){
+        return banned;
+    }
+    public String getAvata(){
+        return profileImgPath;
+    }
+
     @Override
     public String getUsername(){
         return username;

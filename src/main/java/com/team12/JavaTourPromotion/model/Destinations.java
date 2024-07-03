@@ -31,7 +31,7 @@ public class Destinations {
 
     @Column(name = "Content")
     @NotBlank(message = "Content must not be blank!")
-    @Size(min = 50, message = "Content must be 50 characters or more!")
+    @Size(min = 10, message = "Content must be 50 characters or more!")
     private String Content;
 
     @Column(name = "ImageUrl")
