@@ -8,8 +8,15 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 @Controller // Đánh dấu lớp này là một Controller trong Spring MVC.
 @RequestMapping("/") // Đường dẫn gốc mà controller này sẽ xử lý.
@@ -27,10 +34,10 @@ public class UserController {
         model.addAttribute("user", new Users()); // Thêm một đối tượng User mới vào model
         return "Login/register"; // Trả về view "register"
     }
-
     @PostMapping("/register") // Xử lý POST request cho "/register"
     public String register(@Valid @ModelAttribute("user") Users user, // Validate đối tượng User
-                           @NotNull BindingResult bindingResult, // Kết quả của quá trình validate
+                           @NotNull BindingResult bindingResult,
+                           @RequestParam(name = "avatarImage", required = false) MultipartFile avatarImage,// Kết quả của quá trình validate
                            Model model) {
         if (bindingResult.hasErrors()) { // Kiểm tra nếu có lỗi validate
             var errors = bindingResult.getAllErrors() // Lấy tất cả lỗi
@@ -39,6 +46,21 @@ public class UserController {
                     .toArray(String[]::new); // Chuyển các lỗi thành mảng String
             model.addAttribute("errors", errors); // Thêm lỗi vào model
             return "Login/register"; // Trả về lại view "register" nếu có lỗi
+        }
+        try {
+            if (avatarImage != null && !avatarImage.isEmpty()) {
+                byte[] bytes = avatarImage.getBytes();
+                String fileName = StringUtils.cleanPath(avatarImage.getOriginalFilename());
+                user.setProfileImgPath("/images/" + fileName); // Lưu đường dẫn ảnh đại diện
+                Path path = Paths.get("src/main/resources/static/images/userprofile" + fileName);
+                Files.write(path, bytes);
+            } else {
+                // Nếu không có ảnh đại diện, gán ảnh ẩn danh
+                String defaultAvatar = "/images/userprofile/anonymous.png"; // Đường dẫn ảnh ẩn danh
+                user.setProfileImgPath(defaultAvatar); // Gán đường dẫn ảnh ẩn danh cho user
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
         userService.save(user); // Lưu người dùng vào cơ sở dữ liệu
         userService.setDefaultRole(user.getUsername()); // Gán vai trò mặc định cho người dùng

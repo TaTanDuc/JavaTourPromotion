@@ -20,8 +20,43 @@ let valueRating;
 let index = 0;
 let temp;
 let idString;
-console.log(stars);
+let originalUrl = window.location.href;
+let parts = originalUrl.split("/");
+idString = parts[parts.length - 1];
+const listCommentElement = document.querySelector(".list_comment");
+if (idString) {
+  $(document).ready(function () {
+    console.log(idString);
+    $.ajax({
+      url: `http://localhost:8080/api/v1/home/destination/${idString}`,
+      type: "GET",
+      dataType: "json",
+      success: function (data) {
+        let options = "";
+        $.each(data.commentsList, function (i, item) {
+          console.log(item);
 
+          options += `<li class="comment_item" style="display: flex; gap: 20px">
+                                                <img
+                                                  src="/assets/User/images/image-VịnhHạLong-01.jpg"
+                                                  alt=""
+                                                  class="image_comment"
+                                                  style="width: 50px; height: 50px; border-radius: 50%"
+                                                />
+                                                <div class="comment_info">
+                                                  <span> ${item.username}</span>
+                                                  <p>${item.content}</p>
+                                                </div>
+                                              </li>`;
+        });
+        $(".list_comment").html(options);
+      },
+      error: function (xhr, status, error) {
+        console.error("Error fetching data: ", status, error);
+      },
+    });
+  });
+}
 window.addEventListener("load", function () {
   // Lấy URL hiện tại
   let originalUrl = window.location.href;

@@ -11,8 +11,13 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -20,6 +25,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.security.Principal;
 import java.util.Optional;
 
@@ -37,6 +44,8 @@ public class UserControllerAPI {
     public ResponseEntity<Optional<UserGetVM>> userProfile(String username){
         return ResponseEntity.ok(userService.findUserByUsername(username));
     }
+
+
 
     @PostMapping("/comment/add")
     public Comments addComment(@RequestParam(value = "destination") Long id,@RequestParam(value = "username") String username,@RequestBody  Comments comment){

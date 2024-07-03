@@ -406,36 +406,36 @@
 <!--</html>-->
 
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-  <head>
-    <!-- Basic Page Info -->
-    <meta charset="utf-8" />
-    <title>Admin Page</title>
-    <link
-      th:fragment="touch-icon"
-      rel="apple-touch-icon"
-      sizes="180x180"
-      th:href="@{/assets/Admin/vendors/images/apple-touch-icon.png}"
-    />
-    <link
-      th:fragment="all-min"
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-    />
-    <link
-      th:fragment="favicon-32x32"
-      rel="icon"
-      type="image/png"
-      sizes="32x32"
-      th:href="@{/assets/Admin/vendors/images/favicon-32x32.png}"
-    />
-    <link
-      th:fragment="favicon-16x16"
-      rel="icon"
-      type="image/png"
-      sizes="16x16"
-      th:href="@{/assets/Admin/vendors/images/favicon-16x16.png}"
-    />
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+  <!-- Basic Page Info -->
+  <meta charset="utf-8">
+  <title>Admin Page</title>
+        <link
+          th:fragment="touch-icon"
+          rel="apple-touch-icon"
+          sizes="180x180"
+          th:href="@{/assets/Admin/vendors/images/apple-touch-icon.png}"
+        />
+        <link
+          th:fragment="all-min"
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        />
+        <link
+          th:fragment="favicon-32x32"
+          rel="icon"
+          type="image/png"
+          sizes="32x32"
+          th:href="@{/assets/Admin/vendors/images/favicon-32x32.png}"
+        />
+        <link
+          th:fragment="favicon-16x16"
+          rel="icon"
+          type="image/png"
+          sizes="16x16"
+          th:href="@{/assets/Admin/vendors/images/favicon-16x16.png}"
+        />
 
     <!-- Mobile Specific Metas -->
     <meta
@@ -512,7 +512,7 @@
             <div class="header-right">
 
               <div class="user-info-dropdown">
-                <div class="dropdown">
+                <div class="dropdown" style="display:flex;">
                   <a
                     class="dropdown-toggle"
                     href="#"
@@ -522,7 +522,11 @@
                     <span class="user-icon">
                       <img src="/assets/Admin/vendors/images/photo1.jpg" alt="" />
                     </span>
-                    <span class="user-name">admin</span>
+
+                      <form th:action="@{/logout}" method="post" style="">
+                          <span class="user-name">admin</span>
+                          <button  style="background-color: lightseagreen;color: revert-layer;" class="btn btn-outline-light" type="submit">Logout</button>
+                      </form>
                   </a>
 
                 </div>

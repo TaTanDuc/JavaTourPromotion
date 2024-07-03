@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
   <head>
-    <!-- Basic Page Info -->
+    Basic Page Info -->
     <meta charset="utf-8" />
     <title>Admin Page</title>
     <th:block th:replace="~{Layout/layoutAdmin::touch-icon}"></th:block>
@@ -28,11 +28,11 @@
     </script>
   </head>
   <body>
-    <!-- Header Page -->
+    Header Page -->
     <th:block th:replace="~{Layout/layoutAdmin::loading}"></th:block>
-    <!-- Header Page -->
+    Header Page -->
     <th:block th:replace="~{Layout/layoutAdmin::header}"></th:block>
-    <!-- Content Page -->
+    Content Page -->
 
     <div th:fragment="content" class="main-container">
       <div class="xs-pd-20-10 pd-ltr-20">
@@ -63,87 +63,131 @@
         </div>
       </div>
     </div>
-    <!-- Footer Page -->
     <th:block th:replace="~{Layout/layoutAdmin::footer}"></th:block>
     <script>
-      <!--		let name;-->
-      <!--		$(document).ready(function() {-->
-      <!--			loadUsers();-->
+      //     		let name;-->
+      //     		$(document).ready(function() {-->
+      //     			loadUsers();-->
 
-      <!--		});-->
-      <!--		function loadUsers() {-->
-      <!--			$.ajax({-->
-      <!--				url: 'http://localhost:8080/api/v1/admin/users',-->
-      <!--				type: 'GET',-->
-      <!--				success: function(users) {-->
-      <!--					let userList = '';-->
-      <!--					$.each(users, function(index, user) {-->
-      <!--						userList += `<tr>-->
-      <!--										<td><img src="${user.imageUrl}" width="500px" class="img-fluid" alt="Avatar user"></td>-->
-      <!--										<td><span class="badge badge-soft-danger mb-0">${user.username}</span></td>-->
-      <!--										<td>-->
-      <!--											<ul class="list-inline mb-0">`;-->
+      //     		});-->
+      //     		function loadUsers() {-->
+      //     			$.ajax({-->
+      //     				url: 'http://localhost:8080/api/v1/admin/users',-->
+      //     				type: 'GET',-->
+      //     				success: function(users) {-->
+      //     					let userList = '';-->
+      //     					$.each(users, function(index, user) {-->
+      //     						userList += `<tr>-->
+      //     										<td><img src="${user.imageUrl}" width="500px" class="img-fluid" alt="Avatar user"></td>-->
+      //     										<td><span class="badge badge-soft-danger mb-0">${user.username}</span></td>-->
+      //     										<td>-->
+      //     											<ul class="list-inline mb-0">`;-->
 
-      <!--						if (user.banned == 0) { // Assuming 'banned' is an integer where 0 means not banned-->
-      <!--							userList += `<li class="list-inline-item">-->
-      <!--											<button onclick="banUser('${user.username}')" data-bs-toggle="tooltip" data-bs-placement="top" title="Ban" class="px-2 text-danger">-->
-      <!--												<i class="bi bi-lock"></i> Ban-->
-      <!--											</button>-->
-      <!--										</li>`;-->
-      <!--						} else {-->
-      <!--							userList += `<li class="list-inline-item">-->
-      <!--											<button onclick="unbanUser('${user.username}')" data-bs-toggle="tooltip" data-bs-placement="top" title="Unban" class="px-2 text-success">-->
-      <!--												<i class="bi bi-unlock"></i> Unban-->
-      <!--											</button>-->
-      <!--										</li>`;-->
-      <!--						}-->
+      //     						if (user.banned == 0) { // Assuming 'banned' is an integer where 0 means not banned-->
+      //     							userList += `<li class="list-inline-item">-->
+      //     											<button onclick="banUser('${user.username}')" data-bs-toggle="tooltip" data-bs-placement="top" title="Ban" class="px-2 text-danger">-->
+      //     												<i class="bi bi-lock"></i> Ban-->
+      //     											</button>-->
+      //     										</li>`;-->
+      //     						} else {-->
+      //     							userList += `<li class="list-inline-item">-->
+      //     											<button onclick="unbanUser('${user.username}')" data-bs-toggle="tooltip" data-bs-placement="top" title="Unban" class="px-2 text-success">-->
+      //     												<i class="bi bi-unlock"></i> Unban-->
+      //     											</button>-->
+      //     										</li>`;-->
+      //     						}-->
 
-      <!--						userList += `</ul>-->
-      <!--									</td>-->
-      <!--								</tr>`;-->
-      <!--					});-->
-      <!--					$('#userList').html(userList);-->
-      <!--					// Initialize tooltips-->
-      <!--					$('[data-bs-toggle="tooltip"]').tooltip();-->
-      <!--				},-->
-      <!--				error: function(xhr, status, error) {-->
-      <!--					alert('Failed to load users: ' + error);-->
-      <!--				}-->
-      <!--			});-->
-      <!--		}-->
+      //     						userList += `</ul>-->
+      //     									</td>-->
+      //     								</tr>`;-->
+      //     					});-->
+      //     					$('#userList').html(userList);-->
+      //     					// Initialize tooltips-->
+      //     					$('[data-bs-toggle="tooltip"]').tooltip();-->
+      //     				},-->
+      //     				error: function(xhr, status, error) {-->
+      //     					alert('Failed to load users: ' + error);-->
+      //     				}-->
+      //     			});-->
+      //     		}-->
 
-      <!--		function banUser(name1) {-->
-      <!--		console.log(name1);-->
-      <!--			if (confirm('Are you sure you want to ban this user?')) {-->
-      <!--				$.ajax({-->
-      <!--					url: `http://localhost:8080/api/v1/admin/ban/${name1}`,-->
-      <!--					type: 'PUT',-->
-      <!--					success: function() {-->
-      <!--						loadUsers();-->
-      <!--						alert('Success to ban user: ' );-->
-      <!--					},-->
-      <!--					error: function(xhr, status, error) {-->
-      <!--						alert('Failed to ban user: ' + error);-->
-      <!--					}-->
-      <!--				});-->
-      <!--			}-->
-      <!--		}-->
+      //     		function banUser(name1) {-->
+      //     		console.log(name1);-->
+      //     			if (confirm('Are you sure you want to ban this user?')) {-->
+      //     				$.ajax({-->
+      //     					url: `http://localhost:8080/api/v1/admin/ban/${name1}`,-->
+      //     					type: 'PUT',-->
+      //     					success: function() {-->
+      //     						loadUsers();-->
+      //     						alert('Success to ban user: ' );-->
+      //     					},-->
+      //     					error: function(xhr, status, error) {-->
+      //     						alert('Failed to ban user: ' + error);-->
+      //     					}-->
+      //     				});-->
+      //     			}-->
+      //     		}-->
 
-      <!--		function unbanUser(name1) {-->
-      <!--			if (confirm('Are you sure you want to unban this user?')) {-->
-      <!--				$.ajax({-->
-      <!--					url: `http://localhost:8080/api/v1/admin/unban/${name1}`,-->
-      <!--					type: 'PUT',-->
-      <!--					success: function() {-->
-      <!--						loadUsers();-->
-      <!--						alert('Success to unban user: ');-->
-      <!--					},-->
-      <!--					error: function(xhr, status, error) {-->
-      <!--						alert('Failed to ban user: ' + error);-->
-      <!--					}-->
-      <!--				});-->
-      <!--			}-->
-      <!--		}-->
+      // <!--						if (user.banned == 0) { // Assuming 'banned' is an integer where 0 means not banned-->
+      // <!--							userList += `<li class="list-inline-item">-->
+      // <!--											<button onclick="banUser('${user.username}')" data-bs-toggle="tooltip" data-bs-placement="top" title="Ban" class="px-2 text-danger">-->
+      // <!--												<i class="bi bi-lock"></i> Ban-->
+      // <!--											</button>-->
+      // <!--										</li>`;-->
+      // <!--						} else {-->
+      // <!--							userList += `<li class="list-inline-item">-->
+      // <!--											<button onclick="unbanUser('${user.username}')" data-bs-toggle="tooltip" data-bs-placement="top" title="Unban" class="px-2 text-success">-->
+      // <!--												<i class="bi bi-unlock"></i> Unban-->
+      // <!--											</button>-->
+      // <!--										</li>`;-->
+      // <!--						}-->
+
+      // <!--						userList += `</ul>-->
+      // <!--									</td>-->
+      // <!--								</tr>`;-->
+      // <!--					});-->
+      // <!--					$('#userList').html(userList);-->
+      // <!--					// Initialize tooltips-->
+      // <!--					$('[data-bs-toggle="tooltip"]').tooltip();-->
+      // <!--				},-->
+      // <!--				error: function(xhr, status, error) {-->
+      // <!--					alert('Failed to load users: ' + error);-->
+      // <!--				}-->
+      // <!--			});-->
+      // <!--		}-->
+
+      // <!--		function banUser(name1) {-->
+      // <!--		console.log(name1);-->
+      // <!--			if (confirm('Are you sure you want to ban this user?')) {-->
+      // <!--				$.ajax({-->
+      // <!--					url: `http://localhost:8080/api/v1/admin/ban/${name1}`,-->
+      // <!--					type: 'PUT',-->
+      // <!--					success: function() {-->
+      // <!--						loadUsers();-->
+      // <!--						alert('Success to ban user: ' );-->
+      // <!--					},-->
+      // <!--					error: function(xhr, status, error) {-->
+      // <!--						alert('Failed to ban user: ' + error);-->
+      // <!--					}-->
+      // <!--				});-->
+      // <!--			}-->
+      // <!--		}-->
+
+      // <!--		function unbanUser(name1) {-->
+      // <!--			if (confirm('Are you sure you want to unban this user?')) {-->
+      // <!--				$.ajax({-->
+      // <!--					url: `http://localhost:8080/api/v1/admin/unban/${name1}`,-->
+      // <!--					type: 'PUT',-->
+      // <!--					success: function() {-->
+      // <!--						loadUsers();-->
+      // <!--						alert('Success to unban user: ');-->
+      // <!--					},-->
+      // <!--					error: function(xhr, status, error) {-->
+      // <!--						alert('Failed to ban user: ' + error);-->
+      // <!--					}-->
+      // <!--				});-->
+      // <!--			}-->
+      // <!--		}
       function loadUsers() {
         $.ajax({
           url: "http://localhost:8080/api/v1/admin/users",
@@ -153,7 +197,7 @@
             $.each(users, function (index, user) {
               console.log(user);
               userList += `<tr>
-                                <td><img src="${user.imageUrl}" width="500px" class="img-fluid" alt="Avatar user"></td>
+                                <td><img src="${user.avata}"  width="60px" class="img-fluid" alt="Avatar user"></td>
                                 <td><span class="badge badge-soft-danger mb-0">${user.username}</span></td>
                                 <td>
                                     <ul class="list-inline mb-0">`;

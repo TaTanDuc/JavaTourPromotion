@@ -1,12 +1,15 @@
 package com.team12.JavaTourPromotion.controller;
 
+import com.team12.JavaTourPromotion.model.Destinations;
 import com.team12.JavaTourPromotion.service.*;
 import com.team12.JavaTourPromotion.GetVM.*;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @RestController
@@ -60,10 +63,15 @@ public class HomeControllerAPI {
             return ResponseEntity.ok(list);
     }
 
+
     @GetMapping("/destination/{id}")
     public ResponseEntity<DestinationDetailGetVM> getDesByID(@PathVariable Long id) {
-        return ResponseEntity.ok(destinationService.getDestinationDetailId(id)
-                .orElseThrow(() -> new RuntimeException("Province with id: " + id + " can't be found!")));
+        Optional<DestinationDetailGetVM> destinationDetail = destinationService.getDestinationDetailId(id);
+        if (destinationDetail.isPresent()) {
+            return ResponseEntity.ok(destinationDetail.get());
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
     }
 
     @GetMapping("/categories")
